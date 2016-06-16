@@ -1,0 +1,154 @@
+{
+  "algorithm_nick": "lmcut",
+  "build_options": [
+    "-j12"
+  ],
+  "component_options": [
+    "--search",
+    "astar(lmcut())"
+  ],
+  "compress-output-files_returncode": 0,
+  "compress-output-files_wall_clock_time": 0.8110561370849609,
+  "config": "lmcut",
+  "cost": 1.0,
+  "cost_all": [
+    1.0
+  ],
+  "coverage": 1,
+  "dead_ends": 0,
+  "dead_ends_all": [
+    0
+  ],
+  "domain": "zenotravel",
+  "driver_options": [
+    "--search-time-limit",
+    "30m",
+    "--search-memory-limit",
+    "2G"
+  ],
+  "error": "none",
+  "evaluated": 6,
+  "evaluated_all": [
+    6
+  ],
+  "evaluations": 6,
+  "evaluations_all": [
+    6
+  ],
+  "evaluations_until_last_jump": 1,
+  "expansions": 2,
+  "expansions_all": [
+    2
+  ],
+  "expansions_until_last_jump": 0,
+  "experiment_name": "lmcut",
+  "generated": 5,
+  "generated_all": [
+    5
+  ],
+  "generated_until_last_jump": 0,
+  "global_revision": "101a6886f2e4",
+  "id": [
+    "lmcut",
+    "zenotravel",
+    "pfile1"
+  ],
+  "id_string": "lmcut:zenotravel:pfile1",
+  "initial_h_value": 1,
+  "initial_h_values": {
+    "lmcut": [
+      1
+    ]
+  },
+  "limit_search_memory": 2048,
+  "limit_search_time": 1800,
+  "local_revision": "tip",
+  "log_size_in_kb": 5,
+  "memory": 21672,
+  "memory_capped": 21672,
+  "parse-preprocess_returncode": 0,
+  "parse-preprocess_wall_clock_time": 6.551908016204834,
+  "parse-search_returncode": 0,
+  "parse-search_wall_clock_time": 0.7847321033477783,
+  "plan_length": 1,
+  "plan_length_all": [
+    1
+  ],
+  "planner_type": "single",
+  "preprocessor_axioms": 0,
+  "preprocessor_derived_variables": 0,
+  "preprocessor_facts": 18,
+  "preprocessor_operators": 129,
+  "preprocessor_task_size": 607,
+  "preprocessor_variables": 4,
+  "problem": "pfile1",
+  "queue": "all.q",
+  "raw_memory": 21672,
+  "reopened": 0,
+  "reopened_all": [
+    0
+  ],
+  "reopened_until_last_jump": 0,
+  "repo": "/infai/infai2/planners/fd",
+  "revision_summary": "101a6886f2e4 tip",
+  "run-lab-default-parser_returncode": 0,
+  "run-lab-default-parser_wall_clock_time": 2.2973129749298096,
+  "run_dir": "runs-00001-00100/00002",
+  "score_evaluations": 100.0,
+  "score_expansions": 100.0,
+  "score_generated": 100.0,
+  "score_memory": 65.74,
+  "score_search_time": 100.0,
+  "score_total_time": 100.0,
+  "search_returncode": 0,
+  "search_time": 0.01,
+  "search_time_all": [
+    0.000109287
+  ],
+  "search_wall_clock_time": 15.66550588607788,
+  "total_time": 0.01,
+  "translator_auxiliary_atoms": 245,
+  "translator_axioms": 0,
+  "translator_derived_variables": 0,
+  "translator_effect_conditions_simplified": 0,
+  "translator_facts": 18,
+  "translator_final_queue_length": 438,
+  "translator_goal_facts": 3,
+  "translator_implied_preconditions_added": 0,
+  "translator_mutex_groups": 4,
+  "translator_operators": 129,
+  "translator_operators_removed": 0,
+  "translator_peak_memory": 174952,
+  "translator_propositions_removed": 4,
+  "translator_relevant_atoms": 193,
+  "translator_task_size": 625,
+  "translator_time_building_dictionary_for_full_mutex_groups": 0.0,
+  "translator_time_building_mutex_information": 0.0,
+  "translator_time_building_strips_to_sas_dictionary": 0.0,
+  "translator_time_building_translation_key": 0.0,
+  "translator_time_checking_invariant_weight": 0.0,
+  "translator_time_choosing_groups": 0.0,
+  "translator_time_collecting_mutex_groups": 0.0,
+  "translator_time_completing_instantiation": 0.02,
+  "translator_time_computing_fact_groups": 0.0,
+  "translator_time_computing_model": 0.01,
+  "translator_time_detecting_unreachable_propositions": 0.01,
+  "translator_time_done": 0.07,
+  "translator_time_finding_invariants": 0.0,
+  "translator_time_generating_datalog_program": 0.0,
+  "translator_time_instantiating": 0.04,
+  "translator_time_instantiating_groups": 0.0,
+  "translator_time_normalizing_datalog_program": 0.01,
+  "translator_time_normalizing_task": 0.0,
+  "translator_time_parsing": 0.01,
+  "translator_time_preparing_model": 0.0,
+  "translator_time_processing_axioms": 0.0,
+  "translator_time_simplifying_axioms": 0.0,
+  "translator_time_translating_task": 0.01,
+  "translator_time_writing_output": 0.0,
+  "translator_total_mutex_groups_size": 18,
+  "translator_total_queue_pushes": 652,
+  "translator_uncovered_facts": 0,
+  "translator_variables": 4,
+  "unsolvable": 0
+}

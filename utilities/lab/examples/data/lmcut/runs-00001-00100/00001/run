@@ -1,0 +1,47 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+
+# make sure we're in the run directory
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+from lab.calls.call import Call
+from lab.calls.log import driver_log, driver_err
+
+sys.stdout = driver_log
+sys.stderr = driver_err
+
+from lab.calls.log import print_, redirects, save_returncode
+from lab.calls.log import set_property
+
+set_property('queue', os.environ.get('QUEUE'))
+
+
+DOMAIN = "domain.pddl"
+FAST_DOWNWARD_101a6886f2e4 = "../../code-101a6886f2e4/fast-downward.py"
+LAB_DEFAULT_PARSER = "../../lab-default-parser.py"
+PREPROCESS_PARSER = "../../preprocess_parser.py"
+PROBLEM = "problem.pddl"
+SEARCH_PARSER = "../../search_parser.py"
+
+
+retcode = Call([FAST_DOWNWARD_101a6886f2e4, "--search-time-limit", "30m", "--search-memory-limit", "2G", DOMAIN, PROBLEM, "--search", "astar(lmcut())"], name="search", **redirects).wait()
+save_returncode("search", retcode)
+
+retcode = Call([PREPROCESS_PARSER], name="parse-preprocess", **redirects).wait()
+save_returncode("parse-preprocess", retcode)
+
+retcode = Call([SEARCH_PARSER], name="parse-search", **redirects).wait()
+save_returncode("parse-search", retcode)
+
+retcode = Call(["xz", "output.sas", "output"], name="compress-output-files", **redirects).wait()
+save_returncode("compress-output-files", retcode)
+
+retcode = Call([LAB_DEFAULT_PARSER], name="run-lab-default-parser", **redirects).wait()
+save_returncode("run-lab-default-parser", retcode)
+
+
+for stream in redirects.values():
+    stream.close()

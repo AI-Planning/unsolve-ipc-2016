@@ -1,0 +1,143 @@
+INFO     Running translator.
+INFO     translator input: ['domain.pddl', 'problem.pddl']
+INFO     translator arguments: []
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     callstring: /scicore/soft/apps/Python/2.7.5-ictce-6.2.5/bin/python /infai/infai2/utils/lab/examples/data/lmcut/code-101a6886f2e4/builds/release32/bin/translate/translate.py domain.pddl problem.pddl
+Parsing...
+Parsing: [0.010s CPU, 0.725s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.001s wall-clock]
+Normalizing Datalog program...
+Normalizing Datalog program: [0.010s CPU, 0.237s wall-clock]
+Preparing model... [0.000s CPU, 0.002s wall-clock]
+Generated 59 rules.
+Computing model... [0.010s CPU, 0.012s wall-clock]
+193 relevant atoms
+245 auxiliary atoms
+438 final queue length
+652 total queue pushes
+Completing instantiation... [0.020s CPU, 0.013s wall-clock]
+Instantiating: [0.040s CPU, 0.265s wall-clock]
+Computing fact groups...
+Finding invariants...
+9 initial candidates
+Finding invariants: [0.000s CPU, 0.005s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+0 uncovered facts
+Choosing groups: [0.000s CPU, 0.000s wall-clock]
+Building translation key... [0.000s CPU, 0.000s wall-clock]
+Computing fact groups: [0.000s CPU, 0.005s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Processing axioms: [0.000s CPU, 0.000s wall-clock]
+Translating task: [0.010s CPU, 0.008s wall-clock]
+0 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+0 operators removed
+0 axioms removed
+4 propositions removed
+Detecting unreachable propositions: [0.010s CPU, 0.005s wall-clock]
+Translator variables: 4
+Translator derived variables: 0
+Translator facts: 18
+Translator goal facts: 3
+Translator mutex groups: 4
+Translator total mutex groups size: 18
+Translator operators: 129
+Translator axioms: 0
+Translator task size: 625
+Translator peak memory: 174952 KB
+Writing output... [0.000s CPU, 0.261s wall-clock]
+Done! [0.070s CPU, 1.271s wall-clock]
+INFO     Running preprocessor (release32).
+INFO     preprocessor input: output.sas
+INFO     preprocessor arguments: []
+INFO     preprocessor time limit: None
+INFO     preprocessor memory limit: None
+INFO     callstring: /infai/infai2/utils/lab/examples/data/lmcut/code-101a6886f2e4/builds/release32/bin/preprocess < output.sas
+Building causal graph...
+The causal graph is not acyclic.
+4 variables of 4 necessary
+0 of 4 mutex groups necessary.
+129 of 129 operators necessary.
+0 of 0 axiom rules necessary.
+Building domain transition graphs...
+solveable in poly time 0
+Building successor generator...
+Preprocessor facts: 18
+Preprocessor derived variables: 0
+Preprocessor task size: 607
+Writing output...
+done
+INFO     Running search (release32).
+INFO     search input: output
+INFO     search arguments: ['--search', 'astar(lmcut())']
+INFO     search time limit: 1800s
+INFO     search memory limit: 2048 MB
+INFO     search executable: /infai/infai2/utils/lab/examples/data/lmcut/code-101a6886f2e4/builds/release32/bin/downward
+INFO     callstring: /infai/infai2/utils/lab/examples/data/lmcut/code-101a6886f2e4/builds/release32/bin/downward --search 'astar(lmcut())' --internal-plan-file sas_plan < output
+time limit 1800.00 -> (1800, 1801)
+reading input... [t=0.000271455s]
+done reading input! [t=0.00155176s]
+packing state variables...done! [t=0.0015669s]
+Variables: 4
+Facts: 18
+Bytes per state: 4
+Building successor generator...done! [t=0.00165785s]
+done initalizing global data [t=0.00166167s]
+Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+Initializing landmark cut heuristic...
+New best heuristic value for lmcut: 1
+[g=0, 1 evaluated, 0 expanded, t=0.00203561s, 21672 KB]
+f = 1 [1 evaluated, 0 expanded, t=0.00212215s, 21672 KB]
+Initial heuristic value for lmcut: 1
+New best heuristic value for lmcut: 0
+[g=1, 3 evaluated, 1 expanded, t=0.00219642s, 21672 KB]
+Solution found!
+Actual search time: 0.000109287s [t=0.00227295s]
+fly plane1 city0 city1 fl1 fl0 (1)
+Plan length: 1 step(s).
+Plan cost: 1
+Expanded 2 state(s).
+Reopened 0 state(s).
+Evaluated 6 state(s).
+Evaluations: 6
+Generated 5 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 0 state(s).
+Reopened until last jump: 0 state(s).
+Evaluated until last jump: 1 state(s).
+Generated until last jump: 0 state(s).
+Number of registered states: 6
+Search time: 0.000392122s
+Total time: 0.00227614s
+Solution found.
+Peak memory: 21672 KB
+INFO     Running validate.
+INFO     validate input: ['domain.pddl', 'problem.pddl', 'sas_plan']
+INFO     validate arguments: []
+INFO     validate time limit: None
+INFO     validate memory limit: None
+INFO     validate executable: /infai/infai2/utils/lab/examples/data/lmcut/code-101a6886f2e4/builds/release32/bin/validate
+INFO     callstring: /infai/infai2/utils/lab/examples/data/lmcut/code-101a6886f2e4/builds/release32/bin/validate domain.pddl problem.pddl sas_plan
+Checking plan: sas_plan
+Plan executed successfully - checking goal
+Plan valid
+Final value: 1 
+
+Successful plans:
+Value: 1
+ sas_plan 1 
+
+Running single search parser

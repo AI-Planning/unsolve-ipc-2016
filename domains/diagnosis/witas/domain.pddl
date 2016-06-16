@@ -1,0 +1,6461 @@
+(define (domain witas-dddl-compiled)
+  (:requirements :typing :equality :conditional-effects :disjunctive-preconditions)
+  (:types fly3d - task task - caller autotakeoff - task autoland - task basiccameracontrol - task navtopoint - task doatpoints - task photogrametry - task caller - observable observable - object helicopter - observable message - observable observation - object count - object hypothesis - object)
+  (:predicates (static-true) (task-running-on ?t - task ?h - helicopter) (called-by ?t - task ?c - caller) (matches-1 ?o - observation ?m - message) (matches-2 ?o - observation ?s - observable ?m - message) (matches-3 ?o - observation ?s - observable ?m - message ?d - observable) (future ?o - observation) (pending ?o - observation) (observed ?o - observation) (precedes-1 ?o - observation ?o1 - observation) (precedes-2 ?o - observation ?o1 - observation ?o2 - observation) (precedes-3 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation) (precedes-4 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation) (precedes-5 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation) (precedes-6 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation) (precedes-7 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation) (precedes-8 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation ?o8 - observation) (precedes-9 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation ?o8 - observation ?o9 - observation) (precedes-10 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation ?o8 - observation ?o9 - observation ?o10 - observation) (precedes-11 ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation ?o8 - observation ?o9 - observation ?o10 - observation ?o11 - observation) (fault-count-2 ?l - message ?m - message ?c - count) (fault-count-3 ?l - message ?s - observable ?m - message ?c - count) (fault-count-4 ?l - message ?s - observable ?m - message ?d - observable ?c - count) (next-count ?c - count ?c-next - count) (hypothesis-fault-count-2 ?h - hypothesis ?a1 - observable ?a2 - observable ?c - count) (hypothesis-fault-count-3 ?h - hypothesis ?a1 - observable ?a2 - observable ?a3 - observable ?c - count) (hypothesis-fault-count-4 ?h - hypothesis ?a1 - observable ?a2 - observable ?a3 - observable ?a4 - observable ?c - count) (dominates-2 ?h - hypothesis ?a1 - observable ?a2 - observable) (dominates-3 ?h - hypothesis ?a1 - observable ?a2 - observable ?a3 - observable) (dominates-4 ?h - hypothesis ?a1 - observable ?a2 - observable ?a3 - observable ?a4 - observable) (fly3d-mode-is-pre_init ?t - fly3d) (fly3d-mode-is-processing ?t - fly3d) (fly3d-mode-is-ready ?t - fly3d) (fly3d-mode-is-running ?t - fly3d) (fly3d-mode-is-done ?t - fly3d) (fly3d-mode-is-failed ?t - fly3d) (fly3d-mode-is-destroyed ?t - fly3d) (fly3d-in_start_call-is-yes ?t - fly3d) (fly3d-in_start_call-is-no ?t - fly3d) (fly3d-fsm_state-is-turn_to_segment_heading ?t - fly3d) (fly3d-fsm_state-is-send_starting_yaw_command ?t - fly3d) (fly3d-fsm_state-is-wait_for_yaw_finish ?t - fly3d) (fly3d-fsm_state-is-send_first_trajectory ?t - fly3d) (fly3d-fsm_state-is-wait_trajectory_end ?t - fly3d) (fly3d-fsm_state-is-turn_to_goal_heading ?t - fly3d) (fly3d-fsm_state-is-goal_point_wait ?t - fly3d) (fly3d-fsm_exec-is-nothing ?t - fly3d) (fly3d-fsm_exec-is-start ?t - fly3d) (fly3d-fsm_exec-is-action1 ?t - fly3d) (fly3d-fsm_exec-is-action2 ?t - fly3d) (fly3d-fsm_exec-is-action2-wait ?t - fly3d) (fly3d-fsm_exec-is-action2-fail ?t - fly3d) (fly3d-fsm_exec-is-action2-exit ?t - fly3d) (fly3d-fsm_exec-is-reaction_finished_1 ?t - fly3d) (fly3d-fsm_exec-is-reaction_finished_2 ?t - fly3d) (fly3d-fsm_exec-is-reaction_error_1 ?t - fly3d) (fly3d-fsm_exec-is-reaction_cancel_1 ?t - fly3d) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t - fly3d) (fly3d-fsm_exec-is-global_reaction_error_1 ?t - fly3d) (fly3d-trajectory-not-sent ?t - fly3d) (autotakeoff-mode-is-pre_init ?t - autotakeoff) (autotakeoff-mode-is-processing ?t - autotakeoff) (autotakeoff-mode-is-ready ?t - autotakeoff) (autotakeoff-mode-is-running ?t - autotakeoff) (autotakeoff-mode-is-done ?t - autotakeoff) (autotakeoff-mode-is-failed ?t - autotakeoff) (autotakeoff-mode-is-destroyed ?t - autotakeoff) (autotakeoff-in_start_call-is-no ?t - autotakeoff) (autotakeoff-in_start_call-is-yes ?t - autotakeoff) (autotakeoff-fsm_state-is-takeoff ?t - autotakeoff) (autotakeoff-fsm_state-is-go_to_final_altitude ?t - autotakeoff) (autotakeoff-fsm_exec-is-nothing ?t - autotakeoff) (autotakeoff-fsm_exec-is-start ?t - autotakeoff) (autotakeoff-fsm_exec-is-action1 ?t - autotakeoff) (autotakeoff-fsm_exec-is-action2 ?t - autotakeoff) (autotakeoff-fsm_exec-is-action2-exit ?t - autotakeoff) (autotakeoff-fsm_exec-is-action2-climb ?t - autotakeoff) (autotakeoff-fsm_exec-is-reaction_finished_1 ?t - autotakeoff) (autotakeoff-fsm_exec-is-reaction_finished_2 ?t - autotakeoff) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t - autotakeoff) (autotakeoff-fsm_exec-is-reaction_error_1 ?t - autotakeoff) (autoland-mode-is-pre_init ?t - autoland) (autoland-mode-is-processing ?t - autoland) (autoland-mode-is-ready ?t - autoland) (autoland-mode-is-running ?t - autoland) (autoland-mode-is-done ?t - autoland) (autoland-mode-is-failed ?t - autoland) (autoland-mode-is-destroyed ?t - autoland) (autoland-in_start_call-is-no ?t - autoland) (autoland-in_start_call-is-yes ?t - autoland) (autoland-fsm_state-is-start_decouple ?t - autoland) (autoland-fsm_state-is-move_to_init_pos ?t - autoland) (autoland-fsm_state-is-yaw_to_approach_heading ?t - autoland) (autoland-fsm_state-is-look_at_pattern ?t - autoland) (autoland-fsm_state-is-ready_to_land ?t - autoland) (autoland-fsm_state-is-land ?t - autoland) (autoland-fsm_exec-is-nothing ?t - autoland) (autoland-fsm_exec-is-start ?t - autoland) (autoland-fsm_exec-is-action1 ?t - autoland) (autoland-fsm_exec-is-action2 ?t - autoland) (autoland-fsm_exec-is-action2-fail ?t - autoland) (autoland-fsm_exec-is-action2-exit ?t - autoland) (autoland-fsm_exec-is-reaction_finished_1 ?t - autoland) (autoland-fsm_exec-is-reaction_finished_2 ?t - autoland) (autoland-fsm_exec-is-reaction_error_1 ?t - autoland) (basiccameracontrol-mode-is-pre_init ?t - basiccameracontrol) (basiccameracontrol-mode-is-processing ?t - basiccameracontrol) (basiccameracontrol-mode-is-ready ?t - basiccameracontrol) (basiccameracontrol-mode-is-running ?t - basiccameracontrol) (basiccameracontrol-mode-is-done ?t - basiccameracontrol) (basiccameracontrol-mode-is-failed ?t - basiccameracontrol) (basiccameracontrol-mode-is-destroyed ?t - basiccameracontrol) (basiccameracontrol-in_start_call-is-no ?t - basiccameracontrol) (basiccameracontrol-in_start_call-is-yes ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-tracking ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-set_locked_mode ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-not_in_control ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-select_initial_mode ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-converge_wait ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-seq_lock_command ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-converge_final_wait ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-start_tracking_position ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-converge ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-seq_position_command ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-converge_failed ?t - basiccameracontrol) (basiccameracontrol-fsm_state-is-seq_turn_command ?t - basiccameracontrol) (basiccameracontrol-fsm_exec-is-nothing ?t - basiccameracontrol) (basiccameracontrol-fsm_exec-is-start ?t - basiccameracontrol) (basiccameracontrol-fsm_exec-is-action1 ?t - basiccameracontrol) (basiccameracontrol-fsm_exec-is-action2 ?t - basiccameracontrol) (basiccameracontrol-fsm_exec-is-elevation_lost_reaction1 ?t - basiccameracontrol) (basiccameracontrol-fsm_exec-is-azimuth_lost_reaction1 ?t - basiccameracontrol) (navtopoint-mode-is-pre_init ?t - navtopoint) (navtopoint-mode-is-processing ?t - navtopoint) (navtopoint-mode-is-ready ?t - navtopoint) (navtopoint-mode-is-running ?t - navtopoint) (navtopoint-mode-is-done ?t - navtopoint) (navtopoint-mode-is-failed ?t - navtopoint) (navtopoint-mode-is-destroyed ?t - navtopoint) (navtopoint-in_start_call-is-no ?t - navtopoint) (navtopoint-in_start_call-is-yes ?t - navtopoint) (navtopoint-fsm_state-is-start_decouple ?t - navtopoint) (navtopoint-fsm_state-is-plan_path ?t - navtopoint) (navtopoint-fsm_state-is-wait_for_go ?t - navtopoint) (navtopoint-fsm_state-is-fly_path ?t - navtopoint) (navtopoint-fsm_exec-is-nothing ?t - navtopoint) (navtopoint-fsm_exec-is-start ?t - navtopoint) (navtopoint-fsm_exec-is-action1 ?t - navtopoint) (navtopoint-fsm_exec-is-action2 ?t - navtopoint) (navtopoint-fsm_exec-is-reaction_f3d_ready ?t - navtopoint) (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t - navtopoint) (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t - navtopoint) (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t - navtopoint) (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t - navtopoint) (navtopoint-fly_trajectory_task ?t - navtopoint ?st - fly3d) (doatpoints-mode-is-pre_init ?t - doatpoints) (doatpoints-mode-is-processing ?t - doatpoints) (doatpoints-mode-is-ready ?t - doatpoints) (doatpoints-mode-is-running ?t - doatpoints) (doatpoints-mode-is-done ?t - doatpoints) (doatpoints-mode-is-failed ?t - doatpoints) (doatpoints-mode-is-destroyed ?t - doatpoints) (doatpoints-in_start_call-is-no ?t - doatpoints) (doatpoints-in_start_call-is-yes ?t - doatpoints) (doatpoints-fsm_state-is-exec_run_task_action ?t - doatpoints) (doatpoints-fsm_state-is-next_waypoint_action ?t - doatpoints) (doatpoints-fsm_state-is-check_position ?t - doatpoints) (doatpoints-fsm_state-is-seq_emergency_brake ?t - doatpoints) (doatpoints-fsm_state-is-exec_waypoint_action ?t - doatpoints) (doatpoints-fsm_state-is-run_fly3d ?t - doatpoints) (doatpoints-fsm_state-is-wait_for_go ?t - doatpoints) (doatpoints-fsm_state-is-plan_path ?t - doatpoints) (doatpoints-fsm_state-is-next_waypoint ?t - doatpoints) (doatpoints-fsm_exec-is-nothing ?t - doatpoints) (doatpoints-fsm_exec-is-start ?t - doatpoints) (doatpoints-fsm_exec-is-action1 ?t - doatpoints) (doatpoints-fsm_exec-is-action2 ?t - doatpoints) (doatpoints-fsm_exec-is-action3 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t - doatpoints) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t - doatpoints) (doatpoints-deferred-event-ready ?t - doatpoints) (doatpoints-deferred-event-init-failed ?t - doatpoints) (doatpoints-deferred-event-start-failed ?t - doatpoints) (doatpoints-deferred-event-done ?t - doatpoints) (doatpoints-fly3d-task ?t - doatpoints ?st - fly3d) (doatpoints-mission-task ?t - doatpoints ?st - task) (photogrametry-mode-is-pre_init ?t - photogrametry) (photogrametry-mode-is-processing ?t - photogrametry) (photogrametry-mode-is-ready ?t - photogrametry) (photogrametry-mode-is-running ?t - photogrametry) (photogrametry-mode-is-done ?t - photogrametry) (photogrametry-mode-is-failed ?t - photogrametry) (photogrametry-mode-is-destroyed ?t - photogrametry) (photogrametry-in_start_call-is-no ?t - photogrametry) (photogrametry-in_start_call-is-yes ?t - photogrametry) (photogrametry-fsm_exec-is-nothing ?t - photogrametry) (photogrametry-fsm_exec-is-start ?t - photogrametry) (photogrametry-fsm_exec-is-action1 ?t - photogrametry) (photogrametry-fsm_exec-is-action1-wait ?t - photogrametry) (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t - photogrametry) (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t - photogrametry) (photogrametry-fsm_exec-is-reaction_plan_task_done_2 ?t - photogrametry) (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t - photogrametry) (photogrametry-fsm_exec-is-reaction_plan_task_failed_2 ?t - photogrametry) (photogrametry-fsm_exec-is-reaction_new_wp_task ?t - photogrametry) (photogrametry-fsm_exec-is-reaction_bcc_on_target ?t - photogrametry) (photogrametry-plan_task_status-is-in_init_call ?t - photogrametry) (photogrametry-plan_task_status-is-ready ?t - photogrametry) (photogrametry-plan_task_status-is-init_failed ?t - photogrametry) (photogrametry-plan_task_status-is-in_start_call ?t - photogrametry) (photogrametry-plan_task_status-is-running ?t - photogrametry) (photogrametry-plan_task_status-is-done ?t - photogrametry) (photogrametry-plan-task ?t - photogrametry ?st - doatpoints) (photogrametry-wp-task ?t - photogrametry ?st - task) (missionexec-active-mission ?h - helicopter ?t - task) (missionexec-mission-idle ?h - helicopter) (missionexec-mission-init-call ?h - helicopter) (missionexec-mission-ready ?h - helicopter) (missionexec-mission-start-call ?h - helicopter) (missionexec-mission-running ?h - helicopter) (missionexec-mission-over ?h - helicopter))
+  (:constants lost - message created - message destroyed - message task-done - message fail-service - message fail-specific-221 - message fail-specific-222 - message fail-specific-223 - message fail-specific-220 - message fail-specific-210 - message fail-specific-211 - message fail-specific-213 - message fail-specific-214 - message checkpoint10 - message checkpoint11 - message checkpoint12 - message checkpoint20 - message checkpoint21 - message checkpoint22 - message checkpoint24 - message checkpoint30 - message checkpoint31 - message checkpoint40 - message fcl-event-finished - message fcl-event-canceled - message fcl-event-manual - message fcl-event-not_accepted - message fcl-event-traj3d_next_segment - message fcl-event-in_the_air - message fcl-event-on_the_ground - message fcl-return-finished - message fcl-return-canceled - message fcl-return-manual - message fcl-return-not_accepted - message fail-specific-101 - message fail-specific-102 - message checkpoint1 - message checkpoint2 - message checkpoint3 - message checkpoint7 - message checkpoint5 - message checkpoint6 - message fail-specific-212 - message checkpoint41 - message checkpoint42 - message fail-specific-310 - message fail-specific-401 - message fail-specific-402 - message fail-specific-700 - message checkpoint101 - message checkpoint102 - message checkpoint104 - message checkpoint111 - message checkpoint112 - message checkpoint201 - message checkpoint301 - message checkpoint311 - message checkpoint312 - message checkpoint400 - message checkpoint404 - message checkpoint410 - message checkpoint700 - message ccl-event-elevation_not_reachable - message ccl-event-azimuth_not_reachable - message ccl-event-goal_elevation_achieved - message ccl-event-goal_azimuth_achieved - message ccl-event-goal_hfov_achieved - message ccl-event-goal_elevation_not_achieved - message ccl-event-goal_azimuth_not_achieved - message ccl-event-hfov_not_reachable - message ccl-event-goal_hfov_not_achieved - message ccl-event-ccl_initializing - message ccl-event-ccl_initializing_finished - message ccl-event-ccl_manual_control - message ccl-event-ccl_ipc_control - message ccl-event-ccl_drc_control - message fail-specific-403 - message fail-specific-404 - message fail-subtask - message checkpoint4 - message fail-specific-202 - message fail-specific-203 - message fail-specific-301 - message fail-specific-302 - message fail-specific-777 - message checkpoint8 - message checkpoint9 - message checkpoint13 - message fail-specific-219 - message missionexecutor - caller)
+ (:action flightcontrol-fcl-event-finished-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-event-finished) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-event-finished-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-event-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-event-finished ?new-fc0) (not (fault-count-3 lost ?h fcl-event-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-event-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-event-finished)))))
+ )
+ (:action flightcontrol-fcl-event-canceled-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-event-canceled) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-event-canceled-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-event-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-event-canceled ?new-fc0) (not (fault-count-3 lost ?h fcl-event-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-event-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-event-canceled)))))
+ )
+ (:action flightcontrol-fcl-event-manual-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-event-manual) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-event-manual-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-event-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-event-manual ?new-fc0) (not (fault-count-3 lost ?h fcl-event-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-event-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-event-manual)))))
+ )
+ (:action flightcontrol-fcl-event-not_accepted-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-event-not_accepted) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-event-not_accepted-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-event-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-event-not_accepted ?new-fc0) (not (fault-count-3 lost ?h fcl-event-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-event-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-event-not_accepted)))))
+ )
+ (:action flightcontrol-fcl-event-traj3d_next_segment-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-event-traj3d_next_segment) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-event-traj3d_next_segment-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-event-traj3d_next_segment ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-event-traj3d_next_segment ?new-fc0) (not (fault-count-3 lost ?h fcl-event-traj3d_next_segment ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-event-traj3d_next_segment ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-event-traj3d_next_segment)))))
+ )
+ (:action flightcontrol-fcl-event-on_the_ground-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-event-on_the_ground) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-event-on_the_ground-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-event-on_the_ground ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-event-on_the_ground ?new-fc0) (not (fault-count-3 lost ?h fcl-event-on_the_ground ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-event-on_the_ground ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-event-on_the_ground)))))
+ )
+ (:action flightcontrol-fcl-event-in_the_air-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-event-in_the_air) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-event-in_the_air-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-event-in_the_air ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-event-in_the_air ?new-fc0) (not (fault-count-3 lost ?h fcl-event-in_the_air ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-event-in_the_air ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-event-in_the_air)))))
+ )
+ (:action flightcontrol-fcl-return-finished-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-return-finished) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-return-finished-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-return-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-return-finished ?new-fc0) (not (fault-count-3 lost ?h fcl-return-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-return-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-return-finished)))))
+ )
+ (:action flightcontrol-fcl-return-canceled-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-return-canceled) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-return-canceled-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-return-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-return-canceled ?new-fc0) (not (fault-count-3 lost ?h fcl-return-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-return-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-return-canceled)))))
+ )
+ (:action flightcontrol-fcl-return-manual-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-return-manual) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-return-manual-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-return-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-return-manual ?new-fc0) (not (fault-count-3 lost ?h fcl-return-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-return-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-return-manual)))))
+ )
+ (:action flightcontrol-fcl-return-not_accepted-0
+  :parameters ( ?h - helicopter ?o0 - observation)
+  :precondition (and (matches-2 ?o0 ?h fcl-return-not_accepted) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action flightcontrol-fcl-return-not_accepted-1
+  :parameters ( ?h - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-3 lost ?h fcl-return-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?h fcl-return-not_accepted ?new-fc0) (not (fault-count-3 lost ?h fcl-return-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h fcl-return-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h fcl-return-not_accepted)))))
+ )
+ (:action fly3d-start_ok
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_exec-is-start ?t))
+  :effect (and (fly3d-fsm_state-is-turn_to_segment_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (not (fly3d-fsm_exec-is-start ?t)))
+ )
+ (:action fly3d-enter_turn_to_segment_heading_checkpoint10-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_segment_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint10) (pending ?o0))
+  :effect (and (fly3d-fsm_state-is-send_starting_yaw_command ?t) (observed ?o0) (not (fly3d-fsm_state-is-turn_to_segment_heading ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_segment_heading_checkpoint10-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_segment_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint10 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fault-count-3 lost ?t checkpoint10 ?new-fc0) (not (fly3d-fsm_state-is-turn_to_segment_heading ?t)) (not (fault-count-3 lost ?t checkpoint10 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint10 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint10)))))
+ )
+ (:action fly3d-enter_turn_to_segment_heading_checkpoint11-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_segment_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint11) (pending ?o0))
+  :effect (and (fly3d-fsm_state-is-send_first_trajectory ?t) (observed ?o0) (not (fly3d-fsm_state-is-turn_to_segment_heading ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_segment_heading_checkpoint11-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_segment_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint11 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_state-is-send_first_trajectory ?t) (fault-count-3 lost ?t checkpoint11 ?new-fc0) (not (fly3d-fsm_state-is-turn_to_segment_heading ?t)) (not (fault-count-3 lost ?t checkpoint11 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint11 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint11)))))
+ )
+ (:action fly3d-enter_send_starting_yaw_command_ok
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-action1 ?t) (fly3d-in_start_call-is-no ?t))
+  :effect (and (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (not (fly3d-fsm_state-is-send_starting_yaw_command ?t)) (not (fly3d-fsm_exec-is-action1 ?t)))
+ )
+ (:action fly3d-enter_send_starting_yaw_command_checkpoint12-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-action1 ?t) (fly3d-in_start_call-is-no ?t) (matches-2 ?o0 ?t checkpoint12) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-nothing ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_send_starting_yaw_command_checkpoint12-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-action1 ?t) (fly3d-in_start_call-is-no ?t) (fault-count-3 lost ?t checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint12 ?new-fc0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint12 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint12)))))
+ )
+ (:action fly3d-in_send_starting_yaw_command_idle
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-nothing ?t))
+  :effect (and (fly3d-fsm_exec-is-action1 ?t) (not (fly3d-fsm_exec-is-nothing ?t)))
+ )
+ (:action fly3d-in_send_starting_yaw_command_fcl_cancel_1-flightcontrol-fcl-event-canceled-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-canceled) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_cancel_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_send_starting_yaw_command_fcl_cancel_1-flightcontrol-fcl-event-canceled-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-canceled)))))
+ )
+ (:action fly3d-in_send_starting_yaw_command_fcl_cancel_2-flightcontrol-fcl-event-manual-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-manual) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_cancel_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_send_starting_yaw_command_fcl_cancel_2-flightcontrol-fcl-event-manual-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-manual ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-manual)))))
+ )
+ (:action fly3d-in_send_starting_yaw_command_fcl_error-flightcontrol-fcl-event-not_accepted-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-not_accepted) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_error_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_send_starting_yaw_command_fcl_error-flightcontrol-fcl-event-not_accepted-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_starting_yaw_command ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_error_1 ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-not_accepted)))))
+ )
+ (:action fly3d-in_wait_for_yaw_finish_fcl_finished-flightcontrol-fcl-event-finished-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-finished) (pending ?o0))
+  :effect (and (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (observed ?o0) (not (fly3d-fsm_state-is-wait_for_yaw_finish ?t)) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_wait_for_yaw_finish_fcl_finished-flightcontrol-fcl-event-finished-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?new-fc0) (not (fly3d-fsm_state-is-wait_for_yaw_finish ?t)) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-finished)))))
+ )
+ (:action fly3d-in_wait_for_yaw_finish_fcl_cancel_1-flightcontrol-fcl-event-canceled-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-canceled) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_cancel_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_wait_for_yaw_finish_fcl_cancel_1-flightcontrol-fcl-event-canceled-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-canceled)))))
+ )
+ (:action fly3d-in_wait_for_yaw_finish_fcl_cancel_2-flightcontrol-fcl-event-canceled-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-canceled) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_cancel_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_wait_for_yaw_finish_fcl_cancel_2-flightcontrol-fcl-event-canceled-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-canceled)))))
+ )
+ (:action fly3d-in_wait_for_yaw_finish_fcl_error-flightcontrol-fcl-event-not_accepted-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-not_accepted) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_error_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_wait_for_yaw_finish_fcl_error-flightcontrol-fcl-event-not_accepted-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_for_yaw_finish ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_error_1 ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-not_accepted)))))
+ )
+ (:action fly3d-enter_send_first_trajectory_checkpoint20-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (fly3d-in_start_call-is-no ?t) (matches-2 ?o0 ?t checkpoint20) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-nothing ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fly3d-trajectory-not-sent ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_send_first_trajectory_checkpoint20-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (fly3d-in_start_call-is-no ?t) (fault-count-3 lost ?t checkpoint20 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint20 ?new-fc0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fly3d-trajectory-not-sent ?t)) (not (fault-count-3 lost ?t checkpoint20 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint20 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint20)))))
+ )
+ (:action fly3d-enter_send_first_trajectory_checkpoint21-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (fly3d-in_start_call-is-no ?t) (matches-2 ?o0 ?t checkpoint21) (pending ?o0))
+  :effect (and (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-nothing ?t) (observed ?o0) (not (fly3d-fsm_state-is-send_first_trajectory ?t)) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fly3d-trajectory-not-sent ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_send_first_trajectory_checkpoint21-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (fly3d-in_start_call-is-no ?t) (fault-count-3 lost ?t checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint21 ?new-fc0) (not (fly3d-fsm_state-is-send_first_trajectory ?t)) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fly3d-trajectory-not-sent ?t)) (not (fault-count-3 lost ?t checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint21)))))
+ )
+ (:action fly3d-enter_send_first_trajectory_checkpoint22-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint22) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-action2 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_send_first_trajectory_checkpoint22-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint22 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint22 ?new-fc0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint22 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint22 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint22)))))
+ )
+ (:action fly3d-enter_send_first_trajectory_checkpoint21_after22-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action2 ?t) (fly3d-in_start_call-is-no ?t) (matches-2 ?o0 ?t checkpoint21) (pending ?o0))
+  :effect (and (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-nothing ?t) (observed ?o0) (not (fly3d-fsm_state-is-send_first_trajectory ?t)) (not (fly3d-fsm_exec-is-action2 ?t)) (not (fly3d-trajectory-not-sent ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_send_first_trajectory_checkpoint21_after22-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action2 ?t) (fly3d-in_start_call-is-no ?t) (fault-count-3 lost ?t checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint21 ?new-fc0) (not (fly3d-fsm_state-is-send_first_trajectory ?t)) (not (fly3d-fsm_exec-is-action2 ?t)) (not (fly3d-trajectory-not-sent ?t)) (not (fault-count-3 lost ?t checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint21)))))
+ )
+ (:action fly3d-enter_send_first_trajectory_busy
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action1 ?t) (fly3d-in_start_call-is-no ?t))
+  :effect (and (fly3d-trajectory-not-sent ?t) (fly3d-fsm_exec-is-nothing ?t) (not (fly3d-fsm_exec-is-action1 ?t)))
+ )
+ (:action fly3d-enter_send_first_trajectory_after22_busy
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-action2 ?t) (fly3d-in_start_call-is-no ?t))
+  :effect (and (fly3d-trajectory-not-sent ?t) (fly3d-fsm_exec-is-nothing ?t) (not (fly3d-fsm_exec-is-action2 ?t)))
+ )
+ (:action fly3d-in_send_first_trajectory_fcl_finished-flightcontrol-fcl-event-finished-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-finished) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_finished_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_send_first_trajectory_fcl_finished-flightcontrol-fcl-event-finished-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-finished)))))
+ )
+ (:action fly3d-in_send_first_trajectory_fcl_next_trajectory-flightcontrol-fcl-event-traj3d_next_segment-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-traj3d_next_segment) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-action1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_send_first_trajectory_fcl_next_trajectory-flightcontrol-fcl-event-traj3d_next_segment-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-traj3d_next_segment ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?h-1 fcl-event-traj3d_next_segment ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-traj3d_next_segment ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-traj3d_next_segment ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-traj3d_next_segment)))))
+ )
+ (:action fly3d-in_send_first_trajectory_idle_timeout
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-send_first_trajectory ?t) (fly3d-fsm_exec-is-nothing ?t) (fly3d-trajectory-not-sent ?t))
+  :effect (and (fly3d-fsm_exec-is-action1 ?t) (not (fly3d-fsm_exec-is-nothing ?t)))
+ )
+ (:action fly3d-in_wait_trajectory_end_fcl_finished-flightcontrol-fcl-event-finished-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-finished) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_finished_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_wait_trajectory_end_fcl_finished-flightcontrol-fcl-event-finished-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-finished)))))
+ )
+ (:action fly3d-in_wait_trajectory_end_fcl_finished_reaction1-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-reaction_finished_1 ?t) (matches-2 ?o0 ?t checkpoint24) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-reaction_finished_2 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-reaction_finished_1 ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-in_wait_trajectory_end_fcl_finished_reaction1-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?t checkpoint24 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-reaction_finished_2 ?t) (fault-count-3 lost ?t checkpoint24 ?new-fc0) (not (fly3d-fsm_exec-is-reaction_finished_1 ?t)) (not (fault-count-3 lost ?t checkpoint24 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint24 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint24)))))
+ )
+ (:action fly3d-in_wait_trajectory_end_fcl_finished_reaction2a
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-reaction_finished_2 ?t))
+  :effect (and (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (not (fly3d-fsm_state-is-wait_trajectory_end ?t)) (not (fly3d-fsm_exec-is-reaction_finished_2 ?t)))
+ )
+ (:action fly3d-in_wait_trajectory_end_fcl_finished_reaction2b
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-reaction_finished_2 ?t))
+  :effect (and (fly3d-fsm_state-is-goal_point_wait ?t) (fly3d-fsm_exec-is-action1 ?t) (not (fly3d-fsm_state-is-wait_trajectory_end ?t)) (not (fly3d-fsm_exec-is-reaction_finished_2 ?t)))
+ )
+ (:action fly3d-in_wait_trajectory_end_fcl_finished_reaction2d
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-wait_trajectory_end ?t) (fly3d-fsm_exec-is-reaction_finished_2 ?t))
+  :effect (and (fly3d-fsm_state-is-turn_to_segment_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (not (fly3d-fsm_state-is-wait_trajectory_end ?t)) (not (fly3d-fsm_exec-is-reaction_finished_2 ?t)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_checkpoint30-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint30) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-action2-wait ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_checkpoint30-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint30 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-action2-wait ?t) (fault-count-3 lost ?t checkpoint30 ?new-fc0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint30 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint30 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint30)))))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_finish_1-flightcontrol-fcl-return-finished-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (matches-2 ?o0 ?h-1 fcl-return-finished) (pending ?o0))
+  :effect (and (fly3d-fsm_state-is-goal_point_wait ?t) (fly3d-fsm_exec-is-action1 ?t) (observed ?o0) (not (fly3d-fsm_state-is-turn_to_goal_heading ?t)) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_finish_1-flightcontrol-fcl-return-finished-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (fault-count-3 lost ?h-1 fcl-return-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_state-is-goal_point_wait ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?h-1 fcl-return-finished ?new-fc0) (not (fly3d-fsm_state-is-turn_to_goal_heading ?t)) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (fault-count-3 lost ?h-1 fcl-return-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-finished)))))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_finish_2-flightcontrol-fcl-return-finished-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (matches-2 ?o0 ?h-1 fcl-return-finished) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_finish_2-flightcontrol-fcl-return-finished-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (fault-count-3 lost ?h-1 fcl-return-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?h-1 fcl-return-finished ?new-fc0) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (fault-count-3 lost ?h-1 fcl-return-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-finished)))))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_cancel_1-flightcontrol-fcl-return-canceled-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (fly3d-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-canceled) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_cancel_1-flightcontrol-fcl-return-canceled-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (fly3d-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?h-1 fcl-return-canceled ?new-fc0) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (fault-count-3 lost ?h-1 fcl-return-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-canceled)))))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_cancel_2-flightcontrol-fcl-return-manual-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (fly3d-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-manual) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_cancel_2-flightcontrol-fcl-return-manual-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (fly3d-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?h-1 fcl-return-manual ?new-fc0) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (fault-count-3 lost ?h-1 fcl-return-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-manual)))))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_error-flightcontrol-fcl-return-not_accepted-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (matches-2 ?o0 ?h-1 fcl-return-not_accepted) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-action2-fail ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_yaw_wait_error-flightcontrol-fcl-return-not_accepted-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action2-wait ?t) (fault-count-3 lost ?h-1 fcl-return-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-action2-fail ?t) (fault-count-3 lost ?h-1 fcl-return-not_accepted ?new-fc0) (not (fly3d-fsm_exec-is-action2-wait ?t)) (not (fault-count-3 lost ?h-1 fcl-return-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-not_accepted)))))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_checkpoint31a-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint31) (pending ?o0))
+  :effect (and (fly3d-fsm_state-is-goal_point_wait ?t) (observed ?o0) (not (fly3d-fsm_state-is-turn_to_goal_heading ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_checkpoint31a-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint31 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_state-is-goal_point_wait ?t) (fault-count-3 lost ?t checkpoint31 ?new-fc0) (not (fly3d-fsm_state-is-turn_to_goal_heading ?t)) (not (fault-count-3 lost ?t checkpoint31 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint31 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint31)))))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_checkpoint31b-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint31) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_turn_to_goal_heading_checkpoint31b-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-turn_to_goal_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint31 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?t checkpoint31 ?new-fc0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint31 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint31 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint31)))))
+ )
+ (:action fly3d-enter_goal_point_wait_checkpoint40-0
+  :parameters ( ?t - fly3d ?o0 - observation)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-goal_point_wait ?t) (fly3d-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint40) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-nothing ?t) (observed ?o0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-enter_goal_point_wait_checkpoint40-1
+  :parameters ( ?t - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-goal_point_wait ?t) (fly3d-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint40 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint40 ?new-fc0) (not (fly3d-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint40 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint40 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint40)))))
+ )
+ (:action fly3d-goal_point_wait_cmd_continue_1
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-goal_point_wait ?t) (fly3d-fsm_exec-is-nothing ?t))
+  :effect (and (fly3d-fsm_state-is-turn_to_segment_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (not (fly3d-fsm_state-is-goal_point_wait ?t)) (not (fly3d-fsm_exec-is-nothing ?t)))
+ )
+ (:action fly3d-goal_point_wait_idle_1
+  :parameters ( ?t - fly3d)
+  :precondition (and (fly3d-mode-is-running ?t) (fly3d-fsm_state-is-goal_point_wait ?t) (fly3d-fsm_exec-is-nothing ?t))
+  :effect (and (fly3d-fsm_state-is-turn_to_segment_heading ?t) (fly3d-fsm_exec-is-action1 ?t) (not (fly3d-fsm_state-is-goal_point_wait ?t)) (not (fly3d-fsm_exec-is-nothing ?t)))
+ )
+ (:action fly3d-global_fcl_canceled-flightcontrol-fcl-event-canceled-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-canceled) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-global_fcl_canceled-flightcontrol-fcl-event-canceled-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-canceled)))))
+ )
+ (:action fly3d-global_fcl_manual-flightcontrol-fcl-event-manual-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-manual) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-global_fcl_manual-flightcontrol-fcl-event-manual-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-manual ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-manual)))))
+ )
+ (:action fly3d-global_fcl_error-flightcontrol-fcl-event-not_accepted-0
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-not_accepted) (pending ?o0))
+  :effect (and (fly3d-fsm_exec-is-global_reaction_error_1 ?t) (observed ?o0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action fly3d-global_fcl_error-flightcontrol-fcl-event-not_accepted-1
+  :parameters ( ?t - fly3d ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (fly3d-mode-is-running ?t) (fly3d-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-fsm_exec-is-global_reaction_error_1 ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?new-fc0) (not (fly3d-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-not_accepted)))))
+ )
+ (:action autotakeoff-start_ok
+  :parameters ( ?t - autotakeoff)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_exec-is-start ?t))
+  :effect (and (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-action1 ?t) (not (autotakeoff-fsm_exec-is-start ?t)))
+ )
+ (:action autotakeoff-takeoff_action1-0
+  :parameters ( ?t - autotakeoff ?o0 - observation)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-action1 ?t) (autotakeoff-in_start_call-is-yes ?t) (matches-2 ?o0 ?t checkpoint1) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-action2 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-takeoff_action1-1
+  :parameters ( ?t - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-action1 ?t) (autotakeoff-in_start_call-is-yes ?t) (fault-count-3 lost ?t checkpoint1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint1 ?new-fc0) (not (autotakeoff-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint1 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint1)))))
+ )
+ (:action autotakeoff-takeoff_fcl_finished-flightcontrol-fcl-event-finished-0
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-finished) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_finished_1 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-takeoff_fcl_finished-flightcontrol-fcl-event-finished-1
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?new-fc0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-finished)))))
+ )
+ (:action autotakeoff-takeoff_fcl_finished_reaction1-0
+  :parameters ( ?t - autotakeoff ?o0 - observation)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-reaction_finished_1 ?t) (matches-2 ?o0 ?t checkpoint2) (pending ?o0))
+  :effect (and (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-action1 ?t) (observed ?o0) (not (autotakeoff-fsm_state-is-takeoff ?t)) (not (autotakeoff-fsm_exec-is-reaction_finished_1 ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-takeoff_fcl_finished_reaction1-1
+  :parameters ( ?t - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?t checkpoint2 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint2 ?new-fc0) (not (autotakeoff-fsm_state-is-takeoff ?t)) (not (autotakeoff-fsm_exec-is-reaction_finished_1 ?t)) (not (fault-count-3 lost ?t checkpoint2 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint2 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint2)))))
+ )
+ (:action autotakeoff-takeoff_fcl_error_1-flightcontrol-fcl-event-not_accepted-0
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-not_accepted) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_error_1 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-takeoff_fcl_error_1-flightcontrol-fcl-event-not_accepted-1
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_error_1 ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?new-fc0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-not_accepted)))))
+ )
+ (:action autotakeoff-takeoff_fcl_cancel_1-flightcontrol-fcl-event-canceled-0
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-canceled) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-takeoff_fcl_cancel_1-flightcontrol-fcl-event-canceled-1
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?new-fc0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-canceled)))))
+ )
+ (:action autotakeoff-takeoff_fcl_cancel_2-flightcontrol-fcl-event-manual-0
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-manual) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-takeoff_fcl_cancel_2-flightcontrol-fcl-event-manual-1
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-manual ?new-fc0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-manual)))))
+ )
+ (:action autotakeoff-takeoff_idle-0
+  :parameters ( ?t - autotakeoff ?o0 - observation)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?t checkpoint3) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action autotakeoff-takeoff_idle-1
+  :parameters ( ?t - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-takeoff ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint3 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-3 lost ?t checkpoint3 ?new-fc0) (not (fault-count-3 lost ?t checkpoint3 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint3 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint3)))))
+ )
+ (:action autotakeoff-go_to_final_altitude_action1_no_climb-0
+  :parameters ( ?t - autotakeoff ?o0 - observation)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-action1 ?t) (autotakeoff-in_start_call-is-no ?t) (matches-2 ?o0 ?t checkpoint7) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-go_to_final_altitude_action1_no_climb-1
+  :parameters ( ?t - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-action1 ?t) (autotakeoff-in_start_call-is-no ?t) (fault-count-3 lost ?t checkpoint7 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?t checkpoint7 ?new-fc0) (not (autotakeoff-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint7 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint7 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint7)))))
+ )
+ (:action autotakeoff-go_to_final_altitude_action1_climb-0
+  :parameters ( ?t - autotakeoff ?o0 - observation)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-action1 ?t) (autotakeoff-in_start_call-is-no ?t) (matches-2 ?o0 ?t checkpoint5) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-action2-climb ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-go_to_final_altitude_action1_climb-1
+  :parameters ( ?t - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-action1 ?t) (autotakeoff-in_start_call-is-no ?t) (fault-count-3 lost ?t checkpoint5 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-action2-climb ?t) (fault-count-3 lost ?t checkpoint5 ?new-fc0) (not (autotakeoff-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint5 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint5 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint5)))))
+ )
+ (:action autotakeoff-go_to_final_altitude_climb_ok
+  :parameters ( ?t - autotakeoff)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-action2-climb ?t) (autotakeoff-in_start_call-is-no ?t))
+  :effect (and (autotakeoff-fsm_exec-is-nothing ?t) (not (autotakeoff-fsm_exec-is-action2-climb ?t)))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_finished-flightcontrol-fcl-event-finished-0
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-finished) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_finished_1 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_finished-flightcontrol-fcl-event-finished-1
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?new-fc0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-finished)))))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_finished_reaction1-0
+  :parameters ( ?t - autotakeoff ?o0 - observation)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-reaction_finished_1 ?t) (matches-2 ?o0 ?t checkpoint6) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_finished_2 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-reaction_finished_1 ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_finished_reaction1-1
+  :parameters ( ?t - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?t checkpoint6 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_finished_2 ?t) (fault-count-3 lost ?t checkpoint6 ?new-fc0) (not (autotakeoff-fsm_exec-is-reaction_finished_1 ?t)) (not (fault-count-3 lost ?t checkpoint6 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint6 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint6)))))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_error_1-flightcontrol-fcl-event-not_accepted-0
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-not_accepted) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_error_1 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_error_1-flightcontrol-fcl-event-not_accepted-1
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_error_1 ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?new-fc0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-not_accepted)))))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_cancel_1-flightcontrol-fcl-event-canceled-0
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-canceled) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_cancel_1-flightcontrol-fcl-event-canceled-1
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-canceled ?new-fc0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-canceled)))))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_cancel_2-flightcontrol-fcl-event-manual-0
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-manual) (pending ?o0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t) (observed ?o0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autotakeoff-go_to_final_altitude_fcl_cancel_2-flightcontrol-fcl-event-manual-1
+  :parameters ( ?t - autotakeoff ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autotakeoff-mode-is-running ?t) (autotakeoff-fsm_state-is-go_to_final_altitude ?t) (autotakeoff-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t) (fault-count-3 lost ?h-1 fcl-event-manual ?new-fc0) (not (autotakeoff-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-manual)))))
+ )
+ (:action autoland-start_decouple_idle
+  :parameters ( ?t - autoland)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-start_decouple ?t) (autoland-fsm_exec-is-nothing ?t))
+  :effect (and (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action1 ?t) (not (autoland-fsm_state-is-start_decouple ?t)) (not (autoland-fsm_exec-is-nothing ?t)))
+ )
+ (:action autoland-move_to_init_pos_action1_checkpoint20-0
+  :parameters ( ?t - autoland ?o0 - observation)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint20) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2 ?t) (observed ?o0) (not (autoland-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-move_to_init_pos_action1_checkpoint20-1
+  :parameters ( ?t - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint20 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint20 ?new-fc0) (not (autoland-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint20 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint20 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint20)))))
+ )
+ (:action autoland-move_to_init_pos_action1_checkpoint21-0
+  :parameters ( ?t - autoland ?o0 - observation)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint21) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-nothing ?t) (observed ?o0) (not (autoland-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-move_to_init_pos_action1_checkpoint21-1
+  :parameters ( ?t - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint21 ?new-fc0) (not (autoland-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint21)))))
+ )
+ (:action autoland-move_to_init_pos_action2_blocking_finished-flightcontrol-fcl-return-finished-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action2 ?t) (matches-2 ?o0 ?h-1 fcl-return-finished) (pending ?o0))
+  :effect (and (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action1 ?t) (observed ?o0) (not (autoland-fsm_state-is-move_to_init_pos ?t)) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-move_to_init_pos_action2_blocking_finished-flightcontrol-fcl-return-finished-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action2 ?t) (fault-count-3 lost ?h-1 fcl-return-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action1 ?t) (fault-count-3 lost ?h-1 fcl-return-finished ?new-fc0) (not (autoland-fsm_state-is-move_to_init_pos ?t)) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-finished)))))
+ )
+ (:action autoland-move_to_init_pos_action2_blocking_cancel_1-flightcontrol-fcl-return-canceled-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-canceled) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-move_to_init_pos_action2_blocking_cancel_1-flightcontrol-fcl-return-canceled-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?h-1 fcl-return-canceled ?new-fc0) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-canceled)))))
+ )
+ (:action autoland-move_to_init_pos_action2_blocking_cancel_2-flightcontrol-fcl-return-manual-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-manual) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-move_to_init_pos_action2_blocking_cancel_2-flightcontrol-fcl-return-manual-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?h-1 fcl-return-manual ?new-fc0) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-manual)))))
+ )
+ (:action autoland-move_to_init_pos_action2_blocking_error_1-flightcontrol-fcl-return-not_accepted-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-not_accepted) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2-fail ?t) (observed ?o0) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-move_to_init_pos_action2_blocking_error_1-flightcontrol-fcl-return-not_accepted-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-move_to_init_pos ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2-fail ?t) (fault-count-3 lost ?h-1 fcl-return-not_accepted ?new-fc0) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-not_accepted)))))
+ )
+ (:action autoland-yaw_to_approach_heading_checkpoint22
+  :parameters ( ?t - autoland)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action1 ?t))
+  :effect (and (autoland-fsm_exec-is-action2 ?t) (not (autoland-fsm_exec-is-action1 ?t)))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_finished-flightcontrol-fcl-return-finished-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (matches-2 ?o0 ?h-1 fcl-return-finished) (pending ?o0))
+  :effect (and (autoland-fsm_state-is-ready_to_land ?t) (autoland-fsm_exec-is-action1 ?t) (observed ?o0) (not (autoland-fsm_state-is-yaw_to_approach_heading ?t)) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_finished-flightcontrol-fcl-return-finished-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (fault-count-3 lost ?h-1 fcl-return-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_state-is-ready_to_land ?t) (autoland-fsm_exec-is-action1 ?t) (fault-count-3 lost ?h-1 fcl-return-finished ?new-fc0) (not (autoland-fsm_state-is-yaw_to_approach_heading ?t)) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-finished)))))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_canceled_1a-flightcontrol-fcl-return-canceled-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-canceled) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_canceled_1a-flightcontrol-fcl-return-canceled-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?h-1 fcl-return-canceled ?new-fc0) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-canceled)))))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_canceled_1b-flightcontrol-fcl-return-canceled-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-canceled) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2-fail ?t) (observed ?o0) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_canceled_1b-flightcontrol-fcl-return-canceled-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-canceled ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2-fail ?t) (fault-count-3 lost ?h-1 fcl-return-canceled ?new-fc0) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-canceled ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-canceled ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-canceled)))))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_canceled_2a-flightcontrol-fcl-return-manual-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-manual) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2-exit ?t) (observed ?o0) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_canceled_2a-flightcontrol-fcl-return-manual-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2-exit ?t) (fault-count-3 lost ?h-1 fcl-return-manual ?new-fc0) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-manual)))))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_canceled_2b-flightcontrol-fcl-return-manual-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-manual) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2-fail ?t) (observed ?o0) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_canceled_2b-flightcontrol-fcl-return-manual-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-manual ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2-fail ?t) (fault-count-3 lost ?h-1 fcl-return-manual ?new-fc0) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-manual ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-manual ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-manual)))))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_error_1-flightcontrol-fcl-return-not_accepted-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (matches-2 ?o0 ?h-1 fcl-return-not_accepted) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-action2-fail ?t) (observed ?o0) (not (autoland-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-yaw_to_approach_heading_blocking_error_1-flightcontrol-fcl-return-not_accepted-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-yaw_to_approach_heading ?t) (autoland-fsm_exec-is-action2 ?t) (autoland-in_start_call-is-no ?t) (fault-count-3 lost ?h-1 fcl-return-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-action2-fail ?t) (fault-count-3 lost ?h-1 fcl-return-not_accepted ?new-fc0) (not (autoland-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?h-1 fcl-return-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-return-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-return-not_accepted)))))
+ )
+ (:action autoland-ready_to_land_checkpoint40a-0
+  :parameters ( ?t - autoland ?o0 - observation)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-ready_to_land ?t) (autoland-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint40) (pending ?o0))
+  :effect (and (autoland-fsm_state-is-land ?t) (observed ?o0) (not (autoland-fsm_state-is-ready_to_land ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-ready_to_land_checkpoint40a-1
+  :parameters ( ?t - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-ready_to_land ?t) (autoland-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint40 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_state-is-land ?t) (fault-count-3 lost ?t checkpoint40 ?new-fc0) (not (autoland-fsm_state-is-ready_to_land ?t)) (not (fault-count-3 lost ?t checkpoint40 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint40 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint40)))))
+ )
+ (:action autoland-ready_to_land_checkpoint40b-0
+  :parameters ( ?t - autoland ?o0 - observation)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-ready_to_land ?t) (autoland-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint40) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-nothing ?t) (observed ?o0) (not (autoland-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-ready_to_land_checkpoint40b-1
+  :parameters ( ?t - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-ready_to_land ?t) (autoland-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint40 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint40 ?new-fc0) (not (autoland-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint40 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint40 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint40)))))
+ )
+ (:action autoland-ready_to_land_cmd_ok
+  :parameters ( ?t - autoland)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-ready_to_land ?t) (autoland-fsm_exec-is-nothing ?t))
+  :effect (and (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-action1 ?t) (not (autoland-fsm_state-is-ready_to_land ?t)) (not (autoland-fsm_exec-is-nothing ?t)))
+ )
+ (:action autoland-land_checkpoint41-0
+  :parameters ( ?t - autoland ?o0 - observation)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint41) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-nothing ?t) (observed ?o0) (not (autoland-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-land_checkpoint41-1
+  :parameters ( ?t - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint41 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint41 ?new-fc0) (not (autoland-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint41 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint41 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint41)))))
+ )
+ (:action autoland-land_fcl_finished-flightcontrol-fcl-event-finished-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-finished) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-reaction_finished_1 ?t) (observed ?o0) (not (autoland-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-land_fcl_finished-flightcontrol-fcl-event-finished-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?new-fc0) (not (autoland-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-finished)))))
+ )
+ (:action autoland-land_fcl_finished_reaction1-0
+  :parameters ( ?t - autoland ?o0 - observation)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-reaction_finished_1 ?t) (matches-2 ?o0 ?t checkpoint42) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-reaction_finished_2 ?t) (observed ?o0) (not (autoland-fsm_exec-is-reaction_finished_1 ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-land_fcl_finished_reaction1-1
+  :parameters ( ?t - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (autoland-mode-is-running ?t) (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-reaction_finished_1 ?t) (fault-count-3 lost ?t checkpoint42 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-reaction_finished_2 ?t) (fault-count-3 lost ?t checkpoint42 ?new-fc0) (not (autoland-fsm_exec-is-reaction_finished_1 ?t)) (not (fault-count-3 lost ?t checkpoint42 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint42 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint42)))))
+ )
+ (:action autoland-land_fcl_error_1-flightcontrol-fcl-event-not_accepted-0
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-not_accepted) (pending ?o0))
+  :effect (and (autoland-fsm_exec-is-reaction_error_1 ?t) (observed ?o0) (not (autoland-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action autoland-land_fcl_error_1-flightcontrol-fcl-event-not_accepted-1
+  :parameters ( ?t - autoland ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (autoland-mode-is-running ?t) (autoland-fsm_state-is-land ?t) (autoland-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (autoland-fsm_exec-is-reaction_error_1 ?t) (fault-count-3 lost ?h-1 fcl-event-not_accepted ?new-fc0) (not (autoland-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-not_accepted ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-not_accepted ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-not_accepted)))))
+ )
+ (:action cameracontrol-ccl-event-elevation_not_reachable-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-elevation_not_reachable) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-elevation_not_reachable-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-elevation_not_reachable ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-elevation_not_reachable ?new-fc0) (not (fault-count-2 lost ccl-event-elevation_not_reachable ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-elevation_not_reachable ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-elevation_not_reachable)))))
+ )
+ (:action cameracontrol-ccl-event-azimuth_not_reachable-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-azimuth_not_reachable) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-azimuth_not_reachable-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-azimuth_not_reachable ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-azimuth_not_reachable ?new-fc0) (not (fault-count-2 lost ccl-event-azimuth_not_reachable ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-azimuth_not_reachable ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-azimuth_not_reachable)))))
+ )
+ (:action cameracontrol-ccl-event-goal_elevation_achieved-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-goal_elevation_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-goal_elevation_achieved-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-goal_elevation_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_elevation_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_elevation_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_elevation_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_elevation_achieved)))))
+ )
+ (:action cameracontrol-ccl-event-goal_azimuth_achieved-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-goal_azimuth_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-goal_azimuth_achieved-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-goal_azimuth_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_azimuth_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_azimuth_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_azimuth_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_azimuth_achieved)))))
+ )
+ (:action cameracontrol-ccl-event-goal_hfov_achieved-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-goal_hfov_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-goal_hfov_achieved-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-goal_hfov_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_hfov_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_hfov_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_hfov_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_hfov_achieved)))))
+ )
+ (:action cameracontrol-ccl-event-goal_elevation_not_achieved-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-goal_elevation_not_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-goal_elevation_not_achieved-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_elevation_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_elevation_not_achieved)))))
+ )
+ (:action cameracontrol-ccl-event-goal_azimuth_not_achieved-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-goal_azimuth_not_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-goal_azimuth_not_achieved-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_azimuth_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_azimuth_not_achieved)))))
+ )
+ (:action cameracontrol-ccl-event-hfov_not_reachable-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-hfov_not_reachable) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-hfov_not_reachable-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-hfov_not_reachable ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-hfov_not_reachable ?new-fc0) (not (fault-count-2 lost ccl-event-hfov_not_reachable ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-hfov_not_reachable ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-hfov_not_reachable)))))
+ )
+ (:action cameracontrol-ccl-event-goal_hfov_not_achieved-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-goal_hfov_not_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-goal_hfov_not_achieved-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-goal_hfov_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_hfov_not_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_hfov_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_hfov_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_hfov_not_achieved)))))
+ )
+ (:action cameracontrol-ccl-event-ccl_initializing-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-ccl_initializing) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-ccl_initializing-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-ccl_initializing ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-ccl_initializing ?new-fc0) (not (fault-count-2 lost ccl-event-ccl_initializing ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-ccl_initializing ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-ccl_initializing)))))
+ )
+ (:action cameracontrol-ccl-event-ccl_initializing_finished-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-ccl_initializing_finished) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-ccl_initializing_finished-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-ccl_initializing_finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-ccl_initializing_finished ?new-fc0) (not (fault-count-2 lost ccl-event-ccl_initializing_finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-ccl_initializing_finished ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-ccl_initializing_finished)))))
+ )
+ (:action cameracontrol-ccl-event-ccl_manual_control-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-ccl_manual_control) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-ccl_manual_control-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-ccl_manual_control ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-ccl_manual_control ?new-fc0) (not (fault-count-2 lost ccl-event-ccl_manual_control ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-ccl_manual_control ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-ccl_manual_control)))))
+ )
+ (:action cameracontrol-ccl-event-ccl_ipc_control-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-ccl_ipc_control) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-ccl_ipc_control-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-ccl_ipc_control ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-ccl_ipc_control ?new-fc0) (not (fault-count-2 lost ccl-event-ccl_ipc_control ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-ccl_ipc_control ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-ccl_ipc_control)))))
+ )
+ (:action cameracontrol-ccl-event-ccl_drc_control-0
+  :parameters ( ?o0 - observation)
+  :precondition (and (matches-1 ?o0 ccl-event-ccl_drc_control) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action cameracontrol-ccl-event-ccl_drc_control-1
+  :parameters ( ?fc0 - count ?new-fc0 - count)
+  :precondition (and (fault-count-2 lost ccl-event-ccl_drc_control ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-ccl_drc_control ?new-fc0) (not (fault-count-2 lost ccl-event-ccl_drc_control ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-ccl_drc_control ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-ccl_drc_control)))))
+ )
+ (:action basiccameracontrol-start_ok_1
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-start ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-select_initial_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_exec-is-start ?t)))
+ )
+ (:action basiccameracontrol-start_ok_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-start ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_exec-is-start ?t)))
+ )
+ (:action basiccameracontrol-select_initial_mode_action1_1
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-select_initial_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-start_tracking_position ?t) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)))
+ )
+ (:action basiccameracontrol-select_initial_mode_action1_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-select_initial_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)))
+ )
+ (:action basiccameracontrol-select_initial_mode_action1_3
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-select_initial_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-set_locked_mode ?t) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)))
+ )
+ (:action basiccameracontrol-start_tracking_position_ok-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-start_tracking_position ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint101) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_position_command ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-start_tracking_position_ok-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-start_tracking_position ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_position_command ?t) (fault-count-3 lost ?t checkpoint101 ?new-fc0) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (fault-count-3 lost ?t checkpoint101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint101)))))
+ )
+ (:action basiccameracontrol-start_tracking_position_no_fail_111-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-start_tracking_position ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint111) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_lock_command ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-start_tracking_position_no_fail_111-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-start_tracking_position ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint111 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_lock_command ?t) (fault-count-3 lost ?t checkpoint111 ?new-fc0) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (fault-count-3 lost ?t checkpoint111 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint111 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint111)))))
+ )
+ (:action basiccameracontrol-start_tracking_position_no_fail_112-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-start_tracking_position ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint112) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_lock_command ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-start_tracking_position_no_fail_112-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-start_tracking_position ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint112 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_lock_command ?t) (fault-count-3 lost ?t checkpoint112 ?new-fc0) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (fault-count-3 lost ?t checkpoint112 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint112 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint112)))))
+ )
+ (:action basiccameracontrol-seq_position_command_wait_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_position_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action1 ?t)))
+ )
+ (:action basiccameracontrol-seq_position_command_not_in_control
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_position_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)))
+ )
+ (:action basiccameracontrol-seq_position_command_ok
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_position_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-converge ?t) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)))
+ )
+ (:action basiccameracontrol-seq_position_command_idle
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_position_command ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-start_tracking_bearing_ok-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint102) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_bearing_command ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-start_tracking_bearing_ok-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_bearing_command ?t) (fault-count-3 lost ?t checkpoint102 ?new-fc0) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (fault-count-3 lost ?t checkpoint102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint102)))))
+ )
+ (:action basiccameracontrol-seq_bearing_command_wait_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action1 ?t)))
+ )
+ (:action basiccameracontrol-seq_bearing_command_not_in_control
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)))
+ )
+ (:action basiccameracontrol-seq_bearing_command_ok_1
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-converge ?t) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)))
+ )
+ (:action basiccameracontrol-seq_bearing_command_idle
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-converge_ok_1
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_wait ?t) (not (basiccameracontrol-fsm_state-is-converge ?t)))
+ )
+ (:action basiccameracontrol-converge_ok_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (not (basiccameracontrol-fsm_state-is-converge ?t)))
+ )
+ (:action basiccameracontrol-converge_wait_wait_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action1 ?t)))
+ )
+ (:action basiccameracontrol-converge_wait_elevation_reached_1-cameracontrol-ccl-event-goal_elevation_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_elevation_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_wait_elevation_reached_1-cameracontrol-ccl-event-goal_elevation_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_elevation_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_elevation_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_elevation_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_elevation_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_elevation_achieved)))))
+ )
+ (:action basiccameracontrol-converge_wait_elevation_reached_2-cameracontrol-ccl-event-goal_elevation_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_elevation_achieved) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_wait_elevation_reached_2-cameracontrol-ccl-event-goal_elevation_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_elevation_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-2 lost ccl-event-goal_elevation_achieved ?new-fc0) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-goal_elevation_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_elevation_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_elevation_achieved)))))
+ )
+ (:action basiccameracontrol-converge_wait_elevation_not_reached-cameracontrol-ccl-event-goal_elevation_not_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_elevation_not_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_wait_elevation_not_reached-cameracontrol-ccl-event-goal_elevation_not_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_elevation_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_elevation_not_achieved)))))
+ )
+ (:action basiccameracontrol-converge_wait_azimuth_reached_1-cameracontrol-ccl-event-goal_azimuth_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_azimuth_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_wait_azimuth_reached_1-cameracontrol-ccl-event-goal_azimuth_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_azimuth_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_azimuth_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_azimuth_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_azimuth_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_azimuth_achieved)))))
+ )
+ (:action basiccameracontrol-converge_wait_azimuth_reached_2-cameracontrol-ccl-event-goal_azimuth_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_azimuth_achieved) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_wait_azimuth_reached_2-cameracontrol-ccl-event-goal_azimuth_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_azimuth_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-2 lost ccl-event-goal_azimuth_achieved ?new-fc0) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-goal_azimuth_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_azimuth_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_azimuth_achieved)))))
+ )
+ (:action basiccameracontrol-converge_wait_azimuth_not_reached-cameracontrol-ccl-event-goal_azimuth_not_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_azimuth_not_achieved) (pending ?o0))
+  :effect (and (observed ?o0) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_wait_azimuth_not_reached-cameracontrol-ccl-event-goal_azimuth_not_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?new-fc0) (not (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_azimuth_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_azimuth_not_achieved)))))
+ )
+ (:action basiccameracontrol-converge_wait_timeout_1
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_failed ?t) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)))
+ )
+ (:action basiccameracontrol-converge_wait_timeout_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_failed ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-converge_final_wait_wait_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action1 ?t)))
+ )
+ (:action basiccameracontrol-converge_final_wait_azimuth_not_reached-cameracontrol-ccl-event-goal_azimuth_not_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_azimuth_not_achieved) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_final_wait_azimuth_not_reached-cameracontrol-ccl-event-goal_azimuth_not_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?new-fc0) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_azimuth_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_azimuth_not_achieved)))))
+ )
+ (:action basiccameracontrol-converge_final_wait_elevation_not_reached-cameracontrol-ccl-event-goal_elevation_not_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_elevation_not_achieved) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_final_wait_elevation_not_reached-cameracontrol-ccl-event-goal_elevation_not_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_wait ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?new-fc0) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_elevation_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_elevation_not_achieved)))))
+ )
+ (:action basiccameracontrol-converge_final_wait_idle
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_final_wait ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-converge_failed_try_again-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_failed ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint301) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_wait ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-converge_failed_try_again-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-converge_failed ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint301 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge_wait ?t) (fault-count-3 lost ?t checkpoint301 ?new-fc0) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (fault-count-3 lost ?t checkpoint301 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint301 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint301)))))
+ )
+ (:action basiccameracontrol-enter_tracking_1-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint201) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_exec-is-action2 ?t) (observed ?o0) (not (basiccameracontrol-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-enter_tracking_1-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint201 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint201 ?new-fc0) (not (basiccameracontrol-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint201 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint201 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint201)))))
+ )
+ (:action basiccameracontrol-enter_tracking_2b
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-action2 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action2 ?t)))
+ )
+ (:action basiccameracontrol-tracking_elevation_lost-cameracontrol-ccl-event-goal_elevation_not_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_elevation_not_achieved) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_exec-is-elevation_lost_reaction1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-tracking_elevation_lost-cameracontrol-ccl-event-goal_elevation_not_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_exec-is-elevation_lost_reaction1 ?t) (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?new-fc0) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-goal_elevation_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_elevation_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_elevation_not_achieved)))))
+ )
+ (:action basiccameracontrol-tracking_elevation_lost_reaction1-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-elevation_lost_reaction1 ?t) (matches-2 ?o0 ?t checkpoint311) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_exec-is-elevation_lost_reaction1 ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-tracking_elevation_lost_reaction1-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-elevation_lost_reaction1 ?t) (fault-count-3 lost ?t checkpoint311 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint311 ?new-fc0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_exec-is-elevation_lost_reaction1 ?t)) (not (fault-count-3 lost ?t checkpoint311 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint311 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint311)))))
+ )
+ (:action basiccameracontrol-tracking_azimuth_lost-cameracontrol-ccl-event-goal_azimuth_not_achieved-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-goal_azimuth_not_achieved) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_exec-is-azimuth_lost_reaction1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-tracking_azimuth_lost-cameracontrol-ccl-event-goal_azimuth_not_achieved-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_exec-is-azimuth_lost_reaction1 ?t) (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?new-fc0) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-goal_azimuth_not_achieved ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-goal_azimuth_not_achieved ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-goal_azimuth_not_achieved)))))
+ )
+ (:action basiccameracontrol-tracking_azimuth_lost_reaction1-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-azimuth_lost_reaction1 ?t) (matches-2 ?o0 ?t checkpoint312) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_exec-is-azimuth_lost_reaction1 ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-tracking_azimuth_lost_reaction1-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-tracking ?t) (basiccameracontrol-fsm_exec-is-azimuth_lost_reaction1 ?t) (fault-count-3 lost ?t checkpoint312 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-converge ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint312 ?new-fc0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_exec-is-azimuth_lost_reaction1 ?t)) (not (fault-count-3 lost ?t checkpoint312 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint312 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint312)))))
+ )
+ (:action basiccameracontrol-set_locked_mode_ok-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-set_locked_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint104) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_turn_command ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-set_locked_mode_ok-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-set_locked_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint104 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-seq_turn_command ?t) (fault-count-3 lost ?t checkpoint104 ?new-fc0) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (fault-count-3 lost ?t checkpoint104 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint104 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint104)))))
+ )
+ (:action basiccameracontrol-set_locked_mode_action1_error-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-set_locked_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint404) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_exec-is-action2 ?t) (observed ?o0) (not (basiccameracontrol-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-set_locked_mode_action1_error-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-set_locked_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint404 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint404 ?new-fc0) (not (basiccameracontrol-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint404 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint404 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint404)))))
+ )
+ (:action basiccameracontrol-seq_turn_command_wait_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_turn_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action1 ?t)))
+ )
+ (:action basiccameracontrol-seq_turn_command_not_in_control
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_turn_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)))
+ )
+ (:action basiccameracontrol-seq_turn_command_ok
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_turn_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-locked_camera_mode ?t) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)))
+ )
+ (:action basiccameracontrol-seq_turn_command_idle
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_turn_command ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-seq_lock_command_wait_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_lock_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action1 ?t)))
+ )
+ (:action basiccameracontrol-seq_lock_command_not_in_control
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_lock_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)))
+ )
+ (:action basiccameracontrol-seq_lock_command_ok
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_lock_command ?t) (basiccameracontrol-fsm_exec-is-action1 ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-locked_camera_mode ?t) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)))
+ )
+ (:action basiccameracontrol-seq_lock_command_idle
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-seq_lock_command ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-locked_camera_mode_action1-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint400) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_exec-is-action2 ?t) (observed ?o0) (not (basiccameracontrol-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-locked_camera_mode_action1-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint400 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint400 ?new-fc0) (not (basiccameracontrol-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint400 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint400 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint400)))))
+ )
+ (:action basiccameracontrol-locked_camera_mode_action2b
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t) (basiccameracontrol-fsm_exec-is-action2 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action2 ?t)))
+ )
+ (:action basiccameracontrol-not_in_control_wait-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint700) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_exec-is-action2 ?t) (observed ?o0) (not (basiccameracontrol-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-not_in_control_wait-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint700 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint700 ?new-fc0) (not (basiccameracontrol-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint700 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint700 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint700)))))
+ )
+ (:action basiccameracontrol-not_in_control_action2_2
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-action2 ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-nothing ?t) (not (basiccameracontrol-fsm_exec-is-action2 ?t)))
+ )
+ (:action basiccameracontrol-not_in_control_cmd_resume_control_no
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (basiccameracontrol-in_start_call-is-no ?t))
+  :effect (and (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-not_in_control_drc_control-cameracontrol-ccl-event-ccl_drc_control-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-ccl_drc_control) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-locked_camera_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-not_in_control ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-not_in_control_drc_control-cameracontrol-ccl-event-ccl_drc_control-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-ccl_drc_control ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-locked_camera_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-2 lost ccl-event-ccl_drc_control ?new-fc0) (not (basiccameracontrol-fsm_state-is-not_in_control ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-ccl_drc_control ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-ccl_drc_control ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-ccl_drc_control)))))
+ )
+ (:action basiccameracontrol-global_cmd_set_position
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-start_tracking_position ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (basiccameracontrol-fsm_state-is-not_in_control ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-global_cmd_set_bearing
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (basiccameracontrol-fsm_state-is-not_in_control ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-global_cmd_lock_at
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-set_locked_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-not_in_control ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-global_cmd_lock_at_current-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?t checkpoint410) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-set_locked_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-not_in_control ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-global_cmd_lock_at_current-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint410 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-set_locked_mode ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint410 ?new-fc0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-not_in_control ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?t checkpoint410 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint410 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint410)))))
+ )
+ (:action basiccameracontrol-global_cmd_pan
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect (and (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (basiccameracontrol-fsm_state-is-not_in_control ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)))
+ )
+ (:action basiccameracontrol-global_cmd_wait
+  :parameters ( ?t - basiccameracontrol)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t))
+  :effect  (static-true)
+ )
+ (:action basiccameracontrol-global_manual_control-cameracontrol-ccl-event-ccl_manual_control-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-ccl_manual_control) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-global_manual_control-cameracontrol-ccl-event-ccl_manual_control-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-ccl_manual_control ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-2 lost ccl-event-ccl_manual_control ?new-fc0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-ccl_manual_control ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-ccl_manual_control ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-ccl_manual_control)))))
+ )
+ (:action basiccameracontrol-global_ipc_control-cameracontrol-ccl-event-ccl_ipc_control-0
+  :parameters ( ?t - basiccameracontrol ?o0 - observation)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (matches-1 ?o0 ccl-event-ccl_ipc_control) (pending ?o0))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (observed ?o0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action basiccameracontrol-global_ipc_control-cameracontrol-ccl-event-ccl_ipc_control-1
+  :parameters ( ?t - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (basiccameracontrol-mode-is-running ?t) (basiccameracontrol-fsm_exec-is-nothing ?t) (fault-count-2 lost ccl-event-ccl_ipc_control ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (basiccameracontrol-fsm_state-is-not_in_control ?t) (basiccameracontrol-fsm_exec-is-action1 ?t) (fault-count-2 lost ccl-event-ccl_ipc_control ?new-fc0) (not (basiccameracontrol-fsm_state-is-tracking ?t)) (not (basiccameracontrol-fsm_state-is-set_locked_mode ?t)) (not (basiccameracontrol-fsm_state-is-select_initial_mode ?t)) (not (basiccameracontrol-fsm_state-is-converge_wait ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_bearing ?t)) (not (basiccameracontrol-fsm_state-is-seq_lock_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_final_wait ?t)) (not (basiccameracontrol-fsm_state-is-seq_bearing_command ?t)) (not (basiccameracontrol-fsm_state-is-start_tracking_position ?t)) (not (basiccameracontrol-fsm_state-is-converge ?t)) (not (basiccameracontrol-fsm_state-is-locked_camera_mode ?t)) (not (basiccameracontrol-fsm_state-is-seq_position_command ?t)) (not (basiccameracontrol-fsm_state-is-converge_failed ?t)) (not (basiccameracontrol-fsm_state-is-seq_turn_command ?t)) (not (basiccameracontrol-fsm_exec-is-nothing ?t)) (not (fault-count-2 lost ccl-event-ccl_ipc_control ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-2 ?hyp lost ccl-event-ccl_ipc_control ?new-fc0))  (not (dominates-2 ?hyp lost ccl-event-ccl_ipc_control)))))
+ )
+ (:action navtopoint-start_decouple_idle_time_out
+  :parameters ( ?t - navtopoint)
+  :precondition (and (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-start_decouple ?t) (navtopoint-fsm_exec-is-nothing ?t))
+  :effect (and (navtopoint-fsm_exec-is-action1 ?t) (navtopoint-fsm_state-is-plan_path ?t) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (navtopoint-fsm_state-is-start_decouple ?t)))
+ )
+ (:action navtopoint-plan_path_action1_checkpoint1-0
+  :parameters ( ?t - navtopoint ?o0 - observation)
+  :precondition (and (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-plan_path ?t) (navtopoint-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint1) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-action2 ?t) (observed ?o0) (not (navtopoint-fsm_exec-is-action1 ?t)) (not (pending ?o0)))
+ )
+ (:action navtopoint-plan_path_action1_checkpoint1-1
+  :parameters ( ?t - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-plan_path ?t) (navtopoint-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint1 ?new-fc0) (not (navtopoint-fsm_exec-is-action1 ?t)) (not (fault-count-3 lost ?t checkpoint1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint1 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint1)))))
+ )
+ (:action navtopoint-plan_path_action2_checkpoint4a-0
+  :parameters ( ?t - navtopoint ?o0 - observation)
+  :precondition (and (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-plan_path ?t) (navtopoint-fsm_exec-is-action2 ?t) (navtopoint-in_start_call-is-no ?t) (matches-2 ?o0 ?t checkpoint4) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-nothing ?t) (navtopoint-fsm_state-is-wait_for_go ?t) (observed ?o0) (not (navtopoint-fsm_exec-is-action2 ?t)) (not (navtopoint-fsm_state-is-plan_path ?t)) (not (pending ?o0)))
+ )
+ (:action navtopoint-plan_path_action2_checkpoint4a-1
+  :parameters ( ?t - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-plan_path ?t) (navtopoint-fsm_exec-is-action2 ?t) (navtopoint-in_start_call-is-no ?t) (fault-count-3 lost ?t checkpoint4 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-nothing ?t) (navtopoint-fsm_state-is-wait_for_go ?t) (fault-count-3 lost ?t checkpoint4 ?new-fc0) (not (navtopoint-fsm_exec-is-action2 ?t)) (not (navtopoint-fsm_state-is-plan_path ?t)) (not (fault-count-3 lost ?t checkpoint4 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint4 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint4)))))
+ )
+ (:action navtopoint-plan_path_action2_checkpoint4b-0
+  :parameters ( ?t - navtopoint ?o0 - observation)
+  :precondition (and (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-plan_path ?t) (navtopoint-fsm_exec-is-action2 ?t) (matches-2 ?o0 ?t checkpoint4) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-action1 ?t) (navtopoint-fsm_state-is-fly_path ?t) (observed ?o0) (not (navtopoint-fsm_exec-is-action2 ?t)) (not (navtopoint-fsm_state-is-plan_path ?t)) (not (pending ?o0)))
+ )
+ (:action navtopoint-plan_path_action2_checkpoint4b-1
+  :parameters ( ?t - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-plan_path ?t) (navtopoint-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint4 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-action1 ?t) (navtopoint-fsm_state-is-fly_path ?t) (fault-count-3 lost ?t checkpoint4 ?new-fc0) (not (navtopoint-fsm_exec-is-action2 ?t)) (not (navtopoint-fsm_state-is-plan_path ?t)) (not (fault-count-3 lost ?t checkpoint4 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint4 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint4)))))
+ )
+ (:action navtopoint-wait_for_go_ok
+  :parameters ( ?t - navtopoint)
+  :precondition (and (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-wait_for_go ?t) (navtopoint-fsm_exec-is-nothing ?t))
+  :effect (and (navtopoint-fsm_exec-is-action1 ?t) (navtopoint-fsm_state-is-fly_path ?t) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (navtopoint-fsm_state-is-wait_for_go ?t)))
+ )
+ (:action navtopoint-fly_path_action1_proxy_init_ok-fly3d-call_set_args
+  :parameters ( ?t - navtopoint ?st - fly3d ?h - helicopter ?t-1 - fly3d ?c-1 - caller)
+  :precondition (and (= ?t-1 ?st) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?st ?h) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-action1 ?t) (navtopoint-in_start_call-is-no ?t) (fly3d-mode-is-pre_init ?t-1))
+  :effect (and (navtopoint-fsm_exec-is-nothing ?t) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (navtopoint-fsm_exec-is-action1 ?t)) (not (fly3d-mode-is-pre_init ?t-1)))
+ )
+ (:action navtopoint-fly_path_fly3d_ready-fly3d-init_ok-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_ready ?t) (fly3d-mode-is-ready ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_ready-fly3d-init_ok-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_ready ?t) (fly3d-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action navtopoint-fly_path_fly3d_ready_call_start-fly3d-call_start
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_ready ?t) (fly3d-mode-is-ready ?t-1))
+  :effect (and (navtopoint-fsm_exec-is-nothing ?t) (fly3d-in_start_call-is-yes ?t-1) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1) (not (navtopoint-fsm_exec-is-reaction_f3d_ready ?t)) (not (fly3d-mode-is-ready ?t-1)))
+ )
+ (:action navtopoint-fly_path_fly3d_ready_proxy_fail-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_ready ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-reaction_f3d_ready ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_ready_proxy_fail-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_ready ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (navtopoint-fsm_exec-is-reaction_f3d_ready ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action navtopoint-fly_path_fly3d_ready_proxy_fail-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_ready ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-reaction_f3d_ready ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_ready_proxy_fail-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_ready ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (navtopoint-fsm_exec-is-reaction_f3d_ready ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_starting_yaw_command_ok_sync
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_starting_yaw_command ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint12) (pending ?o0))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint12 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint12)))))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint20_sync-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint20) (pending ?o0))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint20_sync-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint20 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint20 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint20 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint20 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint20)))))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint21_sync-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint21) (pending ?o0))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint21_sync-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint21)))))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint21) (pending ?o0))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint21)))))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_busy_sync
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-trajectory-not-sent ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action navtopoint-fly_path_f3d_running-fly3d-enter_send_first_trajectory_busy_after22_sync
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (fly3d-in_start_call-is-no ?t-1) (fly3d-trajectory-not-sent ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action navtopoint-fly_path_fly3d_sync_done-fly3d-start_exit
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-reaction_finished_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-reaction_finished_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-enter_turn_to_goal_heading_action2-exit-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-exit ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-enter_turn_to_goal_heading_action2-exit-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-exit ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-goal_point_wait_cmd_continue_exit-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-goal_point_wait_cmd_continue_exit-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-goal_point_wait_idle_exit-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-goal_point_wait_idle_exit-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-global_fcl_cancel_reaction1-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_done-fly3d-global_fcl_cancel_reaction1-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action navtopoint-fly_path_fly3d_done_1-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_done_1-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action navtopoint-fly_path_fly3d_done_1-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_done_1-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (navtopoint-fsm_exec-is-reaction_f3d_done_1 ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action navtopoint-fly_path_fly3d_sync_fail-fly3d-init_fail
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action navtopoint-fly_path_fly3d_sync_fail-fly3d-fail_in_start_call
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_service-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_service-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_221-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-221) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_221-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-221 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-221 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-221 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-221 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-221)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_222-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-222) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_222-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-222 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-222 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-222 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-222 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-222)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_223-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-223) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_223-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-223 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-223 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-223 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-223 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-223)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_starting_yaw_command_fail_service-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_starting_yaw_command_fail_service-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-211) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-211 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-211 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-211)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-211) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-211 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-211 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-211)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_service-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_service-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_specific_220-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-220) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_specific_220-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-220 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-220 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-220 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-220 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-220)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-in_send_first_trajectory_fcl_finished_reaction1-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-reaction_finished_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-213) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-in_send_first_trajectory_fcl_finished_reaction1-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-reaction_finished_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-213 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-213 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-213 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-213 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-213)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_fail_service-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_fail_service-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_action2-fail-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-fail ?t-1) (matches-2 ?o0 ?t-1 fail-specific-214) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_action2-fail-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-fail ?t-1) (fault-count-3 lost ?t-1 fail-specific-214 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-214 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-214 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-214 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-214)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_goal_point_wait_fail_service-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-enter_goal_point_wait_fail_service-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-global_fcl_error_reaction1-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-210) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_async_fail-fly3d-global_fcl_error_reaction1-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?new-fc0) (not (navtopoint-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-210 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-210 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-210)))))
+ )
+ (:action navtopoint-fly_path_fly3d_subtask_fail_1-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_subtask_fail_1-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action navtopoint-fly_path_fly3d_subtask_fail_1-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action navtopoint-fly_path_fly3d_subtask_fail_1-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - navtopoint ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (navtopoint-fly_trajectory_task ?t ?st) (navtopoint-mode-is-running ?t) (navtopoint-fsm_state-is-fly_path ?t) (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (navtopoint-fsm_exec-is-reaction_f3d_fail_1 ?t)) (not (navtopoint-fly_trajectory_task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-start_ok-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_exec-is-start ?t) (matches-2 ?o0 ?t checkpoint1) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-plan_path ?t) (doatpoints-fsm_exec-is-action1 ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-start ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-start_ok-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_exec-is-start ?t) (fault-count-3 lost ?t checkpoint1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-plan_path ?t) (doatpoints-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint1 ?new-fc0) (not (doatpoints-fsm_exec-is-start ?t)) (not (fault-count-3 lost ?t checkpoint1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint1 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint1)))))
+ )
+ (:action doatpoints-plan_path_action1_ok-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-plan_path ?t) (doatpoints-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint2) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint ?t) (observed ?o0) (not (doatpoints-fsm_state-is-plan_path ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-plan_path_action1_ok-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-plan_path ?t) (doatpoints-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint2 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint ?t) (fault-count-3 lost ?t checkpoint2 ?new-fc0) (not (doatpoints-fsm_state-is-plan_path ?t)) (not (fault-count-3 lost ?t checkpoint2 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint2 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint2)))))
+ )
+ (:action doatpoints-next_waypoint_action1_ok_1-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-next_waypoint ?t) (doatpoints-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint3) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-wait_for_go ?t) (observed ?o0) (not (doatpoints-fsm_state-is-next_waypoint ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-next_waypoint_action1_ok_1-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-next_waypoint ?t) (doatpoints-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint3 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-wait_for_go ?t) (fault-count-3 lost ?t checkpoint3 ?new-fc0) (not (doatpoints-fsm_state-is-next_waypoint ?t)) (not (fault-count-3 lost ?t checkpoint3 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint3 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint3)))))
+ )
+ (:action doatpoints-next_waypoint_action1_ok_2-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-next_waypoint ?t) (doatpoints-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint3) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-run_fly3d ?t) (observed ?o0) (not (doatpoints-fsm_state-is-next_waypoint ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-next_waypoint_action1_ok_2-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-next_waypoint ?t) (doatpoints-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint3 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-run_fly3d ?t) (fault-count-3 lost ?t checkpoint3 ?new-fc0) (not (doatpoints-fsm_state-is-next_waypoint ?t)) (not (fault-count-3 lost ?t checkpoint3 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint3 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint3)))))
+ )
+ (:action doatpoints-enter_wait_for_go_2
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-wait_for_go ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-in_start_call-is-no ?t))
+  :effect (and (doatpoints-fsm_exec-is-nothing ?t) (not (doatpoints-fsm_exec-is-action1 ?t)))
+ )
+ (:action doatpoints-wait_for_go_cmd_ok
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-wait_for_go ?t) (doatpoints-fsm_exec-is-nothing ?t))
+  :effect (and (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-action1 ?t) (not (doatpoints-fsm_state-is-wait_for_go ?t)) (not (doatpoints-fsm_exec-is-nothing ?t)))
+ )
+ (:action doatpoints-wait_for_go_cmd_skip
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-wait_for_go ?t) (doatpoints-fsm_exec-is-nothing ?t))
+  :effect (and (doatpoints-fsm_state-is-plan_path ?t) (doatpoints-fsm_exec-is-action1 ?t) (not (doatpoints-fsm_state-is-wait_for_go ?t)) (not (doatpoints-fsm_exec-is-nothing ?t)))
+ )
+ (:action doatpoints-run_fly3d_action1_ok-fly3d-call_set_args
+  :parameters ( ?t - doatpoints ?st - fly3d ?h - helicopter ?t-1 - fly3d ?c-1 - caller)
+  :precondition (and (= ?t-1 ?st) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?st ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-pre_init ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (doatpoints-fsm_exec-is-action1 ?t)) (not (doatpoints-deferred-event-ready ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (fly3d-mode-is-pre_init ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_defer_init_ready-fly3d-init_ok-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-action2 ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (fly3d-mode-is-ready ?t-1) (observed ?o0) (not (fly3d-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_defer_init_ready-fly3d-init_ok-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-action2 ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (fly3d-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (fly3d-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action doatpoints-run_fly3d_defer_init_fail-fly3d-init_fail
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-action2 ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (fly3d-mode-is-failed ?t-1) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_defer_init_fail-fly3d-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-action2 ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (fly3d-mode-is-failed ?t-1) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_action2_ok_2
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-in_start_call-is-no ?t))
+  :effect (and (doatpoints-fsm_exec-is-nothing ?t) (not (doatpoints-fsm_exec-is-action2 ?t)))
+ )
+ (:action doatpoints-run_fly3d_ready-fly3d-init_ok-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t) (fly3d-mode-is-ready ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_ready-fly3d-init_ok-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t) (fly3d-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action doatpoints-run_fly3d_deferred_ready
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-ready ?t))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-deferred-event-ready ?t)))
+ )
+ (:action doatpoints-run_fly3d_ready1_fail-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t) (doatpoints-in_start_call-is-no ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t)) (not (doatpoints-fly3d-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_ready1_fail-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t) (doatpoints-in_start_call-is-no ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t)) (not (doatpoints-fly3d-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-run_fly3d_ready1_fail-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t) (doatpoints-in_start_call-is-no ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t)) (not (doatpoints-fly3d-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_ready1_fail-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t) (doatpoints-in_start_call-is-no ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t)) (not (doatpoints-fly3d-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-run_fly3d_ready1_ok-fly3d-call_start
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t) (fly3d-mode-is-ready ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t) (fly3d-in_start_call-is-yes ?t-1) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1) (not (doatpoints-fsm_exec-is-reaction_fly3d_ready_1 ?t)) (not (doatpoints-deferred-event-done ?t)) (not (doatpoints-deferred-event-start-failed ?t)) (not (fly3d-mode-is-ready ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_defer_start_done-fly3d-start_exit
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1))
+  :effect (and (doatpoints-deferred-event-done ?t) (fly3d-mode-is-done ?t-1) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_defer_start_fail-fly3d-init_fail
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (fly3d-mode-is-failed ?t-1) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_defer_start_fail-fly3d-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (fly3d-mode-is-failed ?t-1) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_ready2-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t) (matches-2 ?o0 ?t checkpoint5) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-nothing ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_ready2-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t) (fault-count-3 lost ?t checkpoint5 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint5 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_fly3d_ready_2 ?t)) (not (fault-count-3 lost ?t checkpoint5 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint5 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint5)))))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_starting_yaw_command_ok_sync
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_starting_yaw_command ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint12) (pending ?o0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint12 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint12)))))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_first_trajectory_checkpoint20_sync-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint20) (pending ?o0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_first_trajectory_checkpoint20_sync-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint20 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint20 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint20 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint20 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint20)))))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_first_trajectory_checkpoint21_sync-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint21) (pending ?o0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_first_trajectory_checkpoint21_sync-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint21)))))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint21) (pending ?o0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint21)))))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_first_trajectory_busy_sync
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-trajectory-not-sent ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_fly3d_task_running-fly3d-enter_send_first_trajectory_busy_after22_sync
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-trajectory-not-sent ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_sync_done-fly3d-start_exit
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1))
+  :effect (and (fly3d-mode-is-done ?t-1) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-reaction_finished_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-reaction_finished_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-enter_turn_to_goal_heading_action2-exit-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-exit ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-enter_turn_to_goal_heading_action2-exit-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-exit ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-goal_point_wait_cmd_continue_exit-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-goal_point_wait_cmd_continue_exit-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-goal_point_wait_idle_exit-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-goal_point_wait_idle_exit-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-global_fcl_cancel_reaction1-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_done-fly3d-global_fcl_cancel_reaction1-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-run_fly3d_done1-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (matches-2 ?o0 ?t checkpoint6) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_done1-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t) (fault-count-3 lost ?t checkpoint6 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t) (fault-count-3 lost ?t checkpoint6 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_fly3d_done_1 ?t)) (not (fault-count-3 lost ?t checkpoint6 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint6 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint6)))))
+ )
+ (:action doatpoints-run_fly3d_done2-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-exec_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-run_fly3d ?t)) (not (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t)) (not (doatpoints-fly3d-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_done2-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-exec_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-run_fly3d ?t)) (not (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t)) (not (doatpoints-fly3d-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-run_fly3d_done2-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-exec_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-run_fly3d ?t)) (not (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t)) (not (doatpoints-fly3d-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_done2-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-exec_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-run_fly3d ?t)) (not (doatpoints-fsm_exec-is-reaction_fly3d_done_2 ?t)) (not (doatpoints-fly3d-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-run_fly3d_sync_fail-fly3d-init_fail
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_sync_fail-fly3d-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-run_fly3d_deferred_init_fail
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-init-failed ?t))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-deferred-event-init-failed ?t)))
+ )
+ (:action doatpoints-run_fly3d_deferred_start_fail
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-start-failed ?t))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-deferred-event-start-failed ?t)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_service-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_service-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_221-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-221) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_221-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-221 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-221 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-221 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-221 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-221)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_222-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-222) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_222-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-222 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-222 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-222 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-222 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-222)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_223-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-223) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_223-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-223 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-223 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-223 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-223 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-223)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_send_starting_yaw_command_fail_service-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_send_starting_yaw_command_fail_service-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-211) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-211 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-211 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-211)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-211) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-211 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-211 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-211)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_service-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_service-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_specific_220-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-220) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_send_first_trajectory_fail_specific_220-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-220 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-220 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-220 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-220 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-220)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-in_send_first_trajectory_fcl_finished_reaction1-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-reaction_finished_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-213) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-in_send_first_trajectory_fcl_finished_reaction1-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-reaction_finished_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-213 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-213 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-213 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-213 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-213)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_fail_service-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_fail_service-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_action2-fail-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-fail ?t-1) (matches-2 ?o0 ?t-1 fail-specific-214) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_turn_to_goal_heading_action2-fail-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-fail ?t-1) (fault-count-3 lost ?t-1 fail-specific-214 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-214 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-214 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-214 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-214)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_goal_point_wait_fail_service-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-enter_goal_point_wait_fail_service-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-global_fcl_error_reaction1-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-210) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_async_fail-fly3d-global_fcl_error_reaction1-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-210 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-210 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-210)))))
+ )
+ (:action doatpoints-run_fly3d_failed1-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_failed1-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-run_fly3d_failed1-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-run_fly3d_failed1-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - fly3d ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-fly3d-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-run_fly3d ?t) (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_fly3d_failed_1 ?t)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_waypoint_action_action1_ok_1
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t))
+  :effect (and (doatpoints-fsm_state-is-check_position ?t) (not (doatpoints-fsm_state-is-exec_waypoint_action ?t)))
+ )
+ (:action doatpoints-exec_waypoint_action_action1_ok_2
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t))
+  :effect (and (doatpoints-fsm_state-is-exec_run_task_action ?t) (not (doatpoints-fsm_state-is-exec_waypoint_action ?t)))
+ )
+ (:action doatpoints-exec_run_task_action_action1_call_init-fly3d-call_set_args
+  :parameters ( ?t - doatpoints ?st - task ?h - helicopter ?t-1 - fly3d ?c-1 - caller)
+  :precondition (and (= ?t-1 ?st) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?st ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-pre_init ?t-1) (not (= ?t ?st)))
+  :effect (and (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (doatpoints-fsm_exec-is-action1 ?t)) (not (doatpoints-deferred-event-ready ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (fly3d-mode-is-pre_init ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_action1_call_init-autotakeoff-call_set_args
+  :parameters ( ?t - doatpoints ?st - task ?h - helicopter ?t-1 - autotakeoff ?c-1 - caller)
+  :precondition (and (= ?t-1 ?st) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?st ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-pre_init ?t-1) (not (= ?t ?st)))
+  :effect (and (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mission-task ?t ?st) (autotakeoff-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (doatpoints-fsm_exec-is-action1 ?t)) (not (doatpoints-deferred-event-ready ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (autotakeoff-mode-is-pre_init ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_action1_call_init-autoland-call_set_args
+  :parameters ( ?t - doatpoints ?st - task ?h - helicopter ?t-1 - autoland ?c-1 - caller)
+  :precondition (and (= ?t-1 ?st) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?st ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-pre_init ?t-1) (not (= ?t ?st)))
+  :effect (and (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mission-task ?t ?st) (autoland-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (doatpoints-fsm_exec-is-action1 ?t)) (not (doatpoints-deferred-event-ready ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (autoland-mode-is-pre_init ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_action1_call_init-basiccameracontrol-call_set_args
+  :parameters ( ?t - doatpoints ?st - task ?h - helicopter ?t-1 - basiccameracontrol ?c-1 - caller)
+  :precondition (and (= ?t-1 ?st) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?st ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-pre_init ?t-1) (not (= ?t ?st)))
+  :effect (and (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (doatpoints-fsm_exec-is-action1 ?t)) (not (doatpoints-deferred-event-ready ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (basiccameracontrol-mode-is-pre_init ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_action1_call_init-navtopoint-call_set_args
+  :parameters ( ?t - doatpoints ?st - task ?h - helicopter ?t-1 - navtopoint ?c-1 - caller)
+  :precondition (and (= ?t-1 ?st) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?st ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-pre_init ?t-1) (not (= ?t ?st)))
+  :effect (and (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mission-task ?t ?st) (navtopoint-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (doatpoints-fsm_exec-is-action1 ?t)) (not (doatpoints-deferred-event-ready ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (navtopoint-mode-is-pre_init ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_action1_call_init-doatpoints-call_set_args
+  :parameters ( ?t - doatpoints ?st - task ?h - helicopter ?t-1 - doatpoints ?c-1 - caller)
+  :precondition (and (= ?t-1 ?st) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?st ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-pre_init ?t-1) (not (= ?t ?st)))
+  :effect (and (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (doatpoints-fsm_exec-is-action1 ?t)) (not (doatpoints-deferred-event-ready ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (doatpoints-mode-is-pre_init ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-fly3d-init_ok-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (fly3d-mode-is-ready ?t-1) (observed ?o0) (not (fly3d-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-fly3d-init_ok-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (fly3d-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (fly3d-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-autotakeoff-init_ok-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (autotakeoff-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (autotakeoff-mode-is-ready ?t-1) (observed ?o0) (not (autotakeoff-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-autotakeoff-init_ok-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (autotakeoff-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (autotakeoff-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (autotakeoff-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-autoland-init_ok-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (autoland-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (autoland-mode-is-ready ?t-1) (observed ?o0) (not (autoland-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-autoland-init_ok-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (autoland-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (autoland-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (autoland-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-basiccameracontrol-init_ok-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (basiccameracontrol-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (basiccameracontrol-mode-is-ready ?t-1) (observed ?o0) (not (basiccameracontrol-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-basiccameracontrol-init_ok-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (basiccameracontrol-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (basiccameracontrol-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (basiccameracontrol-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-navtopoint-init_ok-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (navtopoint-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (navtopoint-mode-is-ready ?t-1) (observed ?o0) (not (navtopoint-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-navtopoint-init_ok-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (navtopoint-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (navtopoint-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (navtopoint-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-doatpoints-init_ok-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (doatpoints-mode-is-ready ?t-1) (observed ?o0) (not (doatpoints-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_ready-doatpoints-init_ok-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-deferred-event-ready ?t) (doatpoints-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (doatpoints-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-fly3d-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (fly3d-mode-is-failed ?t-1) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-fly3d-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (fly3d-mode-is-failed ?t-1) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-autotakeoff-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (autotakeoff-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (autotakeoff-mode-is-failed ?t-1) (not (autotakeoff-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-autotakeoff-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (autotakeoff-mode-is-failed ?t-1) (not (autotakeoff-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-autoland-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (autoland-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (autoland-mode-is-failed ?t-1) (not (autoland-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-autoland-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (autoland-mode-is-running ?t-1) (autoland-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (autoland-mode-is-failed ?t-1) (not (autoland-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-basiccameracontrol-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (basiccameracontrol-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (basiccameracontrol-mode-is-failed ?t-1) (not (basiccameracontrol-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-basiccameracontrol-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (basiccameracontrol-mode-is-failed ?t-1) (not (basiccameracontrol-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-navtopoint-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (navtopoint-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (navtopoint-mode-is-failed ?t-1) (not (navtopoint-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-navtopoint-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (navtopoint-mode-is-failed ?t-1) (not (navtopoint-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-doatpoints-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (doatpoints-mode-is-failed ?t-1) (not (doatpoints-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_init_fail-doatpoints-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-init-failed ?t) (doatpoints-mode-is-failed ?t-1) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_action2-0
+  :parameters ( ?t - doatpoints ?st - task ?o0 - observation)
+  :precondition (and (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (matches-2 ?o0 ?t checkpoint7) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-action3 ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-action2 ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_action2-1
+  :parameters ( ?t - doatpoints ?st - task ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action2 ?t) (fault-count-3 lost ?t checkpoint7 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-action3 ?t) (fault-count-3 lost ?t checkpoint7 ?new-fc0) (not (doatpoints-fsm_exec-is-action2 ?t)) (not (fault-count-3 lost ?t checkpoint7 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint7 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint7)))))
+ )
+ (:action doatpoints-exec_run_task_action_action3_2
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-action3 ?t) (doatpoints-in_start_call-is-no ?t))
+  :effect (and (doatpoints-fsm_exec-is-nothing ?t) (not (doatpoints-fsm_exec-is-action3 ?t)))
+ )
+ (:action doatpoints-exec_run_task_action_ready
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-ready ?t))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-deferred-event-ready ?t)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-init-failed ?t) (doatpoints-in_start_call-is-no ?t) (matches-2 ?o0 ?t fail-subtask) (pending ?o0))
+  :effect (and (doatpoints-mode-is-failed ?t) (observed ?o0) (not (doatpoints-mode-is-running ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-init-failed ?t) (doatpoints-in_start_call-is-no ?t) (fault-count-3 lost ?t fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-mode-is-failed ?t) (fault-count-3 lost ?t fail-subtask ?new-fc0) (not (doatpoints-mode-is-running ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (fault-count-3 lost ?t fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t fail-subtask)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-init-failed ?t) (matches-2 ?o0 ?t checkpoint9) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-init-failed ?t) (fault-count-3 lost ?t checkpoint9 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (fault-count-3 lost ?t checkpoint9 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-deferred-event-init-failed ?t)) (not (fault-count-3 lost ?t checkpoint9 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint9 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint9)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-autotakeoff-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (autotakeoff-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-autotakeoff-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-autotakeoff-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (autotakeoff-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-autotakeoff-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-autoland-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (autoland-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-autoland-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-autoland-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (autoland-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-autoland-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-basiccameracontrol-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (basiccameracontrol-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-basiccameracontrol-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-basiccameracontrol-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (basiccameracontrol-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-basiccameracontrol-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-navtopoint-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (navtopoint-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-navtopoint-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-navtopoint-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (navtopoint-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-navtopoint-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-doatpoints-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (doatpoints-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-doatpoints-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-doatpoints-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (doatpoints-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_init_fail_ignore_2-doatpoints-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_ready_ok-fly3d-call_start
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t) (fly3d-mode-is-ready ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (fly3d-in_start_call-is-yes ?t-1) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t)) (not (doatpoints-deferred-event-done ?t)) (not (doatpoints-deferred-event-start-failed ?t)) (not (fly3d-mode-is-ready ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_ready_ok-autotakeoff-call_start
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t) (autotakeoff-mode-is-ready ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (autotakeoff-in_start_call-is-yes ?t-1) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_exec-is-start ?t-1) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t)) (not (doatpoints-deferred-event-done ?t)) (not (doatpoints-deferred-event-start-failed ?t)) (not (autotakeoff-mode-is-ready ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_ready_ok-autoland-call_start
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t) (autoland-mode-is-ready ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (autoland-in_start_call-is-yes ?t-1) (autoland-fsm_exec-is-start ?t-1) (autoland-mode-is-running ?t-1) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t)) (not (doatpoints-deferred-event-done ?t)) (not (doatpoints-deferred-event-start-failed ?t)) (not (autoland-mode-is-ready ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_ready_ok-basiccameracontrol-call_start
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t) (basiccameracontrol-mode-is-ready ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (basiccameracontrol-in_start_call-is-yes ?t-1) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_exec-is-start ?t-1) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t)) (not (doatpoints-deferred-event-done ?t)) (not (doatpoints-deferred-event-start-failed ?t)) (not (basiccameracontrol-mode-is-ready ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_ready_ok-navtopoint-call_start
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t) (navtopoint-mode-is-ready ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (navtopoint-fsm_exec-is-start ?t-1) (navtopoint-mode-is-running ?t-1) (navtopoint-in_start_call-is-yes ?t-1) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t)) (not (doatpoints-deferred-event-done ?t)) (not (doatpoints-deferred-event-start-failed ?t)) (not (navtopoint-mode-is-ready ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_ready_ok-doatpoints-call_start
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t) (doatpoints-mode-is-ready ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1) (doatpoints-fsm_exec-is-start ?t-1) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_1 ?t)) (not (doatpoints-deferred-event-done ?t)) (not (doatpoints-deferred-event-start-failed ?t)) (not (doatpoints-mode-is-ready ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_ready_ok2-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (matches-2 ?o0 ?t checkpoint8) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-nothing ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_ready_ok2-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (fault-count-3 lost ?t checkpoint8 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint8 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t)) (not (fault-count-3 lost ?t checkpoint8 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint8 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint8)))))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_done-fly3d-start_exit
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1))
+  :effect (and (doatpoints-deferred-event-done ?t) (fly3d-mode-is-done ?t-1) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_done-basiccameracontrol-not_in_control_exit_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-done ?t) (basiccameracontrol-mode-is-done ?t-1) (not (basiccameracontrol-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_done-doatpoints-start_exit
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_exec-is-start ?t-1))
+  :effect (and (doatpoints-deferred-event-done ?t) (doatpoints-mode-is-done ?t-1) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-fly3d-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (fly3d-mode-is-failed ?t-1) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-fly3d-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (fly3d-mode-is-failed ?t-1) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-autotakeoff-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (autotakeoff-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (autotakeoff-mode-is-failed ?t-1) (not (autotakeoff-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-autotakeoff-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (autotakeoff-mode-is-failed ?t-1) (not (autotakeoff-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-autoland-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (autoland-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (autoland-mode-is-failed ?t-1) (not (autoland-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-autoland-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (autoland-mode-is-running ?t-1) (autoland-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (autoland-mode-is-failed ?t-1) (not (autoland-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-basiccameracontrol-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (basiccameracontrol-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (basiccameracontrol-mode-is-failed ?t-1) (not (basiccameracontrol-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-basiccameracontrol-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (basiccameracontrol-mode-is-failed ?t-1) (not (basiccameracontrol-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-navtopoint-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (navtopoint-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (navtopoint-mode-is-failed ?t-1) (not (navtopoint-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-navtopoint-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (navtopoint-mode-is-failed ?t-1) (not (navtopoint-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-doatpoints-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (doatpoints-mode-is-processing ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (doatpoints-mode-is-failed ?t-1) (not (doatpoints-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_defer_sync_fail-doatpoints-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_ready_2 ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-deferred-event-start-failed ?t) (doatpoints-mode-is-failed ?t-1) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_starting_yaw_command_ok_sync
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_starting_yaw_command ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint12) (pending ?o0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint12 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint12)))))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_first_trajectory_checkpoint20_sync-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint20) (pending ?o0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_first_trajectory_checkpoint20_sync-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint20 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint20 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint20 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint20 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint20)))))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_first_trajectory_checkpoint21_sync-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint21) (pending ?o0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_first_trajectory_checkpoint21_sync-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint21)))))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint21) (pending ?o0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?new-fc0) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint21)))))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_first_trajectory_busy_sync
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-trajectory-not-sent ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-fly3d-enter_send_first_trajectory_busy_after22_sync
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (fly3d-in_start_call-is-no ?t-1) (fly3d-trajectory-not-sent ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-autotakeoff-takeoff_action2
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-action2 ?t-1) (autotakeoff-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (autotakeoff-in_start_call-is-no ?t-1) (autotakeoff-fsm_exec-is-nothing ?t-1) (not (autotakeoff-in_start_call-is-yes ?t-1)) (not (autotakeoff-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-autoland-start_ok
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (autoland-mode-is-running ?t-1) (autoland-fsm_exec-is-start ?t-1))
+  :effect (and (static-true) (autoland-fsm_state-is-start_decouple ?t-1) (autoland-in_start_call-is-no ?t-1) (autoland-fsm_exec-is-nothing ?t-1) (not (autoland-in_start_call-is-yes ?t-1)) (not (autoland-fsm_exec-is-start ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-seq_position_command_wait_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_position_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-seq_bearing_command_wait_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-converge_wait_wait_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_wait ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-converge_final_wait_wait_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_final_wait ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-enter_tracking_2a
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-action2 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-seq_turn_command_wait_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-seq_lock_command_wait_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_lock_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-locked_camera_mode_action2a
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-action2 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-basiccameracontrol-not_in_control_action2_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action2 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-navtopoint-start_ok
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_exec-is-start ?t-1))
+  :effect (and (static-true) (navtopoint-fsm_exec-is-nothing ?t-1) (navtopoint-fsm_state-is-start_decouple ?t-1) (navtopoint-in_start_call-is-no ?t-1) (not (navtopoint-fsm_exec-is-start ?t-1)) (not (navtopoint-in_start_call-is-yes ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-doatpoints-enter_wait_for_go_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-doatpoints-run_fly3d_action2_ok_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action2 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action doatpoints-ignore_mission_task_running-doatpoints-exec_run_task_action_action3_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action3 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (static-true) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action3 ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_deferred_sync_done
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-done ?t))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-deferred-event-done ?t)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_done-fly3d-start_exit
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_done-basiccameracontrol-not_in_control_exit_1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_done-doatpoints-start_exit
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_exec-is-start ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-reaction_finished_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-reaction_finished_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-enter_turn_to_goal_heading_action2-exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-exit ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-enter_turn_to_goal_heading_action2-exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-exit ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-goal_point_wait_cmd_continue_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-goal_point_wait_cmd_continue_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-goal_point_wait_idle_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-goal_point_wait_idle_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-global_fcl_cancel_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-fly3d-global_fcl_cancel_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autotakeoff-takeoff_fcl_cancel_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autotakeoff-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autotakeoff-takeoff_fcl_cancel_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autotakeoff-go_to_final_altitude_action2_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action2-exit ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autotakeoff-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autotakeoff-go_to_final_altitude_action2_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action2-exit ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_finished_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autotakeoff-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_finished_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autotakeoff-go_to_final_altitude_fcl_cancel_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autotakeoff-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autotakeoff-go_to_final_altitude_fcl_cancel_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autoland-move_to_init_pos_action2_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2-exit ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autoland-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autoland-move_to_init_pos_action2_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2-exit ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autoland-yaw_to_approach_heading_action2_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-yaw_to_approach_heading ?t-1) (autoland-fsm_exec-is-action2-exit ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autoland-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autoland-yaw_to_approach_heading_action2_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-yaw_to_approach_heading ?t-1) (autoland-fsm_exec-is-action2-exit ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autoland-ready_to_land_cmd_cancel-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-ready_to_land ?t-1) (autoland-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autoland-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autoland-ready_to_land_cmd_cancel-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-ready_to_land ?t-1) (autoland-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autoland-land_fcl_finished_reaction2-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-land ?t-1) (autoland-fsm_exec-is-reaction_finished_2 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autoland-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-autoland-land_fcl_finished_reaction2-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-land ?t-1) (autoland-fsm_exec-is-reaction_finished_2 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-basiccameracontrol-tracking_idle_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-basiccameracontrol-tracking_idle_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-basiccameracontrol-locked_camera_mode_idle_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-basiccameracontrol-locked_camera_mode_idle_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-basiccameracontrol-not_in_control_exit_2-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-basiccameracontrol-not_in_control_exit_2-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-basiccameracontrol-global_cmd_stop-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-basiccameracontrol-global_cmd_stop-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-navtopoint-wait_for_go_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-wait_for_go ?t-1) (navtopoint-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (navtopoint-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-navtopoint-wait_for_go_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-wait_for_go ?t-1) (navtopoint-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-navtopoint-fly_path_fly3d_done_2-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (navtopoint-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-navtopoint-fly_path_fly3d_done_2-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-doatpoints-plan_path_action1_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-doatpoints-plan_path_action1_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-doatpoints-next_waypoint_action1_exit-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-doatpoints-next_waypoint_action1_exit-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-doatpoints-wait_for_go_cmd_cancel-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_done-doatpoints-wait_for_go_cmd_cancel-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_1-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (matches-2 ?o0 ?t checkpoint10) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_1-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t) (fault-count-3 lost ?t checkpoint10 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (fault-count-3 lost ?t checkpoint10 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t)) (not (fault-count-3 lost ?t checkpoint10 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint10 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint10)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-autotakeoff-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (autotakeoff-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-autotakeoff-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-autotakeoff-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (autotakeoff-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-autotakeoff-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-autoland-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (autoland-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-autoland-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-autoland-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (autoland-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-autoland-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-basiccameracontrol-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (basiccameracontrol-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-basiccameracontrol-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-basiccameracontrol-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (basiccameracontrol-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-basiccameracontrol-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-navtopoint-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (navtopoint-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-navtopoint-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-navtopoint-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (navtopoint-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-navtopoint-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-doatpoints-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (doatpoints-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-doatpoints-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-doatpoints-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (doatpoints-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_done_2-doatpoints-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-fly3d-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-fly3d-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-autotakeoff-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-processing ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-autotakeoff-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-autoland-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-processing ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (autoland-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-autoland-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (autoland-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-basiccameracontrol-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-processing ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-basiccameracontrol-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-navtopoint-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-processing ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-navtopoint-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-doatpoints-init_fail
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-processing ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-processing ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail-doatpoints-fail_in_start_call
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action doatpoints-exec_run_task_action_deferred_sync_fail
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-deferred-event-start-failed ?t))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-deferred-event-start-failed ?t)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_1-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (matches-2 ?o0 ?t checkpoint11) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_1-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t) (fault-count-3 lost ?t checkpoint11 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (fault-count-3 lost ?t checkpoint11 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t)) (not (fault-count-3 lost ?t checkpoint11 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint11 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint11)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-autotakeoff-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (autotakeoff-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-autotakeoff-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-autotakeoff-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (autotakeoff-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-autotakeoff-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-autoland-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (autoland-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-autoland-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-autoland-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (autoland-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-autoland-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-basiccameracontrol-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (basiccameracontrol-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-basiccameracontrol-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-basiccameracontrol-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (basiccameracontrol-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-basiccameracontrol-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-navtopoint-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (navtopoint-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-navtopoint-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-navtopoint-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (navtopoint-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-navtopoint-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-doatpoints-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (doatpoints-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-doatpoints-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-doatpoints-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (doatpoints-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_sync_fail_ignore_2-doatpoints-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_segment_heading_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_segment_heading_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_221-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-221) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_221-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-221 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-221 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-221 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-221 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-221)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_222-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-222) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_222-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-222 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-222 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-222 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-222 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-222)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_223-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-223) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_segment_heading_fail_specific_223-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-223 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-223 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-223 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-223 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-223)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_send_starting_yaw_command_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_send_starting_yaw_command_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-211) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-211 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-211 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-211)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-211) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-211 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-211 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-211)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_send_first_trajectory_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_send_first_trajectory_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_send_first_trajectory_fail_specific_220-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-220) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_send_first_trajectory_fail_specific_220-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-220 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-220 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-220 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-220 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-220)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-in_send_first_trajectory_fcl_finished_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-reaction_finished_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-213) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-in_send_first_trajectory_fcl_finished_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-reaction_finished_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-213 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-213 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-213 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-213 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-213)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_goal_heading_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_goal_heading_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_goal_heading_action2-fail-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-fail ?t-1) (matches-2 ?o0 ?t-1 fail-specific-214) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_turn_to_goal_heading_action2-fail-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-fail ?t-1) (fault-count-3 lost ?t-1 fail-specific-214 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-214 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-214 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-214 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-214)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_goal_point_wait_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-enter_goal_point_wait_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-global_fcl_error_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-210) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-fly3d-global_fcl_error_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-210 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-210 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-210)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-takeoff_fcl_error_reaction1-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-210) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-takeoff_fcl_error_reaction1-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-210 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-210 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-210)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_action1_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_action1_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_action1_fail_specific_101-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_action1_fail_specific_101-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_action1_fail_specific_102-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-102) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_action1_fail_specific_102-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-102)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_climb_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action2-climb ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_climb_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action2-climb ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_fcl_error_reaction-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-210) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autotakeoff-go_to_final_altitude_fcl_error_reaction-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-210 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-210 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-210)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action1_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action1_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action1_fail_specific_101-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action1_fail_specific_101-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action1_fail_specific_102-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-102) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action1_fail_specific_102-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-102)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action2_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action2_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action2_fail-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2-fail ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-212) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-move_to_init_pos_action2_fail-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2-fail ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-212 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-212 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-212 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-212 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-212)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-yaw_to_approach_heading_action2_fail-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-yaw_to_approach_heading ?t-1) (autoland-fsm_exec-is-action2-fail ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-212) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-yaw_to_approach_heading_action2_fail-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-yaw_to_approach_heading ?t-1) (autoland-fsm_exec-is-action2-fail ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-212 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-212 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-212 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-212 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-212)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-land_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-land ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-autoland-land_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-land ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-start_tracking_position_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-start_tracking_position_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-start_tracking_position_fail_101-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-start_tracking_position_fail_101-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-start_tracking_position_fail_102-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-102) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-start_tracking_position_fail_102-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-102)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_position_command_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_position_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_position_command_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_position_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_bearing_command_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_bearing_command_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-converge_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-converge_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-converge_failed_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_failed ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-converge_failed_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_failed ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-converge_failed_fail_310-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_failed ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-310) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-converge_failed_fail_310-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_failed ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-310 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-310 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-310 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-310 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-310)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-tracking_idle_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-tracking_idle_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-set_locked_mode_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-set_locked_mode ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-set_locked_mode_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-set_locked_mode ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_turn_command_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_turn_command_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_turn_command_fail_401-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-401) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_turn_command_fail_401-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-401 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-401 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-401 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-401 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-401)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_turn_command_fail_402-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-402) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_turn_command_fail_402-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-402 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-402 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-402 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-402 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-402)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_lock_command_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_lock_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-seq_lock_command_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_lock_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-locked_camera_mode_idle_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-locked_camera_mode_idle_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-not_in_control_fail-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-700) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-not_in_control_fail-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-700 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-700 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-700 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-700 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-700)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-not_in_control_cmd_resume_control_fail-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-basiccameracontrol-not_in_control_cmd_resume_control_fail-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action1_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action1_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action1_fail_specific_101-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action1_fail_specific_101-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action1_fail_specific_102-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-102) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action1_fail_specific_102-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-102)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action2_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action2_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action2_fail_specific_402-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-402) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action2_fail_specific_402-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-402 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-402 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-402 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-402 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-402)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action2_fail_specific_403-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-403) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action2_fail_specific_403-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-403 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-403 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-403 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-403 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-403)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action2_fail_specific_404-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-404) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-plan_path_action2_fail_specific_404-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-404 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-404 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-404 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-404 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-404)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-fly_path_action1_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-fly_path_action1_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-fly_path_action1_fail_proxy_init-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-fly_path_action1_fail_proxy_init-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-fly_path_subtask_fail_2-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-navtopoint-fly_path_subtask_fail_2-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-plan_path_action1_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-plan_path_action1_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-plan_path_action1_fail_202-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-202) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-plan_path_action1_fail_202-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-202 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-202 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-202 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-202 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-202)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-plan_path_action1_fail_203-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-203) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-plan_path_action1_fail_203-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-203 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-203 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-203 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-203 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-203)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-next_waypoint_action1_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-next_waypoint_action1_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-next_waypoint_action1_fail_302-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-302) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-next_waypoint_action1_fail_302-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-302 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-302 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-302 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-302 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-302)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-run_fly3d_action1_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-run_fly3d_action1_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-run_fly3d_action1_fail_subtask-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-run_fly3d_action1_fail_subtask-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-run_fly3d_failed2-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-run_fly3d_failed2-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-exec_waypoint_action_action1_fail_301-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_waypoint_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-301) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-exec_waypoint_action_action1_fail_301-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_waypoint_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-301 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-301 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-301 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-301 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-301)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-exec_run_task_action_action1_fail_service-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-exec_run_task_action_action1_fail_service-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-exec_run_task_action_action1_fail_subtask-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail-doatpoints-exec_run_task_action_action1_fail_subtask-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_1-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (matches-2 ?o0 ?t checkpoint12) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_1-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t) (fault-count-3 lost ?t checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (fault-count-3 lost ?t checkpoint12 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t)) (not (fault-count-3 lost ?t checkpoint12 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint12)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-autotakeoff-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (autotakeoff-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-autotakeoff-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-autotakeoff-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (autotakeoff-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-autotakeoff-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-autoland-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (autoland-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-autoland-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-autoland-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (autoland-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-autoland-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-basiccameracontrol-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (basiccameracontrol-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-basiccameracontrol-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-basiccameracontrol-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (basiccameracontrol-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-basiccameracontrol-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-navtopoint-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (navtopoint-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-navtopoint-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-navtopoint-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (navtopoint-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-navtopoint-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-doatpoints-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (doatpoints-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-doatpoints-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-doatpoints-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (doatpoints-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2a-doatpoints-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2b-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (matches-2 ?o0 ?t checkpoint12) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-action1 ?t) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-exec_run_task_action_async_fail_ignore_2b-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-exec_run_task_action ?t) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t) (fault-count-3 lost ?t checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint12 ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t)) (not (fault-count-3 lost ?t checkpoint12 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint12)))))
+ )
+ (:action doatpoints-seq_emergency_brake_ok
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-action1 ?t))
+  :effect (and (doatpoints-fsm_exec-is-nothing ?t) (not (doatpoints-fsm_exec-is-action1 ?t)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished-flightcontrol-fcl-event-finished-0
+  :parameters ( ?t - doatpoints ?h - helicopter ?h-1 - helicopter ?o0 - observation)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-nothing ?t) (matches-2 ?o0 ?h-1 fcl-event-finished) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished-flightcontrol-fcl-event-finished-1
+  :parameters ( ?t - doatpoints ?h - helicopter ?h-1 - helicopter ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?h-1 ?h) (task-running-on ?t ?h) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-nothing ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (fault-count-3 lost ?h-1 fcl-event-finished ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t)) (not (fault-count-3 lost ?h-1 fcl-event-finished ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?h-1 fcl-event-finished ?new-fc0))  (not (dominates-3 ?hyp lost ?h-1 fcl-event-finished)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-fly3d-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-fly3d-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-fly3d-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-fly3d-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-autotakeoff-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (autotakeoff-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-autotakeoff-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-autotakeoff-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (autotakeoff-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-autotakeoff-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autotakeoff-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-autoland-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (autoland-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-autoland-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-autoland-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (autoland-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-autoland-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (autoland-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-basiccameracontrol-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-basiccameracontrol-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-basiccameracontrol-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-basiccameracontrol-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-navtopoint-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (navtopoint-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-navtopoint-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-navtopoint-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (navtopoint-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-navtopoint-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (navtopoint-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-doatpoints-call_destroy_when_done-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (doatpoints-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-doatpoints-call_destroy_when_done-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-doatpoints-call_destroy_when_failed-0
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (doatpoints-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action doatpoints-seq_emergency_brake_fcl_finished1-doatpoints-call_destroy_when_failed-1
+  :parameters ( ?t - doatpoints ?st - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?st) (doatpoints-mission-task ?t ?st) (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-seq_emergency_brake ?t) (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (doatpoints-fsm_state-is-seq_emergency_brake ?t)) (not (doatpoints-fsm_exec-is-reaction_fcl_finished_1 ?t)) (not (doatpoints-mission-task ?t ?st)) (not (doatpoints-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action doatpoints-enter_next_waypoint_action
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-next_waypoint_action ?t) (doatpoints-fsm_exec-is-action1 ?t))
+  :effect (and (doatpoints-fsm_state-is-exec_waypoint_action ?t) (not (doatpoints-fsm_state-is-next_waypoint_action ?t)))
+ )
+ (:action doatpoints-check_position_ok
+  :parameters ( ?t - doatpoints)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-check_position ?t) (doatpoints-fsm_exec-is-action1 ?t))
+  :effect (and (doatpoints-fsm_state-is-next_waypoint ?t) (not (doatpoints-fsm_state-is-check_position ?t)))
+ )
+ (:action doatpoints-check_position_replan-0
+  :parameters ( ?t - doatpoints ?o0 - observation)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-check_position ?t) (doatpoints-fsm_exec-is-action1 ?t) (matches-2 ?o0 ?t checkpoint13) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-plan_path ?t) (observed ?o0) (not (doatpoints-fsm_state-is-check_position ?t)) (not (pending ?o0)))
+ )
+ (:action doatpoints-check_position_replan-1
+  :parameters ( ?t - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (doatpoints-mode-is-running ?t) (doatpoints-fsm_state-is-check_position ?t) (doatpoints-fsm_exec-is-action1 ?t) (fault-count-3 lost ?t checkpoint13 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-plan_path ?t) (fault-count-3 lost ?t checkpoint13 ?new-fc0) (not (doatpoints-fsm_state-is-check_position ?t)) (not (fault-count-3 lost ?t checkpoint13 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint13 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint13)))))
+ )
+ (:action photogrametry-start_ok
+  :parameters ( ?t - photogrametry)
+  :precondition (and (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-start ?t))
+  :effect (and (photogrametry-fsm_exec-is-action1 ?t) (not (photogrametry-fsm_exec-is-start ?t)))
+ )
+ (:action photogrametry-plan_task_init_call-doatpoints-call_set_args
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?h - helicopter ?t-1 - doatpoints ?c-1 - caller)
+  :precondition (and (= ?t-1 ?pt) (= ?c-1 ?t) (task-running-on ?t ?h) (task-running-on ?pt ?h) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1 ?t) (doatpoints-mode-is-pre_init ?t-1))
+  :effect (and (photogrametry-plan-task ?t ?pt) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (photogrametry-fsm_exec-is-action1 ?t)) (not (doatpoints-mode-is-pre_init ?t-1)))
+ )
+ (:action photogrametry-plan_task_init_ok-doatpoints-init_ok-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (photogrametry-plan_task_status-is-ready ?t) (doatpoints-mode-is-ready ?t-1) (observed ?o0) (not (photogrametry-plan_task_status-is-in_init_call ?t)) (not (doatpoints-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_init_ok-doatpoints-init_ok-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-plan_task_status-is-ready ?t) (doatpoints-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (photogrametry-plan_task_status-is-in_init_call ?t)) (not (doatpoints-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action photogrametry-plan_task_init_fail-doatpoints-init_fail
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-processing ?t-1))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (not (photogrametry-plan_task_status-is-in_init_call ?t)) (not (doatpoints-mode-is-processing ?t-1)))
+ )
+ (:action photogrametry-plan_task_init_fail-doatpoints-fail_in_start_call
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (not (photogrametry-plan_task_status-is-in_init_call ?t)) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action photogrametry-plan_task_init_fail-doatpoints-exec_run_task_action_sync_fail_fail-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-plan_task_status-is-in_init_call ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_init_fail-doatpoints-exec_run_task_action_sync_fail_fail-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (photogrametry-plan_task_status-is-in_init_call ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action photogrametry-plan_task_init_fail-doatpoints-exec_run_task_action_async_fail_fail-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-plan_task_status-is-in_init_call ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_init_fail-doatpoints-exec_run_task_action_async_fail_fail-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-action1-wait ?t) (photogrametry-plan_task_status-is-in_init_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (photogrametry-plan_task_status-is-in_init_call ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action photogrametry-plan_task_ready_start_ok-doatpoints-call_start
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (photogrametry-plan_task_status-is-ready ?t) (doatpoints-mode-is-ready ?t-1))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1) (doatpoints-fsm_exec-is-start ?t-1) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (photogrametry-plan_task_status-is-ready ?t)) (not (doatpoints-mode-is-ready ?t-1)))
+ )
+ (:action photogrametry-plan_task_start_fail-doatpoints-init_fail
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-processing ?t-1))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-mode-is-processing ?t-1)))
+ )
+ (:action photogrametry-plan_task_start_fail-doatpoints-fail_in_start_call
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action photogrametry-plan_task_start_fail-doatpoints-exec_run_task_action_sync_fail_fail-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_start_fail-doatpoints-exec_run_task_action_sync_fail_fail-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action photogrametry-plan_task_start_fail-doatpoints-exec_run_task_action_async_fail_fail-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_start_fail-doatpoints-exec_run_task_action_async_fail_fail-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-plan_task_status-is-init_failed ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action photogrametry-plan_task_start_done-doatpoints-start_exit
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_exec-is-start ?t-1))
+  :effect (and (photogrametry-plan_task_status-is-done ?t) (doatpoints-mode-is-done ?t-1) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action photogrametry-plan_task_start_running-doatpoints-enter_wait_for_go_1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (photogrametry-plan_task_status-is-running ?t) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action photogrametry-plan_task_start_running-doatpoints-run_fly3d_action2_ok_1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action2 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (photogrametry-plan_task_status-is-running ?t) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action photogrametry-plan_task_start_running-doatpoints-exec_run_task_action_action3_1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-plan_task_status-is-in_start_call ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action3 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (photogrametry-plan_task_status-is-running ?t) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (photogrametry-plan_task_status-is-in_start_call ?t)) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action3 ?t-1)))
+ )
+ (:action photogrametry-plan_task_ready_start_running-0
+  :parameters ( ?t - photogrametry ?o0 - observation)
+  :precondition (and (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t) (photogrametry-plan_task_status-is-running ?t) (matches-2 ?o0 ?t checkpoint2) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-nothing ?t) (observed ?o0) (not (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_ready_start_running-1
+  :parameters ( ?t - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t) (photogrametry-plan_task_status-is-running ?t) (fault-count-3 lost ?t checkpoint2 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint2 ?new-fc0) (not (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t)) (not (fault-count-3 lost ?t checkpoint2 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint2 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint2)))))
+ )
+ (:action photogrametry-plan_task_done-doatpoints-plan_path_action1_exit-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_done-doatpoints-plan_path_action1_exit-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action photogrametry-plan_task_done-doatpoints-next_waypoint_action1_exit-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_done-doatpoints-next_waypoint_action1_exit-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action photogrametry-plan_task_done-doatpoints-wait_for_go_cmd_cancel-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_done-doatpoints-wait_for_go_cmd_cancel-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action photogrametry-plan_task_done_1-doatpoints-call_destroy_when_done-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_2 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t)) (not (photogrametry-plan-task ?t ?pt)) (not (doatpoints-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_done_1-doatpoints-call_destroy_when_done-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_2 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t)) (not (photogrametry-plan-task ?t ?pt)) (not (doatpoints-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action photogrametry-plan_task_done_1-doatpoints-call_destroy_when_failed-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_2 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t)) (not (photogrametry-plan-task ?t ?pt)) (not (doatpoints-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_done_1-doatpoints-call_destroy_when_failed-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_done_2 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (photogrametry-fsm_exec-is-reaction_plan_task_done_1 ?t)) (not (photogrametry-plan-task ?t ?pt)) (not (doatpoints-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action photogrametry-plan_task_init_fail
+  :parameters ( ?t - photogrametry)
+  :precondition (and (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (photogrametry-plan_task_status-is-init_failed ?t))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (not (photogrametry-fsm_exec-is-nothing ?t)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-plan_path_action1_fail_service-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-plan_path_action1_fail_service-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-plan_path_action1_fail_202-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-202) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-plan_path_action1_fail_202-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-202 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-202 ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-202 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-202 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-202)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-plan_path_action1_fail_203-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-203) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-plan_path_action1_fail_203-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-203 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-203 ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-203 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-203 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-203)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-next_waypoint_action1_fail_service-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-next_waypoint_action1_fail_service-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-next_waypoint_action1_fail_302-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-302) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-next_waypoint_action1_fail_302-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-302 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-302 ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-302 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-302 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-302)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-run_fly3d_action1_fail_service-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-run_fly3d_action1_fail_service-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-run_fly3d_action1_fail_subtask-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-run_fly3d_action1_fail_subtask-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-run_fly3d_failed2-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-run_fly3d_failed2-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-exec_waypoint_action_action1_fail_301-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_waypoint_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-301) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-exec_waypoint_action_action1_fail_301-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_waypoint_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-301 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-301 ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-301 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-301 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-301)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-exec_run_task_action_action1_fail_service-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-exec_run_task_action_action1_fail_service-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-exec_run_task_action_action1_fail_subtask-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-exec_run_task_action_action1_fail_subtask-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-seq_emergency_brake_fail_service-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-seq_emergency_brake ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-seq_emergency_brake_fail_service-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-seq_emergency_brake ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-check_position_fail_service-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-check_position_fail_service-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-check_position_fail_101-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-check_position_fail_101-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-check_position_fail_777-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-777) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_async_fail-doatpoints-check_position_fail_777-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-777 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-777 ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-777 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-777 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-777)))))
+ )
+ (:action photogrametry-plan_task_failed_1-doatpoints-call_destroy_when_done-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_2 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t)) (not (photogrametry-plan-task ?t ?pt)) (not (doatpoints-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_failed_1-doatpoints-call_destroy_when_done-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_2 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t)) (not (photogrametry-plan-task ?t ?pt)) (not (doatpoints-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action photogrametry-plan_task_failed_1-doatpoints-call_destroy_when_failed-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_2 ?t) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t)) (not (photogrametry-plan-task ?t ?pt)) (not (doatpoints-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-plan_task_failed_1-doatpoints-call_destroy_when_failed-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_plan_task_failed_2 ?t) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (photogrametry-fsm_exec-is-reaction_plan_task_failed_1 ?t)) (not (photogrametry-plan-task ?t ?pt)) (not (doatpoints-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action photogrametry-dap_checkpoint7-doatpoints-exec_run_task_action_action2-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?wpt - task ?t-1 - doatpoints ?st-1 - task ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (= ?st-1 ?wpt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mission-task ?t-1 ?st-1) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action2 ?t-1) (matches-2 ?o0 ?t-1 checkpoint7) (pending ?o0))
+  :effect (and (photogrametry-wp-task ?t ?wpt) (photogrametry-fsm_exec-is-reaction_new_wp_task ?t) (doatpoints-fsm_exec-is-action3 ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-fsm_exec-is-action2 ?t-1)) (not (pending ?o0)) (forall ( ?prev_wpt - task) (when (and (not (= ?prev_wpt ?wpt)))  (not (photogrametry-wp-task ?t ?prev_wpt)))))
+ )
+ (:action photogrametry-dap_checkpoint7-doatpoints-exec_run_task_action_action2-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?wpt - task ?t-1 - doatpoints ?st-1 - task ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (= ?st-1 ?wpt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mission-task ?t-1 ?st-1) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action2 ?t-1) (fault-count-3 lost ?t-1 checkpoint7 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-wp-task ?t ?wpt) (photogrametry-fsm_exec-is-reaction_new_wp_task ?t) (doatpoints-fsm_exec-is-action3 ?t-1) (fault-count-3 lost ?t-1 checkpoint7 ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (doatpoints-fsm_exec-is-action2 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint7 ?fc0)) (forall ( ?prev_wpt - task) (when (and (not (= ?prev_wpt ?wpt)))  (not (photogrametry-wp-task ?t ?prev_wpt)))) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint7 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint7)))))
+ )
+ (:action photogrametry-new_wp_task_event-0
+  :parameters ( ?t - photogrametry ?o0 - observation)
+  :precondition (and (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_new_wp_task ?t) (matches-2 ?o0 ?t checkpoint3) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-nothing ?t) (observed ?o0) (not (photogrametry-fsm_exec-is-reaction_new_wp_task ?t)) (not (pending ?o0)))
+ )
+ (:action photogrametry-new_wp_task_event-1
+  :parameters ( ?t - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_new_wp_task ?t) (fault-count-3 lost ?t checkpoint3 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint3 ?new-fc0) (not (photogrametry-fsm_exec-is-reaction_new_wp_task ?t)) (not (fault-count-3 lost ?t checkpoint3 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint3 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint3)))))
+ )
+ (:action photogrametry-dap_checkpoint9-doatpoints-exec_run_task_action_init_fail_ignore-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (doatpoints-deferred-event-init-failed ?t-1) (matches-2 ?o0 ?t-1 checkpoint9) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-nothing ?t-1)) (not (doatpoints-deferred-event-init-failed ?t-1)) (not (pending ?o0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))))
+ )
+ (:action photogrametry-dap_checkpoint9-doatpoints-exec_run_task_action_init_fail_ignore-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (doatpoints-deferred-event-init-failed ?t-1) (fault-count-3 lost ?t-1 checkpoint9 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_ready_fail_2 ?t-1) (fault-count-3 lost ?t-1 checkpoint9 ?new-fc0) (not (doatpoints-fsm_exec-is-nothing ?t-1)) (not (doatpoints-deferred-event-init-failed ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint9 ?fc0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint9 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint9)))))
+ )
+ (:action photogrametry-dap_checkpoint10-doatpoints-exec_run_task_action_done_1-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t-1) (matches-2 ?o0 ?t-1 checkpoint10) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t-1)) (not (pending ?o0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))))
+ )
+ (:action photogrametry-dap_checkpoint10-doatpoints-exec_run_task_action_done_1-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t-1) (fault-count-3 lost ?t-1 checkpoint10 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_done_2 ?t-1) (fault-count-3 lost ?t-1 checkpoint10 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_mission_task_done_1 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint10 ?fc0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint10 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint10)))))
+ )
+ (:action photogrametry-dap_checkpoint11-doatpoints-exec_run_task_action_sync_fail_ignore_1-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (matches-2 ?o0 ?t-1 checkpoint11) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1)) (not (pending ?o0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))))
+ )
+ (:action photogrametry-dap_checkpoint11-doatpoints-exec_run_task_action_sync_fail_ignore_1-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (fault-count-3 lost ?t-1 checkpoint11 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_2 ?t-1) (fault-count-3 lost ?t-1 checkpoint11 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint11 ?fc0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint11 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint11)))))
+ )
+ (:action photogrametry-dap_checkpoint12-doatpoints-exec_run_task_action_async_fail_ignore_1-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (matches-2 ?o0 ?t-1 checkpoint12) (pending ?o0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t-1) (observed ?o0) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1)) (not (pending ?o0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))))
+ )
+ (:action photogrametry-dap_checkpoint12-doatpoints-exec_run_task_action_async_fail_ignore_1-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?new-fc0) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint12 ?fc0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint12)))))
+ )
+ (:action photogrametry-dap_checkpoint12-doatpoints-exec_run_task_action_async_fail_ignore_2b-0
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t-1) (matches-2 ?o0 ?t-1 checkpoint12) (pending ?o0))
+  :effect (and (doatpoints-fsm_state-is-seq_emergency_brake ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (observed ?o0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t-1)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t-1)) (not (pending ?o0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))))
+ )
+ (:action photogrametry-dap_checkpoint12-doatpoints-exec_run_task_action_async_fail_ignore_2b-1
+  :parameters ( ?t - photogrametry ?pt - doatpoints ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?pt) (photogrametry-plan-task ?t ?pt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (doatpoints-fsm_state-is-seq_emergency_brake ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?new-fc0) (not (doatpoints-fsm_state-is-exec_run_task_action ?t-1)) (not (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_2 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint12 ?fc0)) (forall ( ?wpt - task)  (not (photogrametry-wp-task ?t ?wpt))) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint12)))))
+ )
+ (:action photogrametry-bcc_on_target_event-basiccameracontrol-enter_tracking_1-0
+  :parameters ( ?t - photogrametry ?wpt - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?wpt) (photogrametry-wp-task ?t ?wpt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (matches-2 ?o0 ?t-1 checkpoint201) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_bcc_on_target ?t) (basiccameracontrol-fsm_exec-is-action2 ?t-1) (observed ?o0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)) (not (pending ?o0)))
+ )
+ (:action photogrametry-bcc_on_target_event-basiccameracontrol-enter_tracking_1-1
+  :parameters ( ?t - photogrametry ?wpt - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?wpt) (photogrametry-wp-task ?t ?wpt) (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-nothing ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (fault-count-3 lost ?t-1 checkpoint201 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-reaction_bcc_on_target ?t) (basiccameracontrol-fsm_exec-is-action2 ?t-1) (fault-count-3 lost ?t-1 checkpoint201 ?new-fc0) (not (photogrametry-fsm_exec-is-nothing ?t)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint201 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint201 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint201)))))
+ )
+ (:action photogrametry-bcc_on_target_2-0
+  :parameters ( ?t - photogrametry ?o0 - observation)
+  :precondition (and (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_bcc_on_target ?t) (matches-2 ?o0 ?t checkpoint4) (pending ?o0))
+  :effect (and (photogrametry-fsm_exec-is-nothing ?t) (observed ?o0) (not (photogrametry-fsm_exec-is-reaction_bcc_on_target ?t)) (not (pending ?o0)))
+ )
+ (:action photogrametry-bcc_on_target_2-1
+  :parameters ( ?t - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (photogrametry-mode-is-running ?t) (photogrametry-fsm_exec-is-reaction_bcc_on_target ?t) (fault-count-3 lost ?t checkpoint4 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (photogrametry-fsm_exec-is-nothing ?t) (fault-count-3 lost ?t checkpoint4 ?new-fc0) (not (photogrametry-fsm_exec-is-reaction_bcc_on_target ?t)) (not (fault-count-3 lost ?t checkpoint4 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t checkpoint4 ?new-fc0))  (not (dominates-3 ?hyp lost ?t checkpoint4)))))
+ )
+ (:action missionexec-init-mission-fly3d-call_set_args
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?c-1 - caller)
+  :precondition (and (= ?t-1 ?t) (= ?c-1 missionexecutor) (task-running-on ?t ?h) (missionexec-mission-idle ?h) (fly3d-mode-is-pre_init ?t-1))
+  :effect (and (missionexec-active-mission ?h ?t) (missionexec-mission-init-call ?h) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (missionexec-mission-idle ?h)) (not (fly3d-mode-is-pre_init ?t-1)))
+ )
+ (:action missionexec-init-mission-autotakeoff-call_set_args
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?c-1 - caller)
+  :precondition (and (= ?t-1 ?t) (= ?c-1 missionexecutor) (task-running-on ?t ?h) (missionexec-mission-idle ?h) (autotakeoff-mode-is-pre_init ?t-1))
+  :effect (and (missionexec-active-mission ?h ?t) (missionexec-mission-init-call ?h) (autotakeoff-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (missionexec-mission-idle ?h)) (not (autotakeoff-mode-is-pre_init ?t-1)))
+ )
+ (:action missionexec-init-mission-autoland-call_set_args
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?c-1 - caller)
+  :precondition (and (= ?t-1 ?t) (= ?c-1 missionexecutor) (task-running-on ?t ?h) (missionexec-mission-idle ?h) (autoland-mode-is-pre_init ?t-1))
+  :effect (and (missionexec-active-mission ?h ?t) (missionexec-mission-init-call ?h) (autoland-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (missionexec-mission-idle ?h)) (not (autoland-mode-is-pre_init ?t-1)))
+ )
+ (:action missionexec-init-mission-basiccameracontrol-call_set_args
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?c-1 - caller)
+  :precondition (and (= ?t-1 ?t) (= ?c-1 missionexecutor) (task-running-on ?t ?h) (missionexec-mission-idle ?h) (basiccameracontrol-mode-is-pre_init ?t-1))
+  :effect (and (missionexec-active-mission ?h ?t) (missionexec-mission-init-call ?h) (basiccameracontrol-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (missionexec-mission-idle ?h)) (not (basiccameracontrol-mode-is-pre_init ?t-1)))
+ )
+ (:action missionexec-init-mission-navtopoint-call_set_args
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?c-1 - caller)
+  :precondition (and (= ?t-1 ?t) (= ?c-1 missionexecutor) (task-running-on ?t ?h) (missionexec-mission-idle ?h) (navtopoint-mode-is-pre_init ?t-1))
+  :effect (and (missionexec-active-mission ?h ?t) (missionexec-mission-init-call ?h) (navtopoint-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (missionexec-mission-idle ?h)) (not (navtopoint-mode-is-pre_init ?t-1)))
+ )
+ (:action missionexec-init-mission-doatpoints-call_set_args
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?c-1 - caller)
+  :precondition (and (= ?t-1 ?t) (= ?c-1 missionexecutor) (task-running-on ?t ?h) (missionexec-mission-idle ?h) (doatpoints-mode-is-pre_init ?t-1))
+  :effect (and (missionexec-active-mission ?h ?t) (missionexec-mission-init-call ?h) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (missionexec-mission-idle ?h)) (not (doatpoints-mode-is-pre_init ?t-1)))
+ )
+ (:action missionexec-init-mission-photogrametry-call_set_args
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?c-1 - caller)
+  :precondition (and (= ?t-1 ?t) (= ?c-1 missionexecutor) (task-running-on ?t ?h) (missionexec-mission-idle ?h) (photogrametry-mode-is-pre_init ?t-1))
+  :effect (and (missionexec-active-mission ?h ?t) (missionexec-mission-init-call ?h) (photogrametry-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (not (missionexec-mission-idle ?h)) (not (photogrametry-mode-is-pre_init ?t-1)))
+ )
+ (:action missionexec-init-mission-ok-fly3d-init_ok-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (missionexec-mission-ready ?h) (fly3d-mode-is-ready ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (fly3d-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-ok-fly3d-init_ok-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-ready ?h) (fly3d-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (fly3d-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action missionexec-init-mission-ok-autotakeoff-init_ok-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (missionexec-mission-ready ?h) (autotakeoff-mode-is-ready ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (autotakeoff-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-ok-autotakeoff-init_ok-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-ready ?h) (autotakeoff-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (autotakeoff-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action missionexec-init-mission-ok-autoland-init_ok-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (missionexec-mission-ready ?h) (autoland-mode-is-ready ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (autoland-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-ok-autoland-init_ok-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-ready ?h) (autoland-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (autoland-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action missionexec-init-mission-ok-basiccameracontrol-init_ok-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (missionexec-mission-ready ?h) (basiccameracontrol-mode-is-ready ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (basiccameracontrol-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-ok-basiccameracontrol-init_ok-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-ready ?h) (basiccameracontrol-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (basiccameracontrol-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action missionexec-init-mission-ok-navtopoint-init_ok-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (missionexec-mission-ready ?h) (navtopoint-mode-is-ready ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (navtopoint-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-ok-navtopoint-init_ok-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-ready ?h) (navtopoint-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (navtopoint-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action missionexec-init-mission-ok-doatpoints-init_ok-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (missionexec-mission-ready ?h) (doatpoints-mode-is-ready ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (doatpoints-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-ok-doatpoints-init_ok-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-ready ?h) (doatpoints-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (doatpoints-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action missionexec-init-mission-ok-photogrametry-init_ok-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?c-1 - caller ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (matches-3 ?o0 ?t-1 created ?c-1) (pending ?o0))
+  :effect (and (missionexec-mission-ready ?h) (photogrametry-mode-is-ready ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (photogrametry-mode-is-processing ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-ok-photogrametry-init_ok-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?c-1 - caller ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-processing ?t-1) (called-by ?t-1 ?c-1) (fault-count-4 lost ?t-1 created ?c-1 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-ready ?h) (photogrametry-mode-is-ready ?t-1) (fault-count-4 lost ?t-1 created ?c-1 ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (photogrametry-mode-is-processing ?t-1)) (not (fault-count-4 lost ?t-1 created ?c-1 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-4 ?hyp lost ?t-1 created ?c-1 ?new-fc0))  (not (dominates-4 ?hyp lost ?t-1 created ?c-1)))))
+ )
+ (:action missionexec-init-mission-fail-fly3d-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-fly3d-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-autotakeoff-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (autotakeoff-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-autotakeoff-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (autotakeoff-mode-is-running ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-autoland-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (autoland-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-autoland-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (autoland-mode-is-running ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-basiccameracontrol-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (basiccameracontrol-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-basiccameracontrol-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (basiccameracontrol-mode-is-running ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-navtopoint-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (navtopoint-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-navtopoint-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (navtopoint-mode-is-running ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-doatpoints-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (doatpoints-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-doatpoints-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-doatpoints-exec_run_task_action_sync_fail_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-fail-doatpoints-exec_run_task_action_sync_fail_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-init-mission-fail-doatpoints-exec_run_task_action_async_fail_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-init-call ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-init-mission-fail-doatpoints-exec_run_task_action_async_fail_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-init-call ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-init-mission-fail-photogrametry-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (photogrametry-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-init-mission-fail-photogrametry-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-init-call ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (not (missionexec-mission-init-call ?h)) (not (photogrametry-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-fly3d-call_start
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-ready ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-ready ?t-1))
+  :effect (and (missionexec-mission-start-call ?h) (fly3d-in_start_call-is-yes ?t-1) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1) (not (missionexec-mission-ready ?h)) (not (fly3d-mode-is-ready ?t-1)))
+ )
+ (:action missionexec-start-mission-autotakeoff-call_start
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-ready ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-ready ?t-1))
+  :effect (and (missionexec-mission-start-call ?h) (autotakeoff-in_start_call-is-yes ?t-1) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_exec-is-start ?t-1) (not (missionexec-mission-ready ?h)) (not (autotakeoff-mode-is-ready ?t-1)))
+ )
+ (:action missionexec-start-mission-autoland-call_start
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-ready ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-ready ?t-1))
+  :effect (and (missionexec-mission-start-call ?h) (autoland-in_start_call-is-yes ?t-1) (autoland-fsm_exec-is-start ?t-1) (autoland-mode-is-running ?t-1) (not (missionexec-mission-ready ?h)) (not (autoland-mode-is-ready ?t-1)))
+ )
+ (:action missionexec-start-mission-basiccameracontrol-call_start
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-ready ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-ready ?t-1))
+  :effect (and (missionexec-mission-start-call ?h) (basiccameracontrol-in_start_call-is-yes ?t-1) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_exec-is-start ?t-1) (not (missionexec-mission-ready ?h)) (not (basiccameracontrol-mode-is-ready ?t-1)))
+ )
+ (:action missionexec-start-mission-navtopoint-call_start
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-ready ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-ready ?t-1))
+  :effect (and (missionexec-mission-start-call ?h) (navtopoint-fsm_exec-is-start ?t-1) (navtopoint-mode-is-running ?t-1) (navtopoint-in_start_call-is-yes ?t-1) (not (missionexec-mission-ready ?h)) (not (navtopoint-mode-is-ready ?t-1)))
+ )
+ (:action missionexec-start-mission-doatpoints-call_start
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-ready ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-ready ?t-1))
+  :effect (and (missionexec-mission-start-call ?h) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1) (doatpoints-fsm_exec-is-start ?t-1) (not (missionexec-mission-ready ?h)) (not (doatpoints-mode-is-ready ?t-1)))
+ )
+ (:action missionexec-start-mission-photogrametry-call_start
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-ready ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-ready ?t-1))
+  :effect (and (missionexec-mission-start-call ?h) (photogrametry-mode-is-running ?t-1) (photogrametry-in_start_call-is-yes ?t-1) (photogrametry-fsm_exec-is-start ?t-1) (not (missionexec-mission-ready ?h)) (not (photogrametry-mode-is-ready ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_starting_yaw_command_ok_sync
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_starting_yaw_command ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint12) (pending ?o0))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_starting_yaw_command_checkpoint12_sync-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint12 ?new-fc0) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint12 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint12 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint12)))))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint20_sync-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint20) (pending ?o0))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint20_sync-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint20 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint20 ?new-fc0) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint20 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint20 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint20)))))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint21_sync-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint21) (pending ?o0))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint21_sync-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?new-fc0) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint21)))))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (matches-2 ?o0 ?t-1 checkpoint21) (pending ?o0))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (observed ?o0) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_checkpoint21_after22_sync-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 checkpoint21 ?new-fc0) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_state-is-send_first_trajectory ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)) (not (fly3d-trajectory-not-sent ?t-1)) (not (fault-count-3 lost ?t-1 checkpoint21 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 checkpoint21 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 checkpoint21)))))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_busy_sync
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-trajectory-not-sent ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-fly3d-enter_send_first_trajectory_busy_after22_sync
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action2 ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (fly3d-in_start_call-is-no ?t-1) (fly3d-trajectory-not-sent ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (fly3d-in_start_call-is-yes ?t-1)) (not (fly3d-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-autotakeoff-takeoff_action2
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-action2 ?t-1) (autotakeoff-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (autotakeoff-in_start_call-is-no ?t-1) (autotakeoff-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (autotakeoff-in_start_call-is-yes ?t-1)) (not (autotakeoff-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-autoland-start_ok
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_exec-is-start ?t-1))
+  :effect (and (missionexec-mission-running ?h) (autoland-fsm_state-is-start_decouple ?t-1) (autoland-in_start_call-is-no ?t-1) (autoland-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (autoland-in_start_call-is-yes ?t-1)) (not (autoland-fsm_exec-is-start ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-seq_position_command_wait_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_position_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-seq_bearing_command_wait_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-converge_wait_wait_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_wait ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-converge_final_wait_wait_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_final_wait ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-enter_tracking_2a
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-action2 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-seq_turn_command_wait_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-seq_lock_command_wait_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_lock_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-locked_camera_mode_action2a
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-action2 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-basiccameracontrol-not_in_control_action2_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action2 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (basiccameracontrol-in_start_call-is-no ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-in_start_call-is-yes ?t-1)) (not (basiccameracontrol-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-navtopoint-start_ok
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_exec-is-start ?t-1))
+  :effect (and (missionexec-mission-running ?h) (navtopoint-fsm_exec-is-nothing ?t-1) (navtopoint-fsm_state-is-start_decouple ?t-1) (navtopoint-in_start_call-is-no ?t-1) (not (missionexec-mission-start-call ?h)) (not (navtopoint-fsm_exec-is-start ?t-1)) (not (navtopoint-in_start_call-is-yes ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-doatpoints-enter_wait_for_go_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action1 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-doatpoints-run_fly3d_action2_ok_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action2 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action2 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-doatpoints-exec_run_task_action_action3_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action3 ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (doatpoints-in_start_call-is-no ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (not (missionexec-mission-start-call ?h)) (not (doatpoints-in_start_call-is-yes ?t-1)) (not (doatpoints-fsm_exec-is-action3 ?t-1)))
+ )
+ (:action missionexec-start-mission-ok-photogrametry-plan_task_init_returned
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-action1-wait ?t-1) (photogrametry-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-running ?h) (photogrametry-fsm_exec-is-nothing ?t-1) (photogrametry-in_start_call-is-no ?t-1) (not (missionexec-mission-start-call ?h)) (not (photogrametry-fsm_exec-is-action1-wait ?t-1)) (not (photogrametry-in_start_call-is-yes ?t-1)))
+ )
+ (:action missionexec-start-mission-done-fly3d-start_exit
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-start ?t-1))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (not (missionexec-mission-start-call ?h)) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-done-basiccameracontrol-not_in_control_exit_1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-done-doatpoints-start_exit
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_exec-is-start ?t-1))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-done ?t-1) (not (missionexec-mission-start-call ?h)) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-fly3d-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (fly3d-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-fly3d-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (fly3d-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-autotakeoff-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (autotakeoff-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-autotakeoff-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (autotakeoff-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-autoland-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (autoland-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-autoland-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (autoland-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-basiccameracontrol-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-basiccameracontrol-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (basiccameracontrol-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-navtopoint-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (navtopoint-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-navtopoint-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (navtopoint-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-doatpoints-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (doatpoints-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-doatpoints-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (doatpoints-mode-is-running ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-doatpoints-exec_run_task_action_sync_fail_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-start-call ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-start-mission-fail-doatpoints-exec_run_task_action_sync_fail_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_sync_fail_1 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-start-call ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-start-mission-fail-doatpoints-exec_run_task_action_async_fail_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-start-call ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-start-mission-fail-doatpoints-exec_run_task_action_async_fail_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-reaction_mission_task_async_fail_1 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-start-call ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-start-mission-fail-photogrametry-init_fail
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-processing ?t-1))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (photogrametry-mode-is-processing ?t-1)))
+ )
+ (:action missionexec-start-mission-fail-photogrametry-fail_in_start_call
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-start-call ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-in_start_call-is-yes ?t-1))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (not (missionexec-mission-start-call ?h)) (not (photogrametry-mode-is-running ?t-1)))
+ )
+ (:action missionexec-mission-done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-fly3d-in_send_starting_yaw_command_fcl_cancel_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-fly3d-in_wait_for_yaw_finish_fcl_cancel_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-reaction_finished_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-fly3d-in_wait_trajectory_end_fcl_finished_reaction2c-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_trajectory_end ?t-1) (fly3d-fsm_exec-is-reaction_finished_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-fly3d-enter_turn_to_goal_heading_action2-exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-exit ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-fly3d-enter_turn_to_goal_heading_action2-exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-exit ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-fly3d-goal_point_wait_cmd_continue_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-fly3d-goal_point_wait_cmd_continue_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-fly3d-goal_point_wait_idle_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-fly3d-goal_point_wait_idle_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-fly3d-global_fcl_cancel_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-fly3d-global_fcl_cancel_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-autotakeoff-takeoff_fcl_cancel_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-autotakeoff-takeoff_fcl_cancel_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-autotakeoff-go_to_final_altitude_action2_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action2-exit ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-autotakeoff-go_to_final_altitude_action2_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action2-exit ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_finished_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_finished_reaction2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_finished_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_cancel_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-autotakeoff-go_to_final_altitude_fcl_cancel_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_cancel_1 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-autoland-move_to_init_pos_action2_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2-exit ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-autoland-move_to_init_pos_action2_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2-exit ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-autoland-yaw_to_approach_heading_action2_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-yaw_to_approach_heading ?t-1) (autoland-fsm_exec-is-action2-exit ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-autoland-yaw_to_approach_heading_action2_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-yaw_to_approach_heading ?t-1) (autoland-fsm_exec-is-action2-exit ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-autoland-ready_to_land_cmd_cancel-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-ready_to_land ?t-1) (autoland-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-autoland-ready_to_land_cmd_cancel-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-ready_to_land ?t-1) (autoland-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-autoland-land_fcl_finished_reaction2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-land ?t-1) (autoland-fsm_exec-is-reaction_finished_2 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-autoland-land_fcl_finished_reaction2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-land ?t-1) (autoland-fsm_exec-is-reaction_finished_2 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-basiccameracontrol-tracking_idle_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-basiccameracontrol-tracking_idle_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-basiccameracontrol-locked_camera_mode_idle_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-basiccameracontrol-locked_camera_mode_idle_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-basiccameracontrol-not_in_control_exit_2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-basiccameracontrol-not_in_control_exit_2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-basiccameracontrol-global_cmd_stop-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-basiccameracontrol-global_cmd_stop-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-navtopoint-wait_for_go_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-wait_for_go ?t-1) (navtopoint-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-navtopoint-wait_for_go_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-wait_for_go ?t-1) (navtopoint-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-navtopoint-fly_path_fly3d_done_2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-navtopoint-fly_path_fly3d_done_2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-reaction_f3d_done_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-doatpoints-plan_path_action1_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-doatpoints-plan_path_action1_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-doatpoints-next_waypoint_action1_exit-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-doatpoints-next_waypoint_action1_exit-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-doatpoints-wait_for_go_cmd_cancel-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-doatpoints-wait_for_go_cmd_cancel-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-wait_for_go ?t-1) (doatpoints-fsm_exec-is-nothing ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-done-photogrametry-plan_task_done_2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-reaction_plan_task_done_2 ?t-1) (matches-2 ?o0 ?t-1 task-done) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-done ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-done-photogrametry-plan_task_done_2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-reaction_plan_task_done_2 ?t-1) (fault-count-3 lost ?t-1 task-done ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-done ?t-1) (fault-count-3 lost ?t-1 task-done ?new-fc0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 task-done ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 task-done ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 task-done)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_221-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-221) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_221-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-221 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-221 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-221 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-221 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-221)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_222-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-222) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_222-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-222 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-222 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-222 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-222 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-222)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_223-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-223) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_segment_heading_fail_specific_223-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_segment_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-223 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-223 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-223 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-223 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-223)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_send_starting_yaw_command_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_send_starting_yaw_command_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-211) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-in_send_starting_yaw_command_fcl_error_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_starting_yaw_command ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-211 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-211 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-211)))))
+ )
+ (:action missionexec-mission-failed-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-211) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-in_wait_for_yaw_finish_fcl_error_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-wait_for_yaw_finish ?t-1) (fly3d-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-211 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-211 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-211 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-211)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_send_first_trajectory_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_send_first_trajectory_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_send_first_trajectory_fail_specific_220-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-220) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_send_first_trajectory_fail_specific_220-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-220 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-220 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-220 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-220 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-220)))))
+ )
+ (:action missionexec-mission-failed-fly3d-in_send_first_trajectory_fcl_finished_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-reaction_finished_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-213) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-in_send_first_trajectory_fcl_finished_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-send_first_trajectory ?t-1) (fly3d-fsm_exec-is-reaction_finished_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-213 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-213 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-213 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-213 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-213)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_goal_heading_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_goal_heading_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_goal_heading_action2-fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-fail ?t-1) (matches-2 ?o0 ?t-1 fail-specific-214) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_turn_to_goal_heading_action2-fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-turn_to_goal_heading ?t-1) (fly3d-fsm_exec-is-action2-fail ?t-1) (fault-count-3 lost ?t-1 fail-specific-214 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-214 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-214 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-214 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-214)))))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_goal_point_wait_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-enter_goal_point_wait_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_state-is-goal_point_wait ?t-1) (fly3d-fsm_exec-is-action1 ?t-1) (fly3d-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-fly3d-global_fcl_error_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-210) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-fly3d-global_fcl_error_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-running ?t-1) (fly3d-fsm_exec-is-global_reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?new-fc0) (not (missionexec-mission-running ?h)) (not (fly3d-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-210 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-210 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-210)))))
+ )
+ (:action missionexec-mission-failed-autotakeoff-takeoff_fcl_error_reaction1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-210) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autotakeoff-takeoff_fcl_error_reaction1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-takeoff ?t-1) (autotakeoff-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-210 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-210 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-210)))))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_action1_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_action1_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_action1_fail_specific_101-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_action1_fail_specific_101-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_action1_fail_specific_102-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-102) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_action1_fail_specific_102-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action1 ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-102)))))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_climb_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action2-climb ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_climb_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-action2-climb ?t-1) (autotakeoff-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_fcl_error_reaction-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_error_1 ?t-1) (matches-2 ?o0 ?t-1 fail-specific-210) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autotakeoff-go_to_final_altitude_fcl_error_reaction-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-running ?t-1) (autotakeoff-fsm_state-is-go_to_final_altitude ?t-1) (autotakeoff-fsm_exec-is-reaction_error_1 ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-210 ?new-fc0) (not (missionexec-mission-running ?h)) (not (autotakeoff-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-210 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-210 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-210)))))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action1_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action1_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action1_fail_specific_101-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action1_fail_specific_101-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action1_fail_specific_102-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-102) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action1_fail_specific_102-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-102)))))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action2_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action2_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action2_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2-fail ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-212) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autoland-move_to_init_pos_action2_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-move_to_init_pos ?t-1) (autoland-fsm_exec-is-action2-fail ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-212 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-212 ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-212 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-212 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-212)))))
+ )
+ (:action missionexec-mission-failed-autoland-yaw_to_approach_heading_action2_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-yaw_to_approach_heading ?t-1) (autoland-fsm_exec-is-action2-fail ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-212) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autoland-yaw_to_approach_heading_action2_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-yaw_to_approach_heading ?t-1) (autoland-fsm_exec-is-action2-fail ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-212 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-212 ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-212 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-212 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-212)))))
+ )
+ (:action missionexec-mission-failed-autoland-land_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-land ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-autoland-land_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-running ?t-1) (autoland-fsm_state-is-land ?t-1) (autoland-fsm_exec-is-action1 ?t-1) (autoland-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (autoland-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-start_tracking_position_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-start_tracking_position_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-start_tracking_position_fail_101-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-start_tracking_position_fail_101-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-start_tracking_position_fail_102-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-102) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-start_tracking_position_fail_102-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-start_tracking_position ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-102)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_position_command_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_position_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_position_command_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_position_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_bearing_command_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_bearing_command_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_bearing_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-converge_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-converge_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-converge_failed_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_failed ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-converge_failed_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_failed ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-converge_failed_fail_310-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_failed ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-310) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-converge_failed_fail_310-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-converge_failed ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-310 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-310 ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-310 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-310 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-310)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-tracking_idle_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-tracking_idle_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-tracking ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-set_locked_mode_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-set_locked_mode ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-set_locked_mode_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-set_locked_mode ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_turn_command_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_turn_command_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_turn_command_fail_401-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-401) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_turn_command_fail_401-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-401 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-401 ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-401 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-401 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-401)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_turn_command_fail_402-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-402) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_turn_command_fail_402-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_turn_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-402 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-402 ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-402 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-402 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-402)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_lock_command_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_lock_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-seq_lock_command_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-seq_lock_command ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-locked_camera_mode_idle_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-locked_camera_mode_idle_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-locked_camera_mode ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-not_in_control_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-700) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-not_in_control_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-action1 ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-700 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-700 ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-700 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-700 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-700)))))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-not_in_control_cmd_resume_control_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-basiccameracontrol-not_in_control_cmd_resume_control_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-running ?t-1) (basiccameracontrol-fsm_state-is-not_in_control ?t-1) (basiccameracontrol-fsm_exec-is-nothing ?t-1) (basiccameracontrol-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (basiccameracontrol-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action1_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action1_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action1_fail_specific_101-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action1_fail_specific_101-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action1_fail_specific_102-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-102) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action1_fail_specific_102-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-102 ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-102 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-102 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-102)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action2_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action2_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_402-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-402) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_402-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-402 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-402 ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-402 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-402 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-402)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_403-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-403) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_403-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-403 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-403 ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-403 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-403 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-403)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_404-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-404) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-plan_path_action2_fail_specific_404-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-plan_path ?t-1) (navtopoint-fsm_exec-is-action2 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-404 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-404 ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-404 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-404 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-404)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-fly_path_action1_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-fly_path_action1_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-fly_path_action1_fail_proxy_init-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-fly_path_action1_fail_proxy_init-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-action1 ?t-1) (navtopoint-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-mission-failed-navtopoint-fly_path_subtask_fail_2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-navtopoint-fly_path_subtask_fail_2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-running ?t-1) (navtopoint-fsm_state-is-fly_path ?t-1) (navtopoint-fsm_exec-is-reaction_f3d_fail_2 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-running ?h)) (not (navtopoint-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-plan_path_action1_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-plan_path_action1_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-plan_path_action1_fail_202-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-202) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-plan_path_action1_fail_202-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-202 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-202 ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-202 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-202 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-202)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-plan_path_action1_fail_203-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-203) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-plan_path_action1_fail_203-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-plan_path ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-203 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-203 ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-203 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-203 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-203)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-next_waypoint_action1_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-next_waypoint_action1_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-next_waypoint_action1_fail_302-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-302) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-next_waypoint_action1_fail_302-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-next_waypoint ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-302 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-302 ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-302 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-302 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-302)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-run_fly3d_action1_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-run_fly3d_action1_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-run_fly3d_action1_fail_subtask-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-run_fly3d_action1_fail_subtask-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-run_fly3d_failed2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-run_fly3d_failed2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-run_fly3d ?t-1) (doatpoints-fsm_exec-is-reaction_fly3d_failed_2 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-exec_waypoint_action_action1_fail_301-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_waypoint_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-301) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-exec_waypoint_action_action1_fail_301-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_waypoint_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-301 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-301 ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-301 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-301 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-301)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-exec_run_task_action_action1_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-exec_run_task_action_action1_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-exec_run_task_action_action1_fail_subtask-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-exec_run_task_action_action1_fail_subtask-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-exec_run_task_action ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-seq_emergency_brake_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-seq_emergency_brake ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-seq_emergency_brake_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-seq_emergency_brake ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-check_position_fail_service-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-service) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-check_position_fail_service-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-service ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-service ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-service ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-service ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-service)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-check_position_fail_101-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-101) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-check_position_fail_101-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-101 ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-101 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-101 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-101)))))
+ )
+ (:action missionexec-mission-failed-doatpoints-check_position_fail_777-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (matches-2 ?o0 ?t-1 fail-specific-777) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-doatpoints-check_position_fail_777-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-running ?t-1) (doatpoints-fsm_state-is-check_position ?t-1) (doatpoints-fsm_exec-is-action1 ?t-1) (doatpoints-in_start_call-is-no ?t-1) (fault-count-3 lost ?t-1 fail-specific-777 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-777 ?new-fc0) (not (missionexec-mission-running ?h)) (not (doatpoints-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-777 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-777 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-777)))))
+ )
+ (:action missionexec-mission-failed-photogrametry-plan_task_ready_start_fail-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-nothing ?t-1) (photogrametry-plan_task_status-is-ready ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-photogrametry-plan_task_ready_start_fail-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-nothing ?t-1) (photogrametry-plan_task_status-is-ready ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-mission-failed-photogrametry-plan_task_ready_start_not_running_1-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t-1) (photogrametry-plan_task_status-is-done ?t-1) (matches-2 ?o0 ?t-1 fail-specific-219) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-photogrametry-plan_task_ready_start_not_running_1-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t-1) (photogrametry-plan_task_status-is-done ?t-1) (fault-count-3 lost ?t-1 fail-specific-219 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-219 ?new-fc0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-219 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-219 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-219)))))
+ )
+ (:action missionexec-mission-failed-photogrametry-plan_task_ready_start_not_running_2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t-1) (photogrametry-plan_task_status-is-init_failed ?t-1) (matches-2 ?o0 ?t-1 fail-specific-219) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-photogrametry-plan_task_ready_start_not_running_2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-reaction_plan_task_ready ?t-1) (photogrametry-plan_task_status-is-init_failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-219 ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-specific-219 ?new-fc0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-specific-219 ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-specific-219 ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-specific-219)))))
+ )
+ (:action missionexec-mission-failed-photogrametry-plan_task_failed_2-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-reaction_plan_task_failed_2 ?t-1) (matches-2 ?o0 ?t-1 fail-subtask) (pending ?o0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (observed ?o0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-mission-failed-photogrametry-plan_task_failed_2-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-running ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-running ?t-1) (photogrametry-fsm_exec-is-reaction_plan_task_failed_2 ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-over ?h) (photogrametry-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 fail-subtask ?new-fc0) (not (missionexec-mission-running ?h)) (not (photogrametry-mode-is-running ?t-1)) (not (fault-count-3 lost ?t-1 fail-subtask ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 fail-subtask ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 fail-subtask)))))
+ )
+ (:action missionexec-destroy-mission-fly3d-call_destroy_when_done-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (fly3d-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-fly3d-call_destroy_when_done-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (fly3d-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-fly3d-call_destroy_when_failed-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (fly3d-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (fly3d-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-fly3d-call_destroy_when_failed-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - fly3d ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (fly3d-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (fly3d-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (fly3d-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-autotakeoff-call_destroy_when_done-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (autotakeoff-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-autotakeoff-call_destroy_when_done-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (autotakeoff-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-autotakeoff-call_destroy_when_failed-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (autotakeoff-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (autotakeoff-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-autotakeoff-call_destroy_when_failed-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autotakeoff ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (autotakeoff-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (autotakeoff-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (autotakeoff-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-autoland-call_destroy_when_failed-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (autoland-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-autoland-call_destroy_when_failed-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (autoland-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-autoland-call_destroy_when_done-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (autoland-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (autoland-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-autoland-call_destroy_when_done-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - autoland ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (autoland-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (autoland-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (autoland-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-basiccameracontrol-call_destroy_when_done-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-basiccameracontrol-call_destroy_when_done-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (basiccameracontrol-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-basiccameracontrol-call_destroy_when_failed-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (basiccameracontrol-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-basiccameracontrol-call_destroy_when_failed-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - basiccameracontrol ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (basiccameracontrol-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (basiccameracontrol-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (basiccameracontrol-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-navtopoint-call_destroy_when_done-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (navtopoint-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-navtopoint-call_destroy_when_done-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (navtopoint-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-navtopoint-call_destroy_when_failed-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (navtopoint-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (navtopoint-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-navtopoint-call_destroy_when_failed-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - navtopoint ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (navtopoint-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (navtopoint-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (navtopoint-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-doatpoints-call_destroy_when_done-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (doatpoints-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-doatpoints-call_destroy_when_done-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (doatpoints-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-doatpoints-call_destroy_when_failed-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (doatpoints-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (doatpoints-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-doatpoints-call_destroy_when_failed-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - doatpoints ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (doatpoints-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (doatpoints-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (doatpoints-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-photogrametry-call_destroy_when_done-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-done ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (photogrametry-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (photogrametry-mode-is-done ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-photogrametry-call_destroy_when_done-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-done ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (photogrametry-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (photogrametry-mode-is-done ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action missionexec-destroy-mission-photogrametry-call_destroy_when_failed-0
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?o0 - observation)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-failed ?t-1) (matches-2 ?o0 ?t-1 destroyed) (pending ?o0))
+  :effect (and (missionexec-mission-idle ?h) (photogrametry-mode-is-destroyed ?t-1) (observed ?o0) (not (missionexec-mission-over ?h)) (not (photogrametry-mode-is-failed ?t-1)) (not (pending ?o0)))
+ )
+ (:action missionexec-destroy-mission-photogrametry-call_destroy_when_failed-1
+  :parameters ( ?h - helicopter ?t - task ?t-1 - photogrametry ?fc0 - count ?new-fc0 - count)
+  :precondition (and (= ?t-1 ?t) (task-running-on ?t ?h) (missionexec-mission-over ?h) (missionexec-active-mission ?h ?t) (photogrametry-mode-is-failed ?t-1) (fault-count-3 lost ?t-1 destroyed ?fc0) (next-count ?fc0 ?new-fc0))
+  :effect (and (missionexec-mission-idle ?h) (photogrametry-mode-is-destroyed ?t-1) (fault-count-3 lost ?t-1 destroyed ?new-fc0) (not (missionexec-mission-over ?h)) (not (photogrametry-mode-is-failed ?t-1)) (not (fault-count-3 lost ?t-1 destroyed ?fc0)) (forall ( ?hyp - hypothesis) (when (and (hypothesis-fault-count-3 ?hyp lost ?t-1 destroyed ?new-fc0))  (not (dominates-3 ?hyp lost ?t-1 destroyed)))))
+ )
+ (:action advance-to-obs-1
+  :parameters ( ?o - observation ?o1 - observation)
+  :precondition (and (future ?o) (precedes-1 ?o ?o1) (observed ?o1))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-2
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation)
+  :precondition (and (future ?o) (precedes-2 ?o ?o1 ?o2) (observed ?o1) (observed ?o2))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-3
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation)
+  :precondition (and (future ?o) (precedes-3 ?o ?o1 ?o2 ?o3) (observed ?o1) (observed ?o2) (observed ?o3))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-4
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation)
+  :precondition (and (future ?o) (precedes-4 ?o ?o1 ?o2 ?o3 ?o4) (observed ?o1) (observed ?o2) (observed ?o3) (observed ?o4))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-5
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation)
+  :precondition (and (future ?o) (precedes-5 ?o ?o1 ?o2 ?o3 ?o4 ?o5) (observed ?o1) (observed ?o2) (observed ?o3) (observed ?o4) (observed ?o5))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-6
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation)
+  :precondition (and (future ?o) (precedes-6 ?o ?o1 ?o2 ?o3 ?o4 ?o5 ?o6) (observed ?o1) (observed ?o2) (observed ?o3) (observed ?o4) (observed ?o5) (observed ?o6))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-7
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation)
+  :precondition (and (future ?o) (precedes-7 ?o ?o1 ?o2 ?o3 ?o4 ?o5 ?o6 ?o7) (observed ?o1) (observed ?o2) (observed ?o3) (observed ?o4) (observed ?o5) (observed ?o6) (observed ?o7))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-8
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation ?o8 - observation)
+  :precondition (and (future ?o) (precedes-8 ?o ?o1 ?o2 ?o3 ?o4 ?o5 ?o6 ?o7 ?o8) (observed ?o1) (observed ?o2) (observed ?o3) (observed ?o4) (observed ?o5) (observed ?o6) (observed ?o7) (observed ?o8))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-9
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation ?o8 - observation ?o9 - observation)
+  :precondition (and (future ?o) (precedes-9 ?o ?o1 ?o2 ?o3 ?o4 ?o5 ?o6 ?o7 ?o8 ?o9) (observed ?o1) (observed ?o2) (observed ?o3) (observed ?o4) (observed ?o5) (observed ?o6) (observed ?o7) (observed ?o8) (observed ?o9))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-10
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation ?o8 - observation ?o9 - observation ?o10 - observation)
+  :precondition (and (future ?o) (precedes-10 ?o ?o1 ?o2 ?o3 ?o4 ?o5 ?o6 ?o7 ?o8 ?o9 ?o10) (observed ?o1) (observed ?o2) (observed ?o3) (observed ?o4) (observed ?o5) (observed ?o6) (observed ?o7) (observed ?o8) (observed ?o9) (observed ?o10))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+ (:action advance-to-obs-11
+  :parameters ( ?o - observation ?o1 - observation ?o2 - observation ?o3 - observation ?o4 - observation ?o5 - observation ?o6 - observation ?o7 - observation ?o8 - observation ?o9 - observation ?o10 - observation ?o11 - observation)
+  :precondition (and (future ?o) (precedes-11 ?o ?o1 ?o2 ?o3 ?o4 ?o5 ?o6 ?o7 ?o8 ?o9 ?o10 ?o11) (observed ?o1) (observed ?o2) (observed ?o3) (observed ?o4) (observed ?o5) (observed ?o6) (observed ?o7) (observed ?o8) (observed ?o9) (observed ?o10) (observed ?o11))
+  :effect (and (pending ?o) (not (future ?o)))
+ )
+)

@@ -1,0 +1,23 @@
+
+  [-] skipping / [x] done / [ ] todo
+
+[-] 3unsat
+[-] mystery
+[x] bottleneck
+[x] unsat-pegsol-strips
+[x] unsat-tiles
+[x] (over-sub) unsat-nomystery
+[x] (over-sub) unsat-rovers
+[x] (over-sub) unsat-tpp
+[x] (generated) tetris
+[x] (generated) unsat diving
+[x] (generated) chessboard pebbling
+[x] (generated) pegsol row5 puzzle
+[x] (generated) document transfer domain (from the bagged folks)
+[x] (generated) Haslum's diagnosis domain
+[-] (generated) Haslum's temporal constraints domain
+[-] (width) conformant encodings
+[x] (bagged) transport
+[x] (bagged) barman
+[x] (bagged) gripper
+

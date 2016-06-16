@@ -1,0 +1,94 @@
+#! /bin/bash
+
+# Test setup:
+#
+# $ sudo apt-get install pip
+# $ sudo pip install -U pytest pep8 pyflakes sphinx
+
+set -euo pipefail
+
+REPO='/home/jendrik/projects/Downward/downward'
+
+function cleanup {
+    rm -rf examples/data
+    rm -rf examples/pi/data
+    rm -rf examples/planner/data
+    rm -rf examples/simple/data
+}
+
+# Change into top directory.
+cd "$(dirname "$0")"
+cd ..
+
+# Make lab available on the PYTHONPATH.
+LAB=`realpath .`
+echo "Checking lab at $LAB"
+if [ -z "$PYTHONPATH" ]; then
+    # PYTHONPATH is empty.
+    export PYTHONPATH=${LAB}
+elif [[ "$PYTHONPATH" != *"$LAB"* ]]; then
+    # LAB is NOT on the PYTHONPATH.
+    export PYTHONPATH=${LAB}:${PYTHONPATH}
+fi
+echo "PYTHONPATH: $PYTHONPATH"
+
+cleanup
+
+py.test tests
+
+# Run doctests.
+cd lab
+python -m doctest reports/__init__.py experiment.py tools.py
+cd ..
+cd downward
+python -m doctest downward/suites.py
+cd ..
+
+# Check imports and unused/missing variables.
+pyflakes lab/calls lab/reports lab/*.py  # Don't check external dir.
+pyflakes downward examples
+
+./tests/find-dead-code
+
+# Check code formatting.
+pep8 --max-line-length=90 --exclude=*external*,data lab downward examples
+
+# Check if documentation builds.
+cd docs
+make -B html
+echo "Docs: file://$(pwd)/_build/html/index.html"
+cd ..
+
+cd examples
+
+cd simple
+./simple-exp.py --all
+cd ..
+
+cd pi
+./pi.py --all
+./pi-ext.py --help
+cd ..
+
+./report-external-results.py --all
+
+# Only check downward code if $REPO exists.
+if [ -d "$REPO" ]; then
+    ./lmcut.py --all
+
+    cd planner
+    ./planner.py --all
+    ./planner-ext.py --all
+    cd ..
+
+    ./showcase-options.py --all
+
+    cd ..
+else
+    echo
+    echo "Repo $REPO is missing. Could not run downward tests."
+fi
+
+cleanup
+
+echo "TESTS PASSED"

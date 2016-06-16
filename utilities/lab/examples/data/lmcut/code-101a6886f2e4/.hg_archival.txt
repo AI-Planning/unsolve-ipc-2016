@@ -1,0 +1,5 @@
+repo: 875fe8fa322a09154e7c39371c8fc3921e36d73d
+node: 101a6886f2e4d0fbd73dc143b7ebb1467bdd8cef
+branch: default
+latesttag: issue604-v7
+latesttagdistance: 53

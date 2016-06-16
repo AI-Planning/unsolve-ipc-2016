@@ -1,0 +1,63 @@
+
+===============================================================================
+
+Included are two encodings of NoMystery. They distinguish only in action costs:
+hard uses unit actions costs; hard_cost uses action costs that correspond to the
+fuel consumed by the actions.
+
+
+===============================================================================
+
+NoMystery instance generator. Currently, it only supports the generation of
+instances with one truck, i.e., one resource. The generated task will be printed
+to stdout. It takes as arguments the number of locations (-l); the number of
+packages (-p); edge rate (-n) defining the overall number of edges (computed by
+EDGE_RATE * NUMBER_OF_LOCATIONS); maximal edge cost, aka fuel consumption, (-m);
+constrainedness (-c), i.e., if B is the minimal amount of fuel needed to solve the
+instance, then the initial budget is set to CONSTRAINEDNESS * B; seed for random
+number generator (-s); and type of encoding (-e) where hard (=0) uses unit
+action costs, and hard_cost (=1) assigns also the fuel consumption as action
+costs.
+
+usage:
+
+OPTIONS   DESCRIPTIONS
+
+-l <int>    number of locations (>= 2; preset: 6)
+-p <int>    number of packages (>= 1; preset: 6)
+
+-n <float>  (int) (<-n> * <-l>) edges in location graph (>= 1; preset: 1.500000)
+-m <int>    edge weights drawn from 1 .. <-m> (>= 1; preset: 25)
+
+-c <float>  constrainedness: (int) (<-c> * <optimalcost>) will be the initial fuel supply (>= 1; preset: 1.000000)
+
+-s <int>    random seed (>= 1; preset: 1)
+-e < 0 | 1 > type of encoding (0 = hard; 1 = hard_cost; preset: 0)
+
+Author: Hootan Nakhost
+
+===============================================================================
+
+Also included is a python script that can be used to scale the resource. It
+takes as argument the path to the generated instances with resource
+constrainedness 1.0 (it expects the tasks with resource 1.0 to be named
+*-problem-10*), and a list of constrainedness coefficients. It generates the
+files according to the given constrainedness coefficients in the same directory
+where the constrainedness 1.0 files are stored. The files will be named
+*-problem-C*, according to the constrainedness 1.0 base file name, and C being
+defined as 10 * CONSTRAINEDNESS_COEFFICIENT.
+
+usage: scale_nomystery.py [-h] [-c CONSTRAINT [CONSTRAINT ...]] path
+
+Scaling constrainedness of NoMystery instances. Stores new files in the same
+directory where the 1.0 problem files are currently stored.
+
+positional arguments:
+  path                  path to NoMystery problem files with constrainedness
+                        1.0
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONSTRAINT [CONSTRAINT ...]
+                        constrainedness coefficients
+

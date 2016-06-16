@@ -1,0 +1,155 @@
+{
+  "algorithm_nick": "lmcut",
+  "build_options": [
+    "-j12"
+  ],
+  "component_options": [
+    "--search",
+    "astar(lmcut())"
+  ],
+  "compress-output-files_returncode": 1,
+  "compress-output-files_wall_clock_time": 0.007222175598144531,
+  "config": "lmcut",
+  "cost": 11.0,
+  "cost_all": [
+    11.0
+  ],
+  "coverage": 1,
+  "dead_ends": 0,
+  "dead_ends_all": [
+    0
+  ],
+  "domain": "gripper",
+  "driver_options": [
+    "--search-time-limit",
+    "30m",
+    "--search-memory-limit",
+    "2G"
+  ],
+  "error": "none",
+  "evaluated": 162,
+  "evaluated_all": [
+    162
+  ],
+  "evaluations": 162,
+  "evaluations_all": [
+    162
+  ],
+  "evaluations_until_last_jump": 134,
+  "expansions": 107,
+  "expansions_all": [
+    107
+  ],
+  "expansions_until_last_jump": 92,
+  "experiment_name": "lmcut",
+  "generated": 366,
+  "generated_all": [
+    366
+  ],
+  "generated_until_last_jump": 316,
+  "global_revision": "101a6886f2e4",
+  "id": [
+    "lmcut",
+    "gripper",
+    "prob01.pddl"
+  ],
+  "id_string": "lmcut:gripper:prob01.pddl",
+  "initial_h_value": 9,
+  "initial_h_values": {
+    "lmcut": [
+      9
+    ]
+  },
+  "limit_search_memory": 2048,
+  "limit_search_time": 1800,
+  "local_revision": "tip",
+  "log_size_in_kb": 6,
+  "memory": 21672,
+  "memory_capped": 21672,
+  "parse-preprocess_returncode": 0,
+  "parse-preprocess_wall_clock_time": 8.198712825775146,
+  "parse-search_returncode": 0,
+  "parse-search_wall_clock_time": 0.508404016494751,
+  "plan_length": 11,
+  "plan_length_all": [
+    11
+  ],
+  "planner_type": "single",
+  "preprocessor_axioms": 0,
+  "preprocessor_derived_variables": 0,
+  "preprocessor_facts": 24,
+  "preprocessor_operators": 34,
+  "preprocessor_task_size": 233,
+  "preprocessor_variables": 7,
+  "problem": "prob01.pddl",
+  "queue": "all.q",
+  "raw_memory": 21672,
+  "reopened": 0,
+  "reopened_all": [
+    0
+  ],
+  "reopened_until_last_jump": 0,
+  "repo": "/infai/infai2/planners/fd",
+  "revision_summary": "101a6886f2e4 tip",
+  "run_dir": "runs-00001-00100/00001",
+  "score_evaluations": 94.76,
+  "score_expansions": 99.27,
+  "score_generated": 85.91,
+  "score_memory": 65.74,
+  "score_search_time": 100.0,
+  "score_total_time": 100.0,
+  "search_returncode": 0,
+  "search_time": 0.01,
+  "search_time_all": [
+    0.00209225
+  ],
+  "search_wall_clock_time": 14.791255950927734,
+  "total_time": 0.01,
+  "translator_auxiliary_atoms": 60,
+  "translator_axioms": 0,
+  "translator_derived_variables": 0,
+  "translator_effect_conditions_simplified": 0,
+  "translator_facts": 24,
+  "translator_final_queue_length": 141,
+  "translator_goal_facts": 4,
+  "translator_implied_preconditions_added": 0,
+  "translator_mutex_groups": 7,
+  "translator_operators": 34,
+  "translator_operators_removed": 0,
+  "translator_peak_memory": 175020,
+  "translator_propositions_removed": 3,
+  "translator_relevant_atoms": 81,
+  "translator_task_size": 245,
+  "translator_time_building_dictionary_for_full_mutex_groups": 0.01,
+  "translator_time_building_mutex_information": 0.0,
+  "translator_time_building_strips_to_sas_dictionary": 0.0,
+  "translator_time_building_translation_key": 0.0,
+  "translator_time_checking_invariant_weight": 0.0,
+  "translator_time_choosing_groups": 0.0,
+  "translator_time_collecting_mutex_groups": 0.0,
+  "translator_time_completing_instantiation": 0.0,
+  "translator_time_computing_fact_groups": 0.0,
+  "translator_time_computing_model": 0.0,
+  "translator_time_detecting_unreachable_propositions": 0.0,
+  "translator_time_done": 0.02,
+  "translator_time_finding_invariants": 0.0,
+  "translator_time_generating_datalog_program": 0.0,
+  "translator_time_instantiating": 0.01,
+  "translator_time_instantiating_groups": 0.0,
+  "translator_time_normalizing_datalog_program": 0.0,
+  "translator_time_normalizing_task": 0.0,
+  "translator_time_parsing": 0.0,
+  "translator_time_preparing_model": 0.01,
+  "translator_time_processing_axioms": 0.0,
+  "translator_time_simplifying_axioms": 0.0,
+  "translator_time_translating_task": 0.0,
+  "translator_time_writing_output": 0.0,
+  "translator_total_mutex_groups_size": 28,
+  "translator_total_queue_pushes": 180,
+  "translator_uncovered_facts": 0,
+  "translator_variables": 7,
+  "unsolvable": 0
+}red_facts": 0,
+  "translator_variables": 7,
+  "unsolvable": 0
+}

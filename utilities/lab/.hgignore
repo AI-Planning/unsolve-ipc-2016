@@ -1,0 +1,12 @@
+~$
+\.pyc$
+.cache/v/cache/lastfailed$
+^docs/_build/
+^docs/driver.err
+^docs/driver.log
+^docs/run.err
+^docs/run.log
+^examples/data/
+^examples/pi/data/
+^examples/planner/data/
+^examples/simple/data/

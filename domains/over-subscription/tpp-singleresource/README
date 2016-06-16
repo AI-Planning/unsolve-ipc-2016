@@ -1,0 +1,44 @@
+
+Generator for Metric-TPP. There is only one resource.  The generated problem
+file is printed to stdout. Currently, it only supports the generation of one
+encoding (corresponding to the "hard" encoding of NoMystery / Rovers, i.e., unit
+action cost + resource consumption).
+
+Usage: [tpp-generator] [options]
+  -h        print this help
+  -s        seed for rng
+  -m        number of markets
+  -e        edge rate
+  --mce     minmal cost for edges
+  --xce     maximal cost for edges
+  -g        number of goods
+  --mlg     minmal number of locations per good
+  --xlg     maximal number of locations per good
+  --mcg     minimal cost of buying a good
+  --xcg     maximal cost of buying a good
+
+
+===============================================================================
+
+Also included is a python script that can be used to scale the resource. It
+takes as argument the path to the generated instances with resource
+constrainedness 1.0 (it expects the tasks with resource 1.0 to be named
+*-problem-10*), and a list of constrainedness coefficients. It generates the
+files according to the given constrainedness coefficients in the same directory
+where the constrainedness 1.0 files are stored. The files will be named
+*-problem-C*, according to the constrainedness 1.0 base file name, and C being
+defined as 10 * CONSTRAINEDNESS_COEFFICIENT.
+
+usage: scale_tpp.py [-h] [-c CONSTRAINT [CONSTRAINT ...]] path
+
+Scaling constrainedness of TPP instances. Stores new files in the same
+directory where the 1.0 problem files are currently stored.
+
+positional arguments:
+  path                  Path to TPP problem files with constrainedness 1.0
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONSTRAINT [CONSTRAINT ...]
+                        constrainedness coefficients
+

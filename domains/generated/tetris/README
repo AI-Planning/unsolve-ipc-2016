@@ -1,0 +1,20 @@
+## TETRIS DOMAIN GENERATOR. 
+## IPC 2014
+## author: Mauro Vallati -- University of Huddersfield
+
+Usage: generator.py <grid_size> <number of 1x1 blocks> <number of 2x1 blocks> <number of L-shaped blocks> <lines-to-free>
+
+All the parameters have to be specified. 
+
+As for the grid_size, the number of column is fixed at 4. E.g., 8-> 8x4 grid. Only odd numbers accepted.
+
+<number of 1x1 blocks> <number of 2x1 blocks> <number of L-shaped blocks> indicate, repspectively, the number of square, 2x1 straight and L (3 squares) pieces that will be placed in the grid. 
+
+<lines-to-free> indicates the number of top rows that must be cleared for achieving the goal. 
+
+** Take care, the generator does not perform any check on the fact that there is enough space for all the blocks! ** 
+
+
+In the deterministic track of IPC 2014, grid size ranges between 10x4 and 14x4. Goal was to clear top half of the grid.
+
+Number of blocks has usually been kept quite low --i.e. not enough for covering exactly half of the grid: otherwise planners were not able to solve.

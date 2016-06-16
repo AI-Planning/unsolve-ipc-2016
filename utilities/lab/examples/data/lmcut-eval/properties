@@ -1,0 +1,66 @@
+{
+  "lmcut-gripper-prob01.pddl": {
+    "algorithm_nick": "lmcut",
+    "build_options": [
+      "-j12"
+    ],
+    "component_options": [
+      "--search",
+      "astar(lmcut())"
+    ],
+    "config": "lmcut",
+    "domain": "gripper",
+    "driver_options": [
+      "--search-time-limit",
+      "30m",
+      "--search-memory-limit",
+      "2G"
+    ],
+    "experiment_name": "lmcut",
+    "global_revision": "101a6886f2e4",
+    "id": [
+      "lmcut",
+      "gripper",
+      "prob01.pddl"
+    ],
+    "id_string": "lmcut:gripper:prob01.pddl",
+    "local_revision": "tip",
+    "planner_type": "single",
+    "problem": "prob01.pddl",
+    "repo": "/infai/infai2/planners/fd",
+    "revision_summary": "101a6886f2e4 tip",
+    "run_dir": "runs-00001-00100/00001"
+  },
+  "lmcut-zenotravel-pfile1": {
+    "algorithm_nick": "lmcut",
+    "build_options": [
+      "-j12"
+    ],
+    "component_options": [
+      "--search",
+      "astar(lmcut())"
+    ],
+    "config": "lmcut",
+    "domain": "zenotravel",
+    "driver_options": [
+      "--search-time-limit",
+      "30m",
+      "--search-memory-limit",
+      "2G"
+    ],
+    "experiment_name": "lmcut",
+    "global_revision": "101a6886f2e4",
+    "id": [
+      "lmcut",
+      "zenotravel",
+      "pfile1"
+    ],
+    "id_string": "lmcut:zenotravel:pfile1",
+    "local_revision": "tip",
+    "planner_type": "single",
+    "problem": "pfile1",
+    "repo": "/infai/infai2/planners/fd",
+    "revision_summary": "101a6886f2e4 tip",
+    "run_dir": "runs-00001-00100/00002"
+  }
+}

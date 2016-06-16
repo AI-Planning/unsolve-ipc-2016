@@ -1,0 +1,59 @@
+
+1. To generate soft PDDL3 constraints (preferences) from a set of plans
+
+    pddlcat -dba-semantics -extract-sc-1 -extract-sc-2 -add {domain, problem, plans} > prefs.pddl
+
+The result is stored in file prefs.pddl.
+
+Note that there is a pseudo-random selection of a subset of the generated
+constraints. The default seed for the random generator is fixed, so running
+the same command twice should produce exactly the same output. To vary it,
+add the option "-r <seed>" to pddlcat.
+
+2(a). To find/generate unsolvable sets
+
+    test_ppc -dba-semantics -icg -hm-test -pcc-test -no-max -save-min {domain, problem} prefs.pddl
+
+This will generate a set of files named prefs-minNN.pddl (where NN is the
+number). Each of these files contains both domain and problem definition
+(the domain is modified in a way that is specific to the constraint set
+being compiled). These domains/problems are non-grounded, and use some
+ADL features (quantified and/or conditional effects, possibly complex
+preconditions).
+
+2(b). To save in propositional strips form
+
+    test_ppc -dba-semantics -icg -hm-test -pcc-test -no-max -save-min -save-compiled {domain, problem} prefs.pddl
+
+As above, this generates a set of files named prefs-minNN.pddl, each
+containing both domain and problem definition. The difference is that
+these domains/problems are fully grounded strips.
+
+3. Selecting "interesting" sets
+
+Each generated file has a comment at the top (second line) that lists
+the preferences that are compiled in as hard goals. The names of the
+preferences indicate what type of constraint it is: a = always, e =
+sometime, o = at-most-once, sb = sometime-before. To create interesting
+unsolvable problems, you should probably look for large sets, and sets
+that contain (one or more) at-most-once constraints. A set like {aXX, eYY}
+is likely to be very easily proven unsolvable (delete-free reachability
+should do it).
+
+4. To split/clean up domains/problems
+
+You can use pddlcat to split the combined files into separate domains and
+problems, and also to simplify/clean up the output.
+
+    pddlcat -dba-semantics -prep -remove -p -no-negation -no-dkel -no-extra -pddl1 -write-strict-PDDL {domain-and-problem-file} -no-problem > domain.pddl
+    pddlcat -dba-semantics -prep -remove -p -no-negation -no-dkel -no-extra -pddl1 -write-strict-PDDL {domain-and-problem-file} -no-domain > problem.pddl
+
+This produces grounded strips output, in what should be acceptable PDDL.
+
+
+5. To generate solvable problems
+
+This is in principle possible. test_ppc can take as input also the set of
+plans, and use that to compute the maximal sets of preferences known to be
+jointly satisfiable. However, it currently doesn't have an option to save
+them. Should be easy to add if needed though.

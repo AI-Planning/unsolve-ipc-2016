@@ -1,0 +1,2 @@
+2016-02-05 21:34:34,941 CRITICAL JSON parse error in file 'properties': No JSON object could be decoded
+2016-02-05 21:34:47,001 CRITICAL JSON parse error in file 'properties': Extra data: line 152 column 2 - line 155 column 2 (char 4161 - 4224)

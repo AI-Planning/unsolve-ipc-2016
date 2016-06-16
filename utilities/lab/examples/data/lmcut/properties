@@ -1,0 +1,13 @@
+{
+  "algorithm_nicks": [
+    "lmcut"
+  ],
+  "experiment_file": "lmcut.py",
+  "runs": 2,
+  "suite": {
+    "/infai/infai2/planners/fd/benchmarks": [
+      "gripper:prob01.pddl",
+      "zenotravel:pfile1"
+    ]
+  }
+}

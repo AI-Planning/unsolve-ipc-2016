@@ -1,0 +1,71 @@
+
+===============================================================================
+
+The generator supports the generation of 7 different encodings:
+
+hard_cost (-c): Action costs correspond to resource consumption; resource is
+limited
+
+soft (-o): Action costs correspond to resource consumption; no resource
+consumption
+
+metric (-m): Unit action cost; resource consumption is encoded
+numerically
+
+untyped (-u): Unit action cost; no resource consumption
+
+simple-time (-s):
+
+time (-t):
+
+hard (-n): unit actions costs; resource is limited
+
+
+===============================================================================
+
+The Rovers generator supports the generation of instances with 1 or 2 rovers,
+i.e., one or two resources. If no directory is provided (-f) it tries to store
+the problems in temp.pddl.
+
+Useage: rovergen <seed> [-c|-o|-s|-t|-n|-m|-u|-f <filename>]
+                 <#rovers> <#waypoints> <#objectives> <#cameras> <#goals> <#problems> <C>
+
+        Options:
+        c: hard_cost version
+        o: soft version
+        m: metric version
+        u: untyped version
+        s: simple-time
+        t: time
+        n: hard
+        f: optional directory for output files
+
+        All numbers are integers except <C>.
+
+Author: Hootan Nakhost
+
+
+===============================================================================
+
+Also included is a python script that can be used to scale the resource. It only
+supports hard and hard_cost encodings. It takes as argument the path to the
+generated instances with resource constrainedness 1.0 (it expects the tasks with
+resource 1.0 to be named *-problem-10*), and a list of constrainedness
+coefficients. It generates the files according to the given constrainedness
+coefficients in the same directory where the constrainedness 1.0 files are
+stored. The files will be named *-problem-C*, according to the constrainedness
+1.0 base file name, and C being defined as 10 * CONSTRAINEDNESS_COEFFICIENT.
+
+usage: scale_rovers.py [-h] [-c CONSTRAINT [CONSTRAINT ...]] path
+
+Scaling constrainedness of Rovers instances. Stores new files in the same
+directory where the 1.0 problem files are currently stored.
+
+positional arguments:
+  path                  Path to Rovers problem files with constrainedness 1.0
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONSTRAINT [CONSTRAINT ...]
+                        constrainedness coefficients
+
