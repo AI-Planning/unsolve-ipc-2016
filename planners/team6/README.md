@@ -1,10 +1,12 @@
-Star-topology Decoupling
+DECS: Star-topology Decoupling
 =======
 
 Team
 ----
 * Daniel Gnad
+* Alvaro Torralba
 * Joerg Hoffmann
+* Martin Wehrle
 
 
 

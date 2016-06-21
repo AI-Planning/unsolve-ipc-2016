@@ -1,16 +1,11 @@
-Generalized Landmarks
+Did not compete...
 =======
 
 Team
 ----
-* Toby Davies
-
-
-Submission
-----------
-* 
+* Did not compete...
 
 
 Description
 -----------
-Coming soon...
+Did not compete...

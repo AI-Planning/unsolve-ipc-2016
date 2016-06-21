@@ -1,9 +1,10 @@
-Red-black Planner
+Django: Red-black Planner
 =======
 
 Team
 ----
 * Daniel Gnad
+* Marcel Steinmetz
 * Joerg Hoffmann
 
 
