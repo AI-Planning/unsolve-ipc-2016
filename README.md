@@ -25,3 +25,7 @@ To simplify the evaluation scripts (which came before the team names were decide
 * team11: << a planner that did not compete >>
 * team12: DE-PDB
 * team13: blind
+
+Analysis
+========
+You can find the analysis of the competition data in the `analysis` directory. See `main.py` for examples of how to invoke the analysis, and `analyze.py` for the actual implementation.
